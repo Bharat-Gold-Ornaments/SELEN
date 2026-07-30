@@ -63,7 +63,7 @@ export function BeneathTheGold() {
         <div className="relative mt-10 flex h-[320px] w-full max-w-3xl items-center justify-center sm:mt-14">
           {/* Rotating ring */}
           <motion.div
-            style={{ rotateY: rotate, opacity: ringOpacity }}
+            style={{ rotateY: rotate, opacity: ringOpacity, scale: ringScale }}
             className="absolute"
             aria-hidden
           >
