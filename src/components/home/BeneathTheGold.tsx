@@ -99,7 +99,7 @@ export function BeneathTheGold() {
               <div className="hidden sm:block">
                 <Label
                   progress={scrollYProgress}
-                  range={[0.5, 0.62]}
+                  at={0.5}
                   title="Premium 20K Gold Plating"
                   detail="A rich, warm finish applied thickly enough to stay beautiful through daily wear."
                   align="right"
@@ -133,7 +133,7 @@ export function BeneathTheGold() {
               <div className="hidden sm:block">
                 <Label
                   progress={scrollYProgress}
-                  range={[0.62, 0.74]}
+                  at={0.6}
                   title="Certified 925 Sterling Silver"
                   detail="A solid precious core — the reason the piece keeps its worth and comfort."
                   align="left"
