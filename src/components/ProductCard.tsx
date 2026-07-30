@@ -33,7 +33,7 @@ export function ProductCard({ product }: ProductCardProps) {
   const imageUrl = firstImage ? `${firstImage.url}?width=600` : null;
 
   return (
-    <Link to="/product/$handle" params={{ handle: product.handle }} className="group block">
+    <Link to="/product/$handle" params={{ handle: product.handle }} className="group block" data-product-card>
       <article className="bg-card text-card-foreground flex flex-col overflow-hidden rounded-lg border border-border transition-shadow hover:shadow-md">
         <div className="relative aspect-[4/5] overflow-hidden bg-muted">
           {imageUrl ? (
