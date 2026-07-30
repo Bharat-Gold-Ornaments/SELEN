@@ -82,7 +82,10 @@ export function CartDrawer() {
                       <div className="min-w-0 flex-1">
                         <h4 className="truncate font-medium">{item.product.title}</h4>
                         <p className="text-sm text-muted-foreground">
-                          {item.selectedOptions.map((option) => option.value).join(" · ")}
+                          {item.selectedOptions
+                            .filter((option) => option.value !== "Default Title")
+                            .map((option) => option.value)
+                            .join(" · ")}
                         </p>
                         <p className="font-heading font-semibold">
                           {item.price.currencyCode} {parseFloat(item.price.amount).toFixed(0)}
