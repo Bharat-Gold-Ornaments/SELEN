@@ -8,42 +8,21 @@ import { Loader2, ShoppingBag } from "lucide-react";
 import type { ShopifyProduct } from "@/lib/shopify.functions";
 
 export const Route = createFileRoute("/product/$handle")({
-  head: ({ params, loaderData }) => {
-    const product = loaderData?.product;
-    return {
-      meta: [
-        { title: product ? `${product.title} — SELEN` : "Product — SELEN" },
-        {
-          name: "description",
-          content: product
-            ? `${product.description.slice(0, 160)}`
-            : "Shop SELEN gold-plated silver jewellery.",
-        },
-        {
-          property: "og:title",
-          content: product ? `${product.title} — SELEN` : "Product — SELEN",
-        },
-        {
-          property: "og:description",
-          content: product
-            ? `${product.description.slice(0, 160)}`
-            : "Shop SELEN gold-plated silver jewellery.",
-        },
-        { property: "og:type", content: "product" },
-        { name: "twitter:card", content: "summary_large_image" },
-      ],
-    };
-  },
+  head: () => ({
+    meta: [
+      { title: "Product — SELEN" },
+      { name: "description", content: "Shop SELEN gold-plated silver jewellery." },
+      { property: "og:title", content: "Product — SELEN" },
+      { property: "og:description", content: "Shop SELEN gold-plated silver jewellery." },
+      { property: "og:type", content: "product" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
   loader: async ({ params, context }) => {
     await context.queryClient.ensureQueryData({
       queryKey: ["product", params.handle],
       queryFn: () => getProductByHandle({ data: { handle: params.handle } }),
     });
-    const product = await context.queryClient.ensureQueryData({
-      queryKey: ["product", params.handle],
-      queryFn: () => getProductByHandle({ data: { handle: params.handle } }),
-    });
-    return { product };
   },
   component: ProductDetail,
   notFoundComponent: () => (
