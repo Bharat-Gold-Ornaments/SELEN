@@ -1,24 +1,29 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { motion, useScroll, useTransform, useMotionValueEvent, type MotionValue } from "motion/react";
 
 function Label({
   progress,
-  range,
+  at,
   title,
   detail,
   align = "left",
 }: {
   progress: MotionValue<number>;
-  range: [number, number];
+  at: number;
   title: string;
   detail: string;
   align?: "left" | "right";
 }) {
-  const opacity = useTransform(progress, range, [0, 1]);
-  const x = useTransform(progress, range, [align === "left" ? -18 : 18, 0]);
+  const [shown, setShown] = useState(false);
+  useMotionValueEvent(progress, "change", (v) => {
+    const next = v >= at;
+    setShown((prev) => (prev === next ? prev : next));
+  });
+
   return (
     <motion.div
-      style={{ opacity, x }}
+      animate={{ opacity: shown ? 1 : 0, x: shown ? 0 : align === "left" ? -18 : 18 }}
+      transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
       className={align === "left" ? "text-left" : "text-right"}
     >
       <p className="font-heading text-base sm:text-lg">{title}</p>
@@ -26,6 +31,7 @@ function Label({
     </motion.div>
   );
 }
+
 
 export function BeneathTheGold() {
   const ref = useRef<HTMLDivElement>(null);
