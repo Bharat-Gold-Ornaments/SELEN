@@ -36,7 +36,12 @@ export function BeneathTheGold() {
 
   // Phase 1: rotation. Phase 2: slice. Phase 3: separation + labels.
   const rotate = useTransform(scrollYProgress, [0, 0.35], [0, 180]);
-  const ringOpacity = useTransform(scrollYProgress, [0.28, 0.38], [1, 0]);
+  const ringOpacity = useTransform(scrollYProgress, (v) =>
+    v < 0.28 ? 1 : Math.max(0, 1 - (v - 0.28) / 0.1),
+  );
+  const ringScale = useTransform(scrollYProgress, (v) =>
+    v < 0.28 ? 1 : Math.max(0.92, 1 - (v - 0.28) * 0.8),
+  );
   const sectionOpacity = useTransform(scrollYProgress, [0.4, 0.48], [0, 1]);
   const goldTop = useTransform(scrollYProgress, [0.46, 0.68], [0, -56]);
   const goldBottom = useTransform(scrollYProgress, [0.46, 0.68], [0, 56]);
