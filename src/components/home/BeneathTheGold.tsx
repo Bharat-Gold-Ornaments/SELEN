@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { motion, useScroll, useTransform, type MotionValue } from "motion/react";
+import { motion, useScroll, useTransform, useMotionValueEvent, type MotionValue } from "motion/react";
 
 function Label({
   progress,
@@ -32,6 +32,10 @@ export function BeneathTheGold() {
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start start", "end end"],
+  });
+
+  useMotionValueEvent(scrollYProgress, "change", (v) => {
+    (window as unknown as { __p?: number }).__p = v;
   });
 
   // Phase 1: rotation. Phase 2: slice. Phase 3: separation + labels.
