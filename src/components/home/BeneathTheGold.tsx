@@ -40,10 +40,6 @@ export function BeneathTheGold() {
     offset: ["start start", "end end"],
   });
 
-  useMotionValueEvent(scrollYProgress, "change", (v) => {
-    (window as unknown as { __p?: number }).__p = v;
-  });
-
   // Phase 1: rotation. Phase 2: slice. Phase 3: separation + labels.
   const rotate = useTransform(scrollYProgress, [0, 0.35], [0, 180]);
   const ringOpacity = useTransform(scrollYProgress, (v) =>
