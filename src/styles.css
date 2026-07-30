@@ -71,6 +71,16 @@
 :root {
   --radius: 0.625rem;
 
+  /* Material palette */
+  --ivory: oklch(0.975 0.012 88);
+  --gold: oklch(0.78 0.11 85);
+  --gold-soft: oklch(0.89 0.06 88);
+  --gold-deep: oklch(0.6 0.1 78);
+  --silver: oklch(0.86 0.005 250);
+  --silver-soft: oklch(0.94 0.003 250);
+  --silver-deep: oklch(0.68 0.008 250);
+
+
   /* Warm cream canvas */
   --background: oklch(0.97 0.01 85);
   --foreground: oklch(0.25 0.02 45);
