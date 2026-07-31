@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, useInView } from "motion/react";
+import { Link } from "@tanstack/react-router";
+import { Sparkles } from "lucide-react";
 
 const PHRASE = "Earrings inspired by lotus petals, for my mother.";
 const STAGES = ["Prompt", "Sketch", "CAD", "Finished piece"];
