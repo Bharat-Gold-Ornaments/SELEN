@@ -16,9 +16,6 @@ export function CraftsmanshipJourney() {
   return (
     <section className="border-t border-border/60 bg-background py-24 sm:py-32">
       <div className="mx-auto max-w-6xl px-6">
-        <p className="text-[0.65rem] uppercase tracking-[0.4em] text-muted-foreground">
-          Section Four
-        </p>
         <h2 className="mt-5 max-w-lg font-heading text-3xl font-normal leading-tight sm:text-5xl">
           Six hands, one piece.
         </h2>

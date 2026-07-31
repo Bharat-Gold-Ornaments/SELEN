@@ -3,7 +3,7 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 import { getProducts } from "@/lib/shopify.functions";
 import { Hero } from "@/components/home/Hero";
 import { BeneathTheGold } from "@/components/home/BeneathTheGold";
-import { MaterialExplorer } from "@/components/home/MaterialExplorer";
+import { ShopStrip } from "@/components/home/ShopStrip";
 import { WhySelenExists } from "@/components/home/WhySelenExists";
 import { EditorialCollections } from "@/components/home/EditorialCollections";
 import { CraftsmanshipJourney } from "@/components/home/CraftsmanshipJourney";
@@ -46,8 +46,8 @@ function Index() {
   return (
     <main className="bg-background">
       <Hero />
+      <ShopStrip products={products} />
       <BeneathTheGold />
-      <MaterialExplorer />
       <WhySelenExists />
       <EditorialCollections products={products} />
       <CraftsmanshipJourney />

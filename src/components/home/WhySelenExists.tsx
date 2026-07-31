@@ -14,15 +14,6 @@ export function WhySelenExists() {
       aria-label="Why SELEN exists"
     >
       <div className="mx-auto max-w-3xl px-6">
-        <motion.p
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true, margin: "-15%" }}
-          transition={{ duration: 0.8 }}
-          className="text-[0.65rem] uppercase tracking-[0.4em] text-muted-foreground"
-        >
-          Chapter Three
-        </motion.p>
 
         <motion.h2
           initial={{ opacity: 0, y: 18 }}
