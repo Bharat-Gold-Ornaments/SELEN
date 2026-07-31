@@ -118,7 +118,7 @@ export const getThread = createServerFn({ method: "POST" })
   });
 
 export const sendMessage = createServerFn({ method: "POST" })
-  .inputValidator((input) => SendMessageInput.parse(input))
+  .validator((input) => SendMessageInput.parse(input))
   .handler(async ({ data }) => {
     await getThreadWithAuth(data.threadId, data.secret);
 
