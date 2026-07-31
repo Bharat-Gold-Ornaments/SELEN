@@ -30,7 +30,7 @@ export const CATEGORIES: Category[] = [
     slug: "rings",
     label: "Rings",
     line: "The most handled piece you will ever own.",
-    match: /ring(?!s?\b.*earring)|\bband\b/i,
+    match: /\brings?\b|\bbands?\b/i,
   },
   {
     slug: "bracelets",
