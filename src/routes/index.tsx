@@ -11,7 +11,7 @@ import { AiPersonalization } from "@/components/home/AiPersonalization";
 import { Testimonials } from "@/components/home/Testimonials";
 import { SiteFooter } from "@/components/home/SiteFooter";
 
-const TITLE = "SELEN — Jewellery Worth Wearing Every Day";
+const TITLE = "SELEN";
 const DESCRIPTION =
   "BIS Hallmarked 925 sterling silver finished in premium 20K gold plating. Beautiful on the outside, precious on the inside.";
 

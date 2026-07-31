@@ -80,10 +80,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "SELEN — Gold-Plated Silver Jewellery" },
+      { title: "SELEN" },
       { name: "description", content: "Discover SELEN's handcrafted gold-plated silver jewellery. Timeless pendants, earrings, and treasures for everyday elegance." },
       { name: "author", content: "SELEN" },
-      { property: "og:title", content: "SELEN — Gold-Plated Silver Jewellery" },
+      { property: "og:title", content: "SELEN" },
       { property: "og:description", content: "Discover SELEN's handcrafted gold-plated silver jewellery. Timeless pendants, earrings, and treasures for everyday elegance." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
