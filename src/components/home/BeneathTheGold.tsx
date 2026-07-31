@@ -50,6 +50,7 @@ export function BeneathTheGold() {
   const coreOpacity = useTransform(cut, [0.15, 0.6], [0, 1]);
   const labelTop = useTransform(cut, [0.2, 0.6], [0, 1]);
   const labelBottom = useTransform(cut, [0.45, 0.85], [0, 1]);
+  const goldShiftDown = useTransform(goldShift, (v) => -v);
 
   return (
     <section className="bg-ivory" aria-label="What's beneath the gold">
@@ -95,7 +96,7 @@ export function BeneathTheGold() {
                   className="absolute inset-x-0 top-[92px] h-[54px] rounded-md bg-[linear-gradient(90deg,var(--silver-soft),var(--silver),var(--silver-deep))]"
                 />
                 <motion.div
-                  style={{ y: useTransform(goldShift, (v) => -v) }}
+                  style={{ y: goldShiftDown }}
                   className="absolute inset-x-0 top-[158px] h-[26px] rounded-full bg-[linear-gradient(90deg,var(--gold-soft),var(--gold),var(--gold-deep))] shadow-[0_10px_30px_-12px_var(--gold-deep)]"
                 />
               </motion.div>
