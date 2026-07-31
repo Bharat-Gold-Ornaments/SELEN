@@ -76,7 +76,24 @@ async function callN8nWebhook(threadId: string, history: { role: string; content
     throw new Error(`n8n webhook returned ${response.status}: ${text}`);
   }
 
-  const data = await response.json();
+  let text: string;
+  try {
+    text = await response.text();
+  } catch {
+    text = "";
+  }
+
+  if (!text.trim()) {
+    return { text: "I'm here to help you design something beautiful." };
+  }
+
+  let data: unknown;
+  try {
+    data = JSON.parse(text);
+  } catch {
+    return { text: text.trim() };
+  }
+
   return data;
 }
 
