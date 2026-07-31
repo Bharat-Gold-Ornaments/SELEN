@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as ShopRouteImport } from './routes/shop'
+import { Route as CollectionsCategoryRouteImport } from './routes/collections.$category'
 import { Route as MaterialsIndexRouteImport } from './routes/materials/index'
 import { Route as MaterialsSlugRouteImport } from './routes/materials/$slug'
 import { Route as ProductHandleRouteImport } from './routes/product.$handle'
@@ -29,6 +30,11 @@ const AboutRoute = AboutRouteImport.update({
 const ShopRoute = ShopRouteImport.update({
   id: '/shop',
   path: '/shop',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CollectionsCategoryRoute = CollectionsCategoryRouteImport.update({
+  id: '/collections/$category',
+  path: '/collections/$category',
   getParentRoute: () => rootRouteImport,
 } as any)
 const MaterialsIndexRoute = MaterialsIndexRouteImport.update({
@@ -51,6 +57,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/shop': typeof ShopRoute
+  '/collections/$category': typeof CollectionsCategoryRoute
   '/materials/$slug': typeof MaterialsSlugRoute
   '/product/$handle': typeof ProductHandleRoute
   '/materials/': typeof MaterialsIndexRoute
@@ -59,6 +66,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/shop': typeof ShopRoute
+  '/collections/$category': typeof CollectionsCategoryRoute
   '/materials/$slug': typeof MaterialsSlugRoute
   '/product/$handle': typeof ProductHandleRoute
   '/materials': typeof MaterialsIndexRoute
@@ -68,6 +76,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/shop': typeof ShopRoute
+  '/collections/$category': typeof CollectionsCategoryRoute
   '/materials/$slug': typeof MaterialsSlugRoute
   '/product/$handle': typeof ProductHandleRoute
   '/materials/': typeof MaterialsIndexRoute
@@ -78,6 +87,7 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/shop'
+    | '/collections/$category'
     | '/materials/$slug'
     | '/product/$handle'
     | '/materials/'
@@ -86,6 +96,7 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/shop'
+    | '/collections/$category'
     | '/materials/$slug'
     | '/product/$handle'
     | '/materials'
@@ -94,6 +105,7 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/shop'
+    | '/collections/$category'
     | '/materials/$slug'
     | '/product/$handle'
     | '/materials/'
@@ -103,6 +115,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   ShopRoute: typeof ShopRoute
+  CollectionsCategoryRoute: typeof CollectionsCategoryRoute
   MaterialsSlugRoute: typeof MaterialsSlugRoute
   ProductHandleRoute: typeof ProductHandleRoute
   MaterialsIndexRoute: typeof MaterialsIndexRoute
@@ -129,6 +142,13 @@ declare module '@tanstack/react-router' {
       path: '/shop'
       fullPath: '/shop'
       preLoaderRoute: typeof ShopRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/collections/$category': {
+      id: '/collections/$category'
+      path: '/collections/$category'
+      fullPath: '/collections/$category'
+      preLoaderRoute: typeof CollectionsCategoryRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/materials/': {
@@ -159,6 +179,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   ShopRoute: ShopRoute,
+  CollectionsCategoryRoute: CollectionsCategoryRoute,
   MaterialsSlugRoute: MaterialsSlugRoute,
   ProductHandleRoute: ProductHandleRoute,
   MaterialsIndexRoute: MaterialsIndexRoute,
