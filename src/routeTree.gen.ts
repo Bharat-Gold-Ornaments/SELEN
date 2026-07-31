@@ -14,6 +14,7 @@ import { Route as AboutRouteImport } from './routes/about'
 import { Route as DesignWithAiRouteImport } from './routes/design-with-ai'
 import { Route as ShopRouteImport } from './routes/shop'
 import { Route as CollectionsCategoryRouteImport } from './routes/collections.$category'
+import { Route as DesignWithAiIndexRouteImport } from './routes/design-with-ai.index'
 import { Route as DesignWithAiThreadIdRouteImport } from './routes/design-with-ai.$threadId'
 import { Route as MaterialsIndexRouteImport } from './routes/materials/index'
 import { Route as MaterialsSlugRouteImport } from './routes/materials/$slug'
@@ -43,6 +44,11 @@ const CollectionsCategoryRoute = CollectionsCategoryRouteImport.update({
   id: '/collections/$category',
   path: '/collections/$category',
   getParentRoute: () => rootRouteImport,
+} as any)
+const DesignWithAiIndexRoute = DesignWithAiIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => DesignWithAiRoute,
 } as any)
 const DesignWithAiThreadIdRoute = DesignWithAiThreadIdRouteImport.update({
   id: '/$threadId',
@@ -74,17 +80,18 @@ export interface FileRoutesByFullPath {
   '/design-with-ai/$threadId': typeof DesignWithAiThreadIdRoute
   '/materials/$slug': typeof MaterialsSlugRoute
   '/product/$handle': typeof ProductHandleRoute
+  '/design-with-ai/': typeof DesignWithAiIndexRoute
   '/materials/': typeof MaterialsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/design-with-ai': typeof DesignWithAiRouteWithChildren
   '/shop': typeof ShopRoute
   '/collections/$category': typeof CollectionsCategoryRoute
   '/design-with-ai/$threadId': typeof DesignWithAiThreadIdRoute
   '/materials/$slug': typeof MaterialsSlugRoute
   '/product/$handle': typeof ProductHandleRoute
+  '/design-with-ai': typeof DesignWithAiIndexRoute
   '/materials': typeof MaterialsIndexRoute
 }
 export interface FileRoutesById {
@@ -97,6 +104,7 @@ export interface FileRoutesById {
   '/design-with-ai/$threadId': typeof DesignWithAiThreadIdRoute
   '/materials/$slug': typeof MaterialsSlugRoute
   '/product/$handle': typeof ProductHandleRoute
+  '/design-with-ai/': typeof DesignWithAiIndexRoute
   '/materials/': typeof MaterialsIndexRoute
 }
 export interface FileRouteTypes {
@@ -110,17 +118,18 @@ export interface FileRouteTypes {
     | '/design-with-ai/$threadId'
     | '/materials/$slug'
     | '/product/$handle'
+    | '/design-with-ai/'
     | '/materials/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/about'
-    | '/design-with-ai'
     | '/shop'
     | '/collections/$category'
     | '/design-with-ai/$threadId'
     | '/materials/$slug'
     | '/product/$handle'
+    | '/design-with-ai'
     | '/materials'
   id:
     | '__root__'
@@ -132,6 +141,7 @@ export interface FileRouteTypes {
     | '/design-with-ai/$threadId'
     | '/materials/$slug'
     | '/product/$handle'
+    | '/design-with-ai/'
     | '/materials/'
   fileRoutesById: FileRoutesById
 }
@@ -183,6 +193,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CollectionsCategoryRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/design-with-ai/': {
+      id: '/design-with-ai/'
+      path: '/'
+      fullPath: '/design-with-ai/'
+      preLoaderRoute: typeof DesignWithAiIndexRouteImport
+      parentRoute: typeof DesignWithAiRoute
+    }
     '/design-with-ai/$threadId': {
       id: '/design-with-ai/$threadId'
       path: '/$threadId'
@@ -216,10 +233,12 @@ declare module '@tanstack/react-router' {
 
 interface DesignWithAiRouteChildren {
   DesignWithAiThreadIdRoute: typeof DesignWithAiThreadIdRoute
+  DesignWithAiIndexRoute: typeof DesignWithAiIndexRoute
 }
 
 const DesignWithAiRouteChildren: DesignWithAiRouteChildren = {
   DesignWithAiThreadIdRoute: DesignWithAiThreadIdRoute,
+  DesignWithAiIndexRoute: DesignWithAiIndexRoute,
 }
 
 const DesignWithAiRouteWithChildren = DesignWithAiRoute._addFileChildren(
@@ -239,3 +258,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
