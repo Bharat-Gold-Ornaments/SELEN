@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as MaterialsIndexRouteImport } from './routes/materials/index'
+import { Route as MaterialsSlugRouteImport } from './routes/materials/$slug'
 import { Route as ProductHandleRouteImport } from './routes/product.$handle'
 
 const IndexRoute = IndexRouteImport.update({
@@ -29,6 +30,11 @@ const MaterialsIndexRoute = MaterialsIndexRouteImport.update({
   path: '/materials/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MaterialsSlugRoute = MaterialsSlugRouteImport.update({
+  id: '/materials/$slug',
+  path: '/materials/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ProductHandleRoute = ProductHandleRouteImport.update({
   id: '/product/$handle',
   path: '/product/$handle',
@@ -38,12 +44,14 @@ const ProductHandleRoute = ProductHandleRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/materials/$slug': typeof MaterialsSlugRoute
   '/product/$handle': typeof ProductHandleRoute
   '/materials/': typeof MaterialsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/materials/$slug': typeof MaterialsSlugRoute
   '/product/$handle': typeof ProductHandleRoute
   '/materials': typeof MaterialsIndexRoute
 }
@@ -51,20 +59,29 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/materials/$slug': typeof MaterialsSlugRoute
   '/product/$handle': typeof ProductHandleRoute
   '/materials/': typeof MaterialsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/product/$handle' | '/materials/'
+  fullPaths:
+    '/' | '/about' | '/materials/$slug' | '/product/$handle' | '/materials/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/product/$handle' | '/materials'
-  id: '__root__' | '/' | '/about' | '/product/$handle' | '/materials/'
+  to: '/' | '/about' | '/materials/$slug' | '/product/$handle' | '/materials'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/materials/$slug'
+    | '/product/$handle'
+    | '/materials/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  MaterialsSlugRoute: typeof MaterialsSlugRoute
   ProductHandleRoute: typeof ProductHandleRoute
   MaterialsIndexRoute: typeof MaterialsIndexRoute
 }
@@ -92,6 +109,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MaterialsIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/materials/$slug': {
+      id: '/materials/$slug'
+      path: '/materials/$slug'
+      fullPath: '/materials/$slug'
+      preLoaderRoute: typeof MaterialsSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/product/$handle': {
       id: '/product/$handle'
       path: '/product/$handle'
@@ -105,6 +129,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  MaterialsSlugRoute: MaterialsSlugRoute,
   ProductHandleRoute: ProductHandleRoute,
   MaterialsIndexRoute: MaterialsIndexRoute,
 }

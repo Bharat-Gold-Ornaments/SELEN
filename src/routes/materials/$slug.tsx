@@ -1,5 +1,5 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { getMaterial, materials } from "@/lib/materials";
+import { getMaterial, materials, type MaterialEntry } from "@/lib/materials";
 import { SiteFooter } from "@/components/home/SiteFooter";
 
 export const Route = createFileRoute("/materials/$slug")({
@@ -36,7 +36,7 @@ export const Route = createFileRoute("/materials/$slug")({
 });
 
 function MaterialPage() {
-  const material = Route.useLoaderData();
+  const material = Route.useLoaderData() as MaterialEntry;
   const others = materials.filter((m) => m.slug !== material.slug).slice(0, 3);
 
   return (
