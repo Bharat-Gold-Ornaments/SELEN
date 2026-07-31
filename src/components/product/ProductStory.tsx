@@ -88,7 +88,6 @@ export function TheDetails({ product }: { product: ShopifyProduct }) {
 const SCALES = [
   { id: "hand", label: "In hand", size: 0.55 },
   { id: "ear", label: "On ear", size: 0.3 },
-  { id: "actual", label: "Actual scale", size: 1 },
 ];
 
 export function Dimensions({ product }: { product: ShopifyProduct }) {
