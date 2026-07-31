@@ -101,7 +101,7 @@ export const createThread = createServerFn({ method: "POST" })
   });
 
 export const getThread = createServerFn({ method: "POST" })
-  .inputValidator((input) => ThreadAuthInput.parse(input))
+  .validator((input) => ThreadAuthInput.parse(input))
   .handler(async ({ data }) => {
     const thread = await getThreadWithAuth(data.threadId, data.secret);
     const messages = await fetchMessages(data.threadId);
