@@ -8,16 +8,7 @@ import { useCartStore } from "@/stores/cartStore";
 import { Loader2 } from "lucide-react";
 import type { ShopifyProduct } from "@/lib/shopify.functions";
 import { SiteFooter } from "@/components/home/SiteFooter";
-import {
-  Care,
-  Dimensions,
-  Gifting,
-  MadeByArtisans,
-  MaterialStory,
-  Reviews,
-  StyleGuide,
-  TheDetails,
-} from "@/components/product/ProductStory";
+import { Care, Dimensions, StyleGuide, TheDetails } from "@/components/product/ProductStory";
 
 export const Route = createFileRoute("/product/$handle")({
   loader: async ({ params, context }) => {
@@ -67,12 +58,8 @@ function ProductDetail() {
       <ProductHero product={product} />
       <TheDetails product={product} />
       <Dimensions product={product} />
-      <MaterialStory />
-      <MadeByArtisans />
       <StyleGuide />
-      <Gifting />
       <Care />
-      <Reviews product={product} />
       <SiteFooter />
     </main>
   );
@@ -162,7 +149,7 @@ function ProductHero({ product }: { product: ShopifyProduct }) {
           <h1 className="mt-6 font-heading text-4xl font-normal leading-[1.1] sm:text-5xl">
             {product.title}
           </h1>
-          <p className="mt-6 font-heading text-2xl text-foreground/80">{formatted}</p>
+          <p className="mt-5 text-lg font-medium tracking-wide text-foreground/90">{formatted}</p>
 
           <div className="mt-8 space-y-4 text-base leading-relaxed text-muted-foreground">
             <p>{intro}</p>
