@@ -44,6 +44,9 @@ export function Header() {
                 >
                   Bracelets
                 </Link>
+                <Link to="/design-with-ai" className="block px-3 py-2 text-xs hover:bg-muted">
+                  Design with AI
+                </Link>
                 <Link to="/materials" className="block px-3 py-2 text-xs hover:bg-muted">
                   Materials
                 </Link>

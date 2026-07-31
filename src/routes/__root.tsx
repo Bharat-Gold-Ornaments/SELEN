@@ -13,6 +13,7 @@ import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { Header } from "@/components/Header";
 import { useCartSync } from "@/hooks/useCartSync";
+import { ChatWidget } from "@/components/chat/ChatWidget";
 import { Toaster } from "@/components/ui/sonner";
 
 function NotFoundComponent() {
@@ -138,6 +139,7 @@ function RootComponent() {
     <QueryClientProvider client={queryClient}>
       <Header />
       <Outlet />
+      <ChatWidget />
       <Toaster />
     </QueryClientProvider>
   );

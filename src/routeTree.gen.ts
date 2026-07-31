@@ -11,8 +11,11 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
+import { Route as DesignWithAiRouteImport } from './routes/design-with-ai'
 import { Route as ShopRouteImport } from './routes/shop'
 import { Route as CollectionsCategoryRouteImport } from './routes/collections.$category'
+import { Route as DesignWithAiIndexRouteImport } from './routes/design-with-ai.index'
+import { Route as DesignWithAiThreadIdRouteImport } from './routes/design-with-ai.$threadId'
 import { Route as MaterialsIndexRouteImport } from './routes/materials/index'
 import { Route as MaterialsSlugRouteImport } from './routes/materials/$slug'
 import { Route as ProductHandleRouteImport } from './routes/product.$handle'
@@ -27,6 +30,11 @@ const AboutRoute = AboutRouteImport.update({
   path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DesignWithAiRoute = DesignWithAiRouteImport.update({
+  id: '/design-with-ai',
+  path: '/design-with-ai',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ShopRoute = ShopRouteImport.update({
   id: '/shop',
   path: '/shop',
@@ -36,6 +44,16 @@ const CollectionsCategoryRoute = CollectionsCategoryRouteImport.update({
   id: '/collections/$category',
   path: '/collections/$category',
   getParentRoute: () => rootRouteImport,
+} as any)
+const DesignWithAiIndexRoute = DesignWithAiIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => DesignWithAiRoute,
+} as any)
+const DesignWithAiThreadIdRoute = DesignWithAiThreadIdRouteImport.update({
+  id: '/$threadId',
+  path: '/$threadId',
+  getParentRoute: () => DesignWithAiRoute,
 } as any)
 const MaterialsIndexRoute = MaterialsIndexRouteImport.update({
   id: '/materials/',
@@ -56,10 +74,13 @@ const ProductHandleRoute = ProductHandleRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/design-with-ai': typeof DesignWithAiRouteWithChildren
   '/shop': typeof ShopRoute
   '/collections/$category': typeof CollectionsCategoryRoute
+  '/design-with-ai/$threadId': typeof DesignWithAiThreadIdRoute
   '/materials/$slug': typeof MaterialsSlugRoute
   '/product/$handle': typeof ProductHandleRoute
+  '/design-with-ai/': typeof DesignWithAiIndexRoute
   '/materials/': typeof MaterialsIndexRoute
 }
 export interface FileRoutesByTo {
@@ -67,18 +88,23 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/shop': typeof ShopRoute
   '/collections/$category': typeof CollectionsCategoryRoute
+  '/design-with-ai/$threadId': typeof DesignWithAiThreadIdRoute
   '/materials/$slug': typeof MaterialsSlugRoute
   '/product/$handle': typeof ProductHandleRoute
+  '/design-with-ai': typeof DesignWithAiIndexRoute
   '/materials': typeof MaterialsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/design-with-ai': typeof DesignWithAiRouteWithChildren
   '/shop': typeof ShopRoute
   '/collections/$category': typeof CollectionsCategoryRoute
+  '/design-with-ai/$threadId': typeof DesignWithAiThreadIdRoute
   '/materials/$slug': typeof MaterialsSlugRoute
   '/product/$handle': typeof ProductHandleRoute
+  '/design-with-ai/': typeof DesignWithAiIndexRoute
   '/materials/': typeof MaterialsIndexRoute
 }
 export interface FileRouteTypes {
@@ -86,10 +112,13 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/about'
+    | '/design-with-ai'
     | '/shop'
     | '/collections/$category'
+    | '/design-with-ai/$threadId'
     | '/materials/$slug'
     | '/product/$handle'
+    | '/design-with-ai/'
     | '/materials/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -97,23 +126,29 @@ export interface FileRouteTypes {
     | '/about'
     | '/shop'
     | '/collections/$category'
+    | '/design-with-ai/$threadId'
     | '/materials/$slug'
     | '/product/$handle'
+    | '/design-with-ai'
     | '/materials'
   id:
     | '__root__'
     | '/'
     | '/about'
+    | '/design-with-ai'
     | '/shop'
     | '/collections/$category'
+    | '/design-with-ai/$threadId'
     | '/materials/$slug'
     | '/product/$handle'
+    | '/design-with-ai/'
     | '/materials/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  DesignWithAiRoute: typeof DesignWithAiRouteWithChildren
   ShopRoute: typeof ShopRoute
   CollectionsCategoryRoute: typeof CollectionsCategoryRoute
   MaterialsSlugRoute: typeof MaterialsSlugRoute
@@ -137,6 +172,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/design-with-ai': {
+      id: '/design-with-ai'
+      path: '/design-with-ai'
+      fullPath: '/design-with-ai'
+      preLoaderRoute: typeof DesignWithAiRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/shop': {
       id: '/shop'
       path: '/shop'
@@ -150,6 +192,20 @@ declare module '@tanstack/react-router' {
       fullPath: '/collections/$category'
       preLoaderRoute: typeof CollectionsCategoryRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/design-with-ai/': {
+      id: '/design-with-ai/'
+      path: '/'
+      fullPath: '/design-with-ai/'
+      preLoaderRoute: typeof DesignWithAiIndexRouteImport
+      parentRoute: typeof DesignWithAiRoute
+    }
+    '/design-with-ai/$threadId': {
+      id: '/design-with-ai/$threadId'
+      path: '/$threadId'
+      fullPath: '/design-with-ai/$threadId'
+      preLoaderRoute: typeof DesignWithAiThreadIdRouteImport
+      parentRoute: typeof DesignWithAiRoute
     }
     '/materials/': {
       id: '/materials/'
@@ -175,9 +231,24 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface DesignWithAiRouteChildren {
+  DesignWithAiThreadIdRoute: typeof DesignWithAiThreadIdRoute
+  DesignWithAiIndexRoute: typeof DesignWithAiIndexRoute
+}
+
+const DesignWithAiRouteChildren: DesignWithAiRouteChildren = {
+  DesignWithAiThreadIdRoute: DesignWithAiThreadIdRoute,
+  DesignWithAiIndexRoute: DesignWithAiIndexRoute,
+}
+
+const DesignWithAiRouteWithChildren = DesignWithAiRoute._addFileChildren(
+  DesignWithAiRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  DesignWithAiRoute: DesignWithAiRouteWithChildren,
   ShopRoute: ShopRoute,
   CollectionsCategoryRoute: CollectionsCategoryRoute,
   MaterialsSlugRoute: MaterialsSlugRoute,

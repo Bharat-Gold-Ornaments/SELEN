@@ -1,12 +1,13 @@
 import { Link } from "@tanstack/react-router";
 
-type FooterLink = { label: string; to?: string; hash?: string; slug?: string };
+type FooterLink = { label: string; to?: "/" | "/materials" | "/materials/$slug" | "/about" | "/design-with-ai"; hash?: string; slug?: string };
 
 const columns: Array<{ title: string; links: FooterLink[] }> = [
   {
     title: "Explore",
     links: [
       { label: "Collections", to: "/", hash: "collection" },
+      { label: "Design with AI", to: "/design-with-ai" },
       { label: "Material Library", to: "/materials" },
       { label: "About SELEN", to: "/about" },
     ],

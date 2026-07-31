@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, useInView } from "motion/react";
+import { Link } from "@tanstack/react-router";
+import { Sparkles } from "lucide-react";
 
 const PHRASE = "Earrings inspired by lotus petals, for my mother.";
 const STAGES = ["Prompt", "Sketch", "CAD", "Finished piece"];
@@ -43,6 +45,14 @@ export function AiPersonalization() {
           Soon, SELEN pieces will be co-created — described in your own words, drawn, modelled,
           and cast in the same precious foundation.
         </p>
+
+        <Link
+          to="/design-with-ai"
+          className="mt-6 inline-flex items-center gap-2 rounded-full bg-foreground px-5 py-2.5 text-xs font-medium uppercase tracking-wider text-background transition-colors hover:bg-foreground/90"
+        >
+          <Sparkles className="h-3.5 w-3.5" />
+          Try Design with AI
+        </Link>
 
         <div className="mt-14 rounded-2xl border border-border/70 bg-card p-6 sm:p-10">
           <div className="rounded-xl border border-border/70 px-5 py-4 font-body text-sm">
