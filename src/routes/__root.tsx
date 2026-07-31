@@ -138,6 +138,7 @@ function RootComponent() {
     <QueryClientProvider client={queryClient}>
       <Header />
       <Outlet />
+      <ChatWidget />
       <Toaster />
     </QueryClientProvider>
   );
