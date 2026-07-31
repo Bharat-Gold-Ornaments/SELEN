@@ -54,7 +54,7 @@ export function useWidgetChatThread() {
           setThreadId(parsed.id);
           setSecret(parsed.secret);
           setTitle(data.thread.title ?? "Design with AI");
-          setMessages(data.messages ?? []);
+          setMessages((data.messages ?? []).map((m) => ({ id: m.id, role: m.role as "user" | "assistant", content: m.content, createdAt: m.created_at })));
         } else {
           const thread = await createThreadFn({ data: { title: "Design with AI" } });
           storeThread(thread.id, thread.secret);
