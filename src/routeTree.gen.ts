@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
+import { Route as AuthRouteImport } from './routes/auth'
 import { Route as DesignWithAiRouteImport } from './routes/design-with-ai'
 import { Route as McpRouteImport } from './routes/mcp'
 import { Route as ShopRouteImport } from './routes/shop'
@@ -22,6 +23,7 @@ import { Route as DesignWithAiThreadIdRouteImport } from './routes/design-with-a
 import { Route as MaterialsIndexRouteImport } from './routes/materials/index'
 import { Route as MaterialsSlugRouteImport } from './routes/materials/$slug'
 import { Route as ProductHandleRouteImport } from './routes/product.$handle'
+import { Route as DotlovableOauthConsentRouteImport } from './routes/[.]lovable.oauth.consent'
 import { Route as Char91DotmcpChar93InvokeToolToolRouteImport } from './routes/[.mcp]/invoke-tool/$tool'
 
 const IndexRoute = IndexRouteImport.update({
@@ -32,6 +34,11 @@ const IndexRoute = IndexRouteImport.update({
 const AboutRoute = AboutRouteImport.update({
   id: '/about',
   path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DesignWithAiRoute = DesignWithAiRouteImport.update({
@@ -91,6 +98,11 @@ const ProductHandleRoute = ProductHandleRouteImport.update({
   path: '/product/$handle',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DotlovableOauthConsentRoute = DotlovableOauthConsentRouteImport.update({
+  id: '/.lovable/oauth/consent',
+  path: '/.lovable/oauth/consent',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const Char91DotmcpChar93InvokeToolToolRoute =
   Char91DotmcpChar93InvokeToolToolRouteImport.update({
     id: '/.mcp/invoke-tool/$tool',
@@ -101,6 +113,7 @@ const Char91DotmcpChar93InvokeToolToolRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/auth': typeof AuthRoute
   '/design-with-ai': typeof DesignWithAiRouteWithChildren
   '/mcp': typeof McpRoute
   '/shop': typeof ShopRoute
@@ -112,11 +125,13 @@ export interface FileRoutesByFullPath {
   '/product/$handle': typeof ProductHandleRoute
   '/design-with-ai/': typeof DesignWithAiIndexRoute
   '/materials/': typeof MaterialsIndexRoute
+  '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/auth': typeof AuthRoute
   '/mcp': typeof McpRoute
   '/shop': typeof ShopRoute
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
@@ -127,12 +142,14 @@ export interface FileRoutesByTo {
   '/product/$handle': typeof ProductHandleRoute
   '/design-with-ai': typeof DesignWithAiIndexRoute
   '/materials': typeof MaterialsIndexRoute
+  '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/auth': typeof AuthRoute
   '/design-with-ai': typeof DesignWithAiRouteWithChildren
   '/mcp': typeof McpRoute
   '/shop': typeof ShopRoute
@@ -144,6 +161,7 @@ export interface FileRoutesById {
   '/product/$handle': typeof ProductHandleRoute
   '/design-with-ai/': typeof DesignWithAiIndexRoute
   '/materials/': typeof MaterialsIndexRoute
+  '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
 }
 export interface FileRouteTypes {
@@ -151,6 +169,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/about'
+    | '/auth'
     | '/design-with-ai'
     | '/mcp'
     | '/shop'
@@ -162,11 +181,13 @@ export interface FileRouteTypes {
     | '/product/$handle'
     | '/design-with-ai/'
     | '/materials/'
+    | '/.lovable/oauth/consent'
     | '/.mcp/invoke-tool/$tool'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/about'
+    | '/auth'
     | '/mcp'
     | '/shop'
     | '/.mcp/list-tools'
@@ -177,11 +198,13 @@ export interface FileRouteTypes {
     | '/product/$handle'
     | '/design-with-ai'
     | '/materials'
+    | '/.lovable/oauth/consent'
     | '/.mcp/invoke-tool/$tool'
   id:
     | '__root__'
     | '/'
     | '/about'
+    | '/auth'
     | '/design-with-ai'
     | '/mcp'
     | '/shop'
@@ -193,12 +216,14 @@ export interface FileRouteTypes {
     | '/product/$handle'
     | '/design-with-ai/'
     | '/materials/'
+    | '/.lovable/oauth/consent'
     | '/.mcp/invoke-tool/$tool'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  AuthRoute: typeof AuthRoute
   DesignWithAiRoute: typeof DesignWithAiRouteWithChildren
   McpRoute: typeof McpRoute
   ShopRoute: typeof ShopRoute
@@ -208,6 +233,7 @@ export interface RootRouteChildren {
   MaterialsSlugRoute: typeof MaterialsSlugRoute
   ProductHandleRoute: typeof ProductHandleRoute
   MaterialsIndexRoute: typeof MaterialsIndexRoute
+  DotlovableOauthConsentRoute: typeof DotlovableOauthConsentRoute
   Char91DotmcpChar93InvokeToolToolRoute: typeof Char91DotmcpChar93InvokeToolToolRoute
 }
 
@@ -225,6 +251,13 @@ declare module '@tanstack/react-router' {
       path: '/about'
       fullPath: '/about'
       preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/design-with-ai': {
@@ -304,6 +337,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProductHandleRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/.lovable/oauth/consent': {
+      id: '/.lovable/oauth/consent'
+      path: '/.lovable/oauth/consent'
+      fullPath: '/.lovable/oauth/consent'
+      preLoaderRoute: typeof DotlovableOauthConsentRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/.mcp/invoke-tool/$tool': {
       id: '/.mcp/invoke-tool/$tool'
       path: '/.mcp/invoke-tool/$tool'
@@ -331,6 +371,7 @@ const DesignWithAiRouteWithChildren = DesignWithAiRoute._addFileChildren(
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  AuthRoute: AuthRoute,
   DesignWithAiRoute: DesignWithAiRouteWithChildren,
   McpRoute: McpRoute,
   ShopRoute: ShopRoute,
@@ -341,6 +382,7 @@ const rootRouteChildren: RootRouteChildren = {
   MaterialsSlugRoute: MaterialsSlugRoute,
   ProductHandleRoute: ProductHandleRoute,
   MaterialsIndexRoute: MaterialsIndexRoute,
+  DotlovableOauthConsentRoute: DotlovableOauthConsentRoute,
   Char91DotmcpChar93InvokeToolToolRoute: Char91DotmcpChar93InvokeToolToolRoute,
 }
 export const routeTree = rootRouteImport
