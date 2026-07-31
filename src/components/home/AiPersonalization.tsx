@@ -36,9 +36,6 @@ export function AiPersonalization() {
       aria-label="AI personalisation"
     >
       <div className="mx-auto max-w-4xl px-6">
-        <p className="text-[0.65rem] uppercase tracking-[0.4em] text-muted-foreground">
-          Section Five
-        </p>
         <h2 className="mt-5 max-w-xl font-heading text-3xl font-normal leading-tight sm:text-5xl">
           Jewellery that begins with your story.
         </h2>
