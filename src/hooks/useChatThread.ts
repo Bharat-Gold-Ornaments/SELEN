@@ -160,12 +160,12 @@ export function usePageChatThread(initialThreadId: string) {
           const data = await getThreadFn({ data: { threadId: parsed.id, secret: parsed.secret } });
           setSecret(parsed.secret);
           setTitle(data.thread.title ?? "Design with AI");
-          setMessages(data.messages ?? []);
+          setMessages((data.messages ?? []).map((m) => ({ id: m.id, role: m.role as "user" | "assistant", content: m.content, createdAt: m.created_at })));
         } else {
           const data = await getThreadFn({ data: { threadId: initialThreadId } });
           setSecret("");
           setTitle(data.thread.title ?? "Design with AI");
-          setMessages(data.messages ?? []);
+          setMessages((data.messages ?? []).map((m) => ({ id: m.id, role: m.role as "user" | "assistant", content: m.content, createdAt: m.created_at })));
         }
       } catch (err) {
         console.error("Page chat load error:", err);
