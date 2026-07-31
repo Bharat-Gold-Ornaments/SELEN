@@ -81,7 +81,7 @@ async function callN8nWebhook(threadId: string, history: { role: string; content
 }
 
 export const createThread = createServerFn({ method: "POST" })
-  .inputValidator((input) => CreateThreadInput.parse(input))
+  .validator((input) => CreateThreadInput.parse(input))
   .handler(async ({ data }) => {
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
     const { data: thread, error } = await supabaseAdmin
