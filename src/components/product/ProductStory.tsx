@@ -22,7 +22,7 @@ const LAYERS = [
     id: "stone",
     label: "Hand-set CZ",
     copy: "Well-graded cubic zirconia, seated by a setter rather than glued into place.",
-    swatch: "bg-ivory",
+    swatch: "bg-background ring-1 ring-inset ring-foreground/40",
   },
 ];
 

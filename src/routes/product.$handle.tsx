@@ -102,6 +102,8 @@ function ProductHero({ product }: { product: ShopifyProduct }) {
     });
   };
 
+  const { intro, specs } = parseDescription(product.description);
+
   const formatted = `${price.currencyCode === "INR" ? "₹" : price.currencyCode + " "}${Math.round(
     parseFloat(price.amount),
   ).toLocaleString("en-IN")}`;
@@ -163,14 +165,21 @@ function ProductHero({ product }: { product: ShopifyProduct }) {
           <p className="mt-6 font-heading text-2xl text-foreground/80">{formatted}</p>
 
           <div className="mt-8 space-y-4 text-base leading-relaxed text-muted-foreground">
-            {product.description
-              .split("\n")
-              .filter(Boolean)
-              .slice(0, 3)
-              .map((paragraph, idx) => (
-                <p key={idx}>{paragraph}</p>
-              ))}
+            <p>{intro}</p>
           </div>
+
+          {specs.length > 0 && (
+            <dl className="mt-8 divide-y divide-border/60 border-y border-border/60 text-sm">
+              {specs.map((spec) => (
+                <div key={spec.label} className="flex justify-between gap-6 py-3">
+                  <dt className="text-[0.6rem] uppercase tracking-[0.25em] text-muted-foreground">
+                    {spec.label}
+                  </dt>
+                  <dd className="text-right text-foreground/80">{spec.value}</dd>
+                </div>
+              ))}
+            </dl>
+          )}
 
           {product.options.length > 0 &&
             product.options.some((o) => o.values.length > 1) && (
@@ -220,4 +229,28 @@ function ProductHero({ product }: { product: ShopifyProduct }) {
       </div>
     </section>
   );
+}
+
+const SPEC_LABELS = ["Material", "Stone", "Weight", "Dimensions", "SKU", "Finish", "Closure"];
+
+function parseDescription(description: string) {
+  let rest = description.replace(/\s+/g, " ").trim();
+  const specs: Array<{ label: string; value: string }> = [];
+
+  const firstLabel = SPEC_LABELS.map((l) => rest.indexOf(`${l}:`))
+    .filter((i) => i >= 0)
+    .sort((a, b) => a - b)[0];
+
+  let intro = rest;
+  if (firstLabel !== undefined && firstLabel > 0) {
+    intro = rest.slice(0, firstLabel).trim();
+    const tail = rest.slice(firstLabel);
+    const parts = tail.split(new RegExp(`(?=(?:${SPEC_LABELS.join("|")}):)`));
+    for (const part of parts) {
+      const match = part.match(/^([A-Za-z ]+):\s*(.+)$/);
+      if (match) specs.push({ label: match[1].trim(), value: match[2].trim() });
+    }
+  }
+
+  return { intro, specs };
 }
