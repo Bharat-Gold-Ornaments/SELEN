@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
+import { Route as ShopRouteImport } from './routes/shop'
 import { Route as MaterialsIndexRouteImport } from './routes/materials/index'
 import { Route as MaterialsSlugRouteImport } from './routes/materials/$slug'
 import { Route as ProductHandleRouteImport } from './routes/product.$handle'
@@ -23,6 +24,11 @@ const IndexRoute = IndexRouteImport.update({
 const AboutRoute = AboutRouteImport.update({
   id: '/about',
   path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ShopRoute = ShopRouteImport.update({
+  id: '/shop',
+  path: '/shop',
   getParentRoute: () => rootRouteImport,
 } as any)
 const MaterialsIndexRoute = MaterialsIndexRouteImport.update({
@@ -44,6 +50,7 @@ const ProductHandleRoute = ProductHandleRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/shop': typeof ShopRoute
   '/materials/$slug': typeof MaterialsSlugRoute
   '/product/$handle': typeof ProductHandleRoute
   '/materials/': typeof MaterialsIndexRoute
@@ -51,6 +58,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/shop': typeof ShopRoute
   '/materials/$slug': typeof MaterialsSlugRoute
   '/product/$handle': typeof ProductHandleRoute
   '/materials': typeof MaterialsIndexRoute
@@ -59,6 +67,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/shop': typeof ShopRoute
   '/materials/$slug': typeof MaterialsSlugRoute
   '/product/$handle': typeof ProductHandleRoute
   '/materials/': typeof MaterialsIndexRoute
@@ -66,13 +75,25 @@ export interface FileRoutesById {
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    '/' | '/about' | '/materials/$slug' | '/product/$handle' | '/materials/'
+    | '/'
+    | '/about'
+    | '/shop'
+    | '/materials/$slug'
+    | '/product/$handle'
+    | '/materials/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/materials/$slug' | '/product/$handle' | '/materials'
+  to:
+    | '/'
+    | '/about'
+    | '/shop'
+    | '/materials/$slug'
+    | '/product/$handle'
+    | '/materials'
   id:
     | '__root__'
     | '/'
     | '/about'
+    | '/shop'
     | '/materials/$slug'
     | '/product/$handle'
     | '/materials/'
@@ -81,6 +102,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  ShopRoute: typeof ShopRoute
   MaterialsSlugRoute: typeof MaterialsSlugRoute
   ProductHandleRoute: typeof ProductHandleRoute
   MaterialsIndexRoute: typeof MaterialsIndexRoute
@@ -100,6 +122,13 @@ declare module '@tanstack/react-router' {
       path: '/about'
       fullPath: '/about'
       preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/shop': {
+      id: '/shop'
+      path: '/shop'
+      fullPath: '/shop'
+      preLoaderRoute: typeof ShopRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/materials/': {
@@ -129,6 +158,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  ShopRoute: ShopRoute,
   MaterialsSlugRoute: MaterialsSlugRoute,
   ProductHandleRoute: ProductHandleRoute,
   MaterialsIndexRoute: MaterialsIndexRoute,
