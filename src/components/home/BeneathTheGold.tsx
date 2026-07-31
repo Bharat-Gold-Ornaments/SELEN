@@ -1,5 +1,8 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "motion/react";
+import ringCutaway from "@/assets/ring-cutaway.jpg";
+import barBrass from "@/assets/bar-brass.jpg";
+import barSilver from "@/assets/bar-silver.jpg";
 import { Award, ShieldCheck, Sparkles, Heart, Gem, Leaf, Check, X } from "lucide-react";
 
 const trust = [
@@ -154,7 +157,7 @@ export function BeneathTheGold() {
         <div className="mt-12 grid items-start gap-10 sm:grid-cols-[1fr_auto_1fr]">
           <div>
             <p className="text-center font-heading text-xl">Most Fashion Jewellery</p>
-            <div className="mt-5 h-16 rounded-sm bg-[linear-gradient(180deg,var(--gold)_0_10%,oklch(0.55_0.07_75)_10%_100%)]" />
+            <img src={barBrass} alt="Thin gold plating over a dull brass base metal" width={1152} height={576} loading="lazy" className="mt-5 h-20 w-full rounded-sm object-cover" />
             <ul className="mt-6 space-y-3">
               {others.map((t) => (
                 <li key={t} className="flex items-start gap-3 text-sm text-muted-foreground">
@@ -171,7 +174,7 @@ export function BeneathTheGold() {
 
           <div>
             <p className="text-center font-heading text-xl">SELEN Jewellery</p>
-            <div className="mt-5 h-16 rounded-sm bg-[linear-gradient(180deg,var(--gold)_0_10%,var(--silver-soft)_10%_100%)]" />
+            <img src={barSilver} alt="Premium 20K gold plating over a 925 sterling silver core" width={1152} height={576} loading="lazy" className="mt-5 h-20 w-full rounded-sm object-cover" />
             <ul className="mt-6 space-y-3">
               {selen.map((t) => (
                 <li key={t} className="flex items-start gap-3 text-sm text-foreground/80">
