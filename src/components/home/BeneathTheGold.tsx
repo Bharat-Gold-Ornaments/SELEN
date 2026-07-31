@@ -1,5 +1,8 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "motion/react";
+import ringCutaway from "@/assets/ring-cutaway.jpg";
+import barBrass from "@/assets/bar-brass.jpg";
+import barSilver from "@/assets/bar-silver.jpg";
 import { Award, ShieldCheck, Sparkles, Heart, Gem, Leaf, Check, X } from "lucide-react";
 
 const trust = [
@@ -44,13 +47,11 @@ export function BeneathTheGold() {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
 
-  const rotate = useTransform(scrollYProgress, [0, 1], [-12, 12]);
-  const cut = useTransform(scrollYProgress, [0.1, 0.55], [0, 1]);
-  const goldShift = useTransform(cut, [0, 1], [0, -26]);
-  const coreOpacity = useTransform(cut, [0.15, 0.6], [0, 1]);
-  const labelTop = useTransform(cut, [0.2, 0.6], [0, 1]);
-  const labelBottom = useTransform(cut, [0.45, 0.85], [0, 1]);
-  const goldShiftDown = useTransform(goldShift, (v) => -v);
+  const imgScale = useTransform(scrollYProgress, [0, 1], [1.06, 0.94]);
+  const imgY = useTransform(scrollYProgress, [0, 1], [24, -24]);
+  const labelTop = useTransform(scrollYProgress, [0.06, 0.3], [0, 1]);
+  const labelBottom = useTransform(scrollYProgress, [0.2, 0.45], [0, 1]);
+
 
   return (
     <section className="bg-ivory" aria-label="What's beneath the gold">
@@ -85,42 +86,40 @@ export function BeneathTheGold() {
             </div>
 
             {/* Cross-section visual */}
-            <div className="relative mx-auto flex h-[340px] w-full max-w-md items-center justify-center">
-              <motion.div style={{ rotate }} className="relative h-[220px] w-[260px]" aria-hidden>
-                <motion.div
-                  style={{ y: goldShift }}
-                  className="absolute inset-x-0 top-[46px] h-[26px] rounded-full bg-[linear-gradient(90deg,var(--gold-soft),var(--gold),var(--gold-deep))] shadow-[0_10px_30px_-12px_var(--gold-deep)]"
-                />
-                <motion.div
-                  style={{ opacity: coreOpacity }}
-                  className="absolute inset-x-0 top-[92px] h-[54px] rounded-md bg-[linear-gradient(90deg,var(--silver-soft),var(--silver),var(--silver-deep))]"
-                />
-                <motion.div
-                  style={{ y: goldShiftDown }}
-                  className="absolute inset-x-0 top-[158px] h-[26px] rounded-full bg-[linear-gradient(90deg,var(--gold-soft),var(--gold),var(--gold-deep))] shadow-[0_10px_30px_-12px_var(--gold-deep)]"
-                />
-              </motion.div>
+            <div className="relative mx-auto flex h-[380px] w-full max-w-md items-center justify-center">
+              <motion.img
+                src={ringCutaway}
+                alt="Cut-away of a SELEN ring showing 20K gold plating over a 925 sterling silver core"
+                width={1280}
+                height={1280}
+                loading="lazy"
+                style={{ scale: imgScale, y: imgY }}
+                className="h-full w-full object-contain mix-blend-multiply drop-shadow-[0_30px_60px_rgba(120,90,30,0.18)]"
+              />
 
               <motion.div
                 style={{ opacity: labelTop }}
-                className="absolute left-0 top-4 max-w-[150px]"
+                className="absolute left-0 top-2 max-w-[150px]"
               >
                 <p className="text-[0.6rem] uppercase tracking-[0.25em] text-gold-deep">
                   20K Gold Plating
                 </p>
                 <p className="mt-1 text-xs text-muted-foreground">A premium layer of lasting shine.</p>
+                <span className="mt-2 block h-px w-20 bg-gold/60" />
               </motion.div>
 
               <motion.div
                 style={{ opacity: labelBottom }}
-                className="absolute bottom-4 right-0 max-w-[160px] text-right"
+                className="absolute bottom-2 right-0 max-w-[160px] text-right"
               >
+                <span className="mb-2 ml-auto block h-px w-20 bg-silver-deep/60" />
                 <p className="text-[0.6rem] uppercase tracking-[0.25em] text-silver-deep">
                   925 Sterling Silver
                 </p>
                 <p className="mt-1 text-xs text-muted-foreground">
                   A precious core, BIS hallmarked.
                 </p>
+
               </motion.div>
             </div>
           </div>
@@ -158,7 +157,7 @@ export function BeneathTheGold() {
         <div className="mt-12 grid items-start gap-10 sm:grid-cols-[1fr_auto_1fr]">
           <div>
             <p className="text-center font-heading text-xl">Most Fashion Jewellery</p>
-            <div className="mt-5 h-16 rounded-sm bg-[linear-gradient(180deg,var(--gold)_0_10%,oklch(0.55_0.07_75)_10%_100%)]" />
+            <img src={barBrass} alt="Thin gold plating over a dull brass base metal" width={1152} height={576} loading="lazy" className="mt-5 h-20 w-full rounded-sm object-cover" />
             <ul className="mt-6 space-y-3">
               {others.map((t) => (
                 <li key={t} className="flex items-start gap-3 text-sm text-muted-foreground">
@@ -175,7 +174,7 @@ export function BeneathTheGold() {
 
           <div>
             <p className="text-center font-heading text-xl">SELEN Jewellery</p>
-            <div className="mt-5 h-16 rounded-sm bg-[linear-gradient(180deg,var(--gold)_0_10%,var(--silver-soft)_10%_100%)]" />
+            <img src={barSilver} alt="Premium 20K gold plating over a 925 sterling silver core" width={1152} height={576} loading="lazy" className="mt-5 h-20 w-full rounded-sm object-cover" />
             <ul className="mt-6 space-y-3">
               {selen.map((t) => (
                 <li key={t} className="flex items-start gap-3 text-sm text-foreground/80">
