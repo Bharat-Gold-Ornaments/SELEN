@@ -44,13 +44,11 @@ export function BeneathTheGold() {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
 
-  const rotate = useTransform(scrollYProgress, [0, 1], [-12, 12]);
-  const cut = useTransform(scrollYProgress, [0.1, 0.55], [0, 1]);
-  const goldShift = useTransform(cut, [0, 1], [0, -26]);
-  const coreOpacity = useTransform(cut, [0.15, 0.6], [0, 1]);
-  const labelTop = useTransform(cut, [0.2, 0.6], [0, 1]);
-  const labelBottom = useTransform(cut, [0.45, 0.85], [0, 1]);
-  const goldShiftDown = useTransform(goldShift, (v) => -v);
+  const imgScale = useTransform(scrollYProgress, [0, 1], [1.06, 0.94]);
+  const imgY = useTransform(scrollYProgress, [0, 1], [24, -24]);
+  const labelTop = useTransform(scrollYProgress, [0.06, 0.3], [0, 1]);
+  const labelBottom = useTransform(scrollYProgress, [0.2, 0.45], [0, 1]);
+
 
   return (
     <section className="bg-ivory" aria-label="What's beneath the gold">
