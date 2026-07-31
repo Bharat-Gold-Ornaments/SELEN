@@ -80,7 +80,7 @@ export function EditorialCollections({ products }: { products: ProductEdge[] }) 
 
       <div className="mt-16 space-y-6 px-6">
         {groups.map((group, i) => (
-          <CollectionRow key={group.key} index={i} {...group} />
+          <CollectionRow key={group.key} index={i} title={group.title} line={group.line} items={group.items} />
         ))}
       </div>
     </section>
