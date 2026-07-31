@@ -1,6 +1,8 @@
 import { Link } from "@tanstack/react-router";
 
-const columns = [
+type FooterLink = { label: string; to?: string; hash?: string; slug?: string };
+
+const columns: Array<{ title: string; links: FooterLink[] }> = [
   {
     title: "Explore",
     links: [
