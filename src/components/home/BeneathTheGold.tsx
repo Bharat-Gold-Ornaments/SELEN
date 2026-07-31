@@ -83,42 +83,40 @@ export function BeneathTheGold() {
             </div>
 
             {/* Cross-section visual */}
-            <div className="relative mx-auto flex h-[340px] w-full max-w-md items-center justify-center">
-              <motion.div style={{ rotate }} className="relative h-[220px] w-[260px]" aria-hidden>
-                <motion.div
-                  style={{ y: goldShift }}
-                  className="absolute inset-x-0 top-[46px] h-[26px] rounded-full bg-[linear-gradient(90deg,var(--gold-soft),var(--gold),var(--gold-deep))] shadow-[0_10px_30px_-12px_var(--gold-deep)]"
-                />
-                <motion.div
-                  style={{ opacity: coreOpacity }}
-                  className="absolute inset-x-0 top-[92px] h-[54px] rounded-md bg-[linear-gradient(90deg,var(--silver-soft),var(--silver),var(--silver-deep))]"
-                />
-                <motion.div
-                  style={{ y: goldShiftDown }}
-                  className="absolute inset-x-0 top-[158px] h-[26px] rounded-full bg-[linear-gradient(90deg,var(--gold-soft),var(--gold),var(--gold-deep))] shadow-[0_10px_30px_-12px_var(--gold-deep)]"
-                />
-              </motion.div>
+            <div className="relative mx-auto flex h-[380px] w-full max-w-md items-center justify-center">
+              <motion.img
+                src={ringCutaway}
+                alt="Cut-away of a SELEN ring showing 20K gold plating over a 925 sterling silver core"
+                width={1280}
+                height={1280}
+                loading="lazy"
+                style={{ scale: imgScale, y: imgY }}
+                className="h-full w-full object-contain mix-blend-multiply drop-shadow-[0_30px_60px_rgba(120,90,30,0.18)]"
+              />
 
               <motion.div
                 style={{ opacity: labelTop }}
-                className="absolute left-0 top-4 max-w-[150px]"
+                className="absolute left-0 top-2 max-w-[150px]"
               >
                 <p className="text-[0.6rem] uppercase tracking-[0.25em] text-gold-deep">
                   20K Gold Plating
                 </p>
                 <p className="mt-1 text-xs text-muted-foreground">A premium layer of lasting shine.</p>
+                <span className="mt-2 block h-px w-20 bg-gold/60" />
               </motion.div>
 
               <motion.div
                 style={{ opacity: labelBottom }}
-                className="absolute bottom-4 right-0 max-w-[160px] text-right"
+                className="absolute bottom-2 right-0 max-w-[160px] text-right"
               >
+                <span className="mb-2 ml-auto block h-px w-20 bg-silver-deep/60" />
                 <p className="text-[0.6rem] uppercase tracking-[0.25em] text-silver-deep">
                   925 Sterling Silver
                 </p>
                 <p className="mt-1 text-xs text-muted-foreground">
                   A precious core, BIS hallmarked.
                 </p>
+
               </motion.div>
             </div>
           </div>
