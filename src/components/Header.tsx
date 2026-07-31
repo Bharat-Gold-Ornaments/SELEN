@@ -12,14 +12,6 @@ export function Header() {
           <Link to="/" className="text-muted-foreground transition-colors hover:text-foreground">
             Shop
           </Link>
-          <a
-            href="https://s3iphy-ah.myshopify.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-muted-foreground transition-colors hover:text-foreground"
-          >
-            Store admin
-          </a>
         </nav>
         <CartDrawer />
       </div>
