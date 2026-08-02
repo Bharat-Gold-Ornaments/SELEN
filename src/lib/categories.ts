@@ -36,9 +36,16 @@ export const CATEGORIES: Category[] = [
     slug: "bracelets",
     label: "Bracelets",
     line: "Movement, caught in silver.",
-    match: /bracelet|bangle|kada|anklet/i,
+    match: /bracelet|bangle|kada/i,
+  },
+  {
+    slug: "anklets",
+    label: "Anklets",
+    line: "A quiet shine, low and close.",
+    match: /anklet|payal/i,
   },
 ];
+
 
 export function getCategory(slug: string) {
   return CATEGORIES.find((c) => c.slug === slug);
