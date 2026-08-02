@@ -1,78 +1,115 @@
 import { Link } from "@tanstack/react-router";
+import { EDITORIAL_COLLECTIONS } from "@/lib/collections";
 
-type FooterLink = { label: string; to?: "/" | "/materials" | "/materials/$slug" | "/about" | "/design-with-ai"; hash?: string; slug?: string };
-
-const columns: Array<{ title: string; links: FooterLink[] }> = [
-  {
-    title: "Explore",
-    links: [
-      { label: "Collections", to: "/", hash: "collection" },
-      { label: "Design with AI", to: "/design-with-ai" },
-      { label: "Material Library", to: "/materials" },
-      { label: "About SELEN", to: "/about" },
-    ],
-  },
-  {
-    title: "Know your jewellery",
-    links: [
-      { label: "925 Sterling Silver", to: "/materials/$slug", slug: "925-sterling-silver" },
-      { label: "20K Gold Plating", to: "/materials/$slug", slug: "gold-plating" },
-      { label: "Jewellery Care", to: "/materials/$slug", slug: "jewellery-care" },
-    ],
-  },
-];
+const SHOP = ["earrings", "necklaces", "rings", "bracelets", "anklets"];
 
 export function SiteFooter() {
   return (
-    <footer className="border-t border-border/60 bg-ivory py-20">
-      <div className="mx-auto max-w-6xl px-6">
-        <div className="flex flex-col gap-14 sm:flex-row sm:justify-between">
-          <div className="max-w-sm">
-            <p className="font-heading text-2xl tracking-wide">SELEN</p>
-            <p className="mt-4 text-xs leading-relaxed text-muted-foreground">
-              BIS Hallmarked 925 sterling silver, finished in premium 20K gold plating.
-              Beautiful on the outside. Precious on the inside.
+    <footer className="border-t border-border/50 bg-background px-6 pb-14 pt-24 sm:px-10">
+      <div className="mx-auto max-w-[1600px]">
+        <div className="grid gap-14 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
+          <div className="max-w-xs">
+            <p className="font-heading text-lg tracking-[0.42em]">SELEN</p>
+            <p className="mt-6 text-sm leading-relaxed text-muted-foreground">
+              925 sterling silver, finished in 20K gold. Made to be worn, not stored.
             </p>
           </div>
 
-          <div className="flex gap-16">
-            {columns.map((col) => (
-              <div key={col.title}>
-                <p className="text-[0.6rem] uppercase tracking-[0.3em] text-muted-foreground/80">
-                  {col.title}
-                </p>
-                <ul className="mt-5 space-y-3">
-                  {col.links.map((link) => (
-                    <li key={link.label}>
-                      {link.slug ? (
-                        <Link
-                          to="/materials/$slug"
-                          params={{ slug: link.slug }}
-                          className="text-sm text-foreground/80 hover:text-foreground"
-                        >
-                          {link.label}
-                        </Link>
-                      ) : (
-                        <Link
-                          to={link.to as "/" | "/materials" | "/about"}
-                          hash={link.hash}
-                          className="text-sm text-foreground/80 hover:text-foreground"
-                        >
-                          {link.label}
-                        </Link>
-                      )}
-                    </li>
-                  ))}
-                </ul>
-              </div>
+          <FooterColumn title="Shop">
+            {SHOP.map((slug) => (
+              <li key={slug}>
+                <Link
+                  to="/collections/$category"
+                  params={{ category: slug }}
+                  className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                >
+                  {slug.charAt(0).toUpperCase() + slug.slice(1)}
+                </Link>
+              </li>
             ))}
-          </div>
+          </FooterColumn>
+
+          <FooterColumn title="Collections">
+            {EDITORIAL_COLLECTIONS.map((c) => (
+              <li key={c.slug}>
+                <Link
+                  to="/collections/$category"
+                  params={{ category: c.slug }}
+                  className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                >
+                  {c.title}
+                </Link>
+              </li>
+            ))}
+          </FooterColumn>
+
+          <FooterColumn title="About">
+            <li>
+              <Link
+                to="/about"
+                className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+              >
+                Our Belief
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/materials"
+                className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+              >
+                Materials
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/materials/$slug"
+                params={{ slug: "jewellery-care" }}
+                className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+              >
+                Care Guide
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/visit"
+                className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+              >
+                Visit Store
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/contact"
+                className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+              >
+                Contact
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/design-with-ai"
+                className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+              >
+                Design with AI
+              </Link>
+            </li>
+          </FooterColumn>
         </div>
 
-        <p className="mt-16 text-[0.6rem] uppercase tracking-[0.3em] text-muted-foreground/80">
-          &copy; {new Date().getFullYear()} SELEN · A KinMitra brand
-        </p>
+        <div className="mt-20 flex flex-col gap-3 border-t border-border/50 pt-8 text-[0.6rem] uppercase tracking-[0.3em] text-muted-foreground sm:flex-row sm:justify-between">
+          <span>© {new Date().getFullYear()} SELEN</span>
+          <span>A KINMITRA BRAND</span>
+        </div>
       </div>
     </footer>
+  );
+}
+
+function FooterColumn({ title, children }: { title: string; children: React.ReactNode }) {
+  return (
+    <div>
+      <p className="text-[0.58rem] uppercase tracking-[0.38em] text-muted-foreground/80">{title}</p>
+      <ul className="mt-6 space-y-3">{children}</ul>
+    </div>
   );
 }
