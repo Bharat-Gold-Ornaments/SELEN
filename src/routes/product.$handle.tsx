@@ -8,6 +8,7 @@ import { Loader2 } from "lucide-react";
 import type { ShopifyProduct } from "@/lib/shopify.functions";
 import { SiteFooter } from "@/components/home/SiteFooter";
 import { StyledTogether } from "@/components/product/StyledTogether";
+import { ProductGallery } from "@/components/product/ProductGallery";
 import { Reveal } from "@/components/editorial/Reveal";
 import { EDITORIAL_FALLBACKS } from "@/lib/placeholders";
 import { formatPrice } from "@/lib/categories";
