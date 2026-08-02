@@ -1,21 +1,37 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { useState } from "react";
-import { motion } from "motion/react";
-import { getProductByHandle } from "@/lib/shopify.functions";
+import { getProductByHandle, getProducts } from "@/lib/shopify.functions";
 import { Button } from "@/components/ui/button";
 import { useCartStore } from "@/stores/cartStore";
 import { Loader2 } from "lucide-react";
 import type { ShopifyProduct } from "@/lib/shopify.functions";
 import { SiteFooter } from "@/components/home/SiteFooter";
-import { Care, Dimensions, StyleGuide, TheDetails } from "@/components/product/ProductStory";
+import { StyledTogether } from "@/components/product/StyledTogether";
+import { Reveal } from "@/components/editorial/Reveal";
+import { EDITORIAL_FALLBACKS } from "@/lib/placeholders";
+import { formatPrice } from "@/lib/categories";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+
+const productsQuery = {
+  queryKey: ["products"],
+  queryFn: () => getProducts({ data: {} }),
+};
 
 export const Route = createFileRoute("/product/$handle")({
   loader: async ({ params, context }) => {
-    await context.queryClient.ensureQueryData({
-      queryKey: ["product", params.handle],
-      queryFn: () => getProductByHandle({ data: { handle: params.handle } }),
-    });
+    await Promise.all([
+      context.queryClient.ensureQueryData({
+        queryKey: ["product", params.handle],
+        queryFn: () => getProductByHandle({ data: { handle: params.handle } }),
+      }),
+      context.queryClient.ensureQueryData(productsQuery),
+    ]);
   },
   head: ({ params }) => {
     const name = params.handle
@@ -23,7 +39,7 @@ export const Route = createFileRoute("/product/$handle")({
       .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
       .join(" ");
     const title = `${name} — SELEN`;
-    const description = `${name} in BIS hallmarked 925 sterling silver with premium 20K gold plating. Beautiful on the outside, precious on the inside.`;
+    const description = `${name} in BIS hallmarked 925 sterling silver with 20K gold plating. Made to be worn every day.`;
     return {
       meta: [
         { title },
@@ -37,9 +53,11 @@ export const Route = createFileRoute("/product/$handle")({
   },
   component: ProductDetail,
   notFoundComponent: () => (
-    <div className="mx-auto max-w-7xl px-4 py-24 text-center sm:px-6 lg:px-8">
-      <h1 className="font-heading text-2xl font-medium">Product not found</h1>
-      <p className="mt-2 text-muted-foreground">This piece isn't in the SELEN collection.</p>
+    <div className="mx-auto max-w-3xl px-6 py-40 text-center">
+      <h1 className="font-heading text-3xl font-normal">Piece not found</h1>
+      <p className="mt-3 text-sm text-muted-foreground">
+        This piece isn&rsquo;t part of the SELEN collection.
+      </p>
     </div>
   ),
 });
@@ -50,32 +68,44 @@ function ProductDetail() {
     queryKey: ["product", handle],
     queryFn: () => getProductByHandle({ data: { handle } }),
   });
+  const { data: all } = useSuspenseQuery(productsQuery);
 
   if (!product) return null;
 
+  const related = all
+    .map((e) => e.node)
+    .filter((p) => p.handle !== product.handle)
+    .slice(0, 4);
+
   return (
     <main className="bg-background">
-      <ProductHero product={product} />
-      <TheDetails product={product} />
-      <Dimensions product={product} />
-      <StyleGuide />
-      <Care />
+      <ProductView product={product} />
+      <StyledTogether products={related} />
       <SiteFooter />
     </main>
   );
 }
 
-function ProductHero({ product }: { product: ShopifyProduct }) {
+function ProductView({ product }: { product: ShopifyProduct }) {
   const addItem = useCartStore((state) => state.addItem);
   const isLoading = useCartStore((state) => state.isLoading);
   const variants = product.variants.edges.map((e) => e.node);
   const [selectedVariantId, setSelectedVariantId] = useState(variants[0]?.id ?? "");
-  const [imageIndex, setImageIndex] = useState(0);
 
   const selectedVariant = variants.find((v) => v.id === selectedVariantId) ?? variants[0];
   const price = selectedVariant?.price ?? product.priceRange.minVariantPrice;
-  const images = product.images.edges;
-  const hero = images[imageIndex]?.node;
+
+  /** Hero, lifestyle, detail, alternate angle, dimensions — topped up with editorial placeholders. */
+  const shopifyImages = product.images.edges.map((e) => ({
+    url: `${e.node.url}?width=1600`,
+    alt: e.node.altText ?? product.title,
+  }));
+  const gallery = [
+    ...shopifyImages,
+    ...EDITORIAL_FALLBACKS.map((url) => ({ url, alt: "" })),
+  ].slice(0, 5);
+
+  const { intro, specs } = parseDescription(product.description);
 
   const handleAddToCart = async () => {
     if (!selectedVariant) return;
@@ -89,95 +119,51 @@ function ProductHero({ product }: { product: ShopifyProduct }) {
     });
   };
 
-  const { intro, specs } = parseDescription(product.description);
-
-  const formatted = `${price.currencyCode === "INR" ? "₹" : price.currencyCode + " "}${Math.round(
-    parseFloat(price.amount),
-  ).toLocaleString("en-IN")}`;
-
   return (
-    <section className="bg-background px-6 pb-20 pt-14 sm:pt-20">
-      <div className="mx-auto grid max-w-6xl items-center gap-16 lg:grid-cols-[1.15fr_1fr]">
-        <div>
-          <motion.div
-            initial={{ opacity: 0, scale: 0.97 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-            className="relative flex aspect-square items-center justify-center rounded-sm bg-ivory"
-          >
-            {hero ? (
-              <img
-                src={`${hero.url}?width=1400`}
-                alt={hero.altText ?? product.title}
-                className="max-h-[78%] max-w-[78%] object-contain drop-shadow-[0_36px_50px_rgba(0,0,0,0.16)]"
-              />
-            ) : (
-              <span className="text-muted-foreground">No image</span>
-            )}
-          </motion.div>
-
-          {images.length > 1 && (
-            <div className="mt-5 flex gap-3">
-              {images.map((image, idx) => (
-                <button
-                  key={idx}
-                  onClick={() => setImageIndex(idx)}
-                  aria-label={`View image ${idx + 1}`}
-                  className={`h-16 w-16 overflow-hidden rounded-sm border bg-ivory transition-opacity ${
-                    idx === imageIndex ? "border-foreground" : "border-transparent opacity-60"
-                  }`}
-                >
-                  <img
-                    src={`${image.node.url}?width=200`}
-                    alt={image.node.altText ?? product.title}
-                    className="h-full w-full object-contain p-1"
-                  />
-                </button>
-              ))}
-            </div>
-          )}
+    <section className="mx-auto max-w-[1600px] px-6 pt-10 sm:px-10 sm:pt-16">
+      <div className="grid gap-16 lg:grid-cols-[1.25fr_1fr] lg:gap-24">
+        <div className="space-y-4 sm:space-y-6">
+          {gallery.map((image, i) => (
+            <Reveal key={i} delay={i === 0 ? 0 : 0.05}>
+              <div className="overflow-hidden bg-ivory">
+                <img
+                  src={image.url}
+                  alt={image.alt || product.title}
+                  loading={i === 0 ? "eager" : "lazy"}
+                  className={
+                    i < shopifyImages.length
+                      ? "aspect-[4/5] w-full object-contain p-4 sm:p-8"
+                      : "aspect-[4/5] w-full object-cover"
+                  }
+                />
+              </div>
+            </Reveal>
+          ))}
         </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 18 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, delay: 0.15 }}
-        >
-          <p className="text-[0.65rem] uppercase tracking-[0.4em] text-muted-foreground">
-            925 Silver · 20K Gold Plated
-          </p>
-          <h1 className="mt-6 font-heading text-4xl font-normal leading-[1.1] sm:text-5xl">
-            {product.title}
-          </h1>
-          <p className="mt-5 text-lg font-medium tracking-wide text-foreground/90">{formatted}</p>
+        <div>
+          <div className="lg:sticky lg:top-28">
+            <p className="text-[0.6rem] uppercase tracking-[0.4em] text-muted-foreground">
+              925 Silver · 20K Gold Plated
+            </p>
+            <h1 className="mt-6 font-heading text-3xl font-normal leading-[1.1] tracking-tight sm:text-5xl">
+              {product.title}
+            </h1>
+            <p className="mt-5 text-sm tracking-wide text-muted-foreground">
+              {formatPrice(price.amount, price.currencyCode)}
+            </p>
 
-          <div className="mt-8 space-y-4 text-base leading-relaxed text-muted-foreground">
-            <p>{intro}</p>
-          </div>
+            <p className="mt-8 max-w-md text-sm leading-relaxed text-muted-foreground">{intro}</p>
 
-          {specs.length > 0 && (
-            <dl className="mt-8 divide-y divide-border/60 border-y border-border/60 text-sm">
-              {specs.map((spec) => (
-                <div key={spec.label} className="flex justify-between gap-6 py-3">
-                  <dt className="text-[0.6rem] uppercase tracking-[0.25em] text-muted-foreground">
-                    {spec.label}
-                  </dt>
-                  <dd className="text-right text-foreground/80">{spec.value}</dd>
-                </div>
-              ))}
-            </dl>
-          )}
-
-          {product.options.length > 0 &&
-            product.options.some((o) => o.values.length > 1) && (
-              <div className="mt-8 space-y-4">
+            {product.options.length > 0 && product.options.some((o) => o.values.length > 1) && (
+              <div className="mt-10 space-y-4">
                 {product.options.map((option) => (
                   <div key={option.name}>
                     <label className="mb-2 block text-[0.6rem] uppercase tracking-[0.3em] text-muted-foreground">
                       {option.name}
                     </label>
                     <select
-                      className="w-full rounded-sm border border-input bg-background px-3 py-3 text-sm"
+                      className="w-full border border-input bg-background px-3 py-3 text-sm"
                       onChange={(e) => setSelectedVariantId(e.target.value)}
                       value={selectedVariantId}
                     >
@@ -193,35 +179,87 @@ function ProductHero({ product }: { product: ShopifyProduct }) {
               </div>
             )}
 
-          <div className="mt-10">
             <Button
               size="lg"
-              className="w-full rounded-none py-6 text-[0.7rem] uppercase tracking-[0.3em] sm:w-auto sm:px-12"
+              className="mt-10 w-full rounded-none py-6 text-[0.65rem] uppercase tracking-[0.3em]"
               onClick={handleAddToCart}
               disabled={isLoading || !selectedVariant?.availableForSale}
             >
               {isLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : "Add to bag"}
             </Button>
             {!selectedVariant?.availableForSale && (
-              <p className="mt-3 text-sm text-muted-foreground">
-                This variant is currently unavailable.
+              <p className="mt-3 text-xs text-muted-foreground">
+                This option is currently unavailable.
               </p>
             )}
-          </div>
 
-          <p className="mt-8 text-xs leading-relaxed text-muted-foreground">
-            BIS hallmarked 925 sterling silver core · premium 20K gold plating · hand-set CZ
-          </p>
-        </motion.div>
+            <Accordion type="single" collapsible className="mt-14 border-t border-border/70">
+              <Panel value="materials" title="Materials">
+                <p>
+                  A solid core of BIS hallmarked 925 sterling silver, finished with a generous layer
+                  of 20K gold. Stones, where present, are hand-set cubic zirconia.
+                </p>
+              </Panel>
+              <Panel value="dimensions" title="Dimensions">
+                {specs.length > 0 ? (
+                  <dl className="space-y-2">
+                    {specs.map((spec) => (
+                      <div key={spec.label} className="flex justify-between gap-6">
+                        <dt className="text-muted-foreground">{spec.label}</dt>
+                        <dd className="text-right">{spec.value}</dd>
+                      </div>
+                    ))}
+                  </dl>
+                ) : (
+                  <p>Full measurements are shown in the dimensions illustration in the gallery.</p>
+                )}
+              </Panel>
+              <Panel value="shipping" title="Shipping & Returns">
+                <p>
+                  Complimentary insured shipping across India, dispatched within two working days.
+                  Returns accepted within 14 days, unworn and in the original box.
+                </p>
+              </Panel>
+              <Panel value="care" title="Jewellery Care">
+                <p>
+                  Last on, first off. Keep away from perfume and water, wipe with the enclosed cloth
+                  after wear, and store in its pouch. Complimentary replating is offered at our
+                  boutique.
+                </p>
+              </Panel>
+            </Accordion>
+          </div>
+        </div>
       </div>
     </section>
+  );
+}
+
+function Panel({
+  value,
+  title,
+  children,
+}: {
+  value: string;
+  title: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <AccordionItem value={value} className="border-b border-border/70">
+      <AccordionTrigger className="py-5 text-[0.62rem] uppercase tracking-[0.28em] hover:no-underline">
+        {title}
+      </AccordionTrigger>
+      <AccordionContent className="pb-6 text-sm leading-relaxed text-muted-foreground">
+        {children}
+      </AccordionContent>
+    </AccordionItem>
   );
 }
 
 const SPEC_LABELS = ["Material", "Stone", "Weight", "Dimensions", "SKU", "Finish", "Closure"];
 
 function parseDescription(description: string) {
-  let rest = description.replace(/\s+/g, " ").trim();
+  const rest = description.replace(/\s+/g, " ").trim();
   const specs: Array<{ label: string; value: string }> = [];
 
   const firstLabel = SPEC_LABELS.map((l) => rest.indexOf(`${l}:`))

@@ -3,11 +3,11 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 import { getProducts } from "@/lib/shopify.functions";
 import { ProductGrid } from "@/components/ProductGrid";
 import { SiteFooter } from "@/components/home/SiteFooter";
-import { CategoryNav } from "@/components/CategoryNav";
+import { Reveal, SectionLabel } from "@/components/editorial/Reveal";
 
-const TITLE = "Shop All Jewellery — SELEN";
+const TITLE = "The Full Collection — SELEN";
 const DESCRIPTION =
-  "Browse every SELEN piece: BIS hallmarked 925 sterling silver finished in premium 20K gold plating.";
+  "Every SELEN piece in one place: 925 sterling silver finished in 20K gold, photographed and made for everyday wear.";
 
 const productsQuery = {
   queryKey: ["products"],
@@ -37,15 +37,18 @@ function ShopPage() {
 
   return (
     <main className="bg-background">
-      <div className="mx-auto max-w-7xl px-6 py-14">
-        <h1 className="font-heading text-3xl sm:text-4xl">All jewellery</h1>
-        <p className="mt-3 max-w-md text-sm text-muted-foreground">
-          925 sterling silver, 20K gold plated. {products.length} pieces in stock.
-        </p>
-        <div className="mt-8">
-          <CategoryNav />
-        </div>
-        <div className="mt-12">
+      <div className="mx-auto max-w-[1600px] px-6 pb-28 pt-24 sm:px-10 sm:pb-36 sm:pt-32">
+        <Reveal className="max-w-xl">
+          <SectionLabel>The Collection</SectionLabel>
+          <h1 className="mt-6 font-heading text-4xl font-normal leading-tight tracking-tight sm:text-6xl">
+            Everything we make.
+          </h1>
+          <p className="mt-5 max-w-sm text-sm leading-relaxed text-muted-foreground">
+            {products.length} pieces in 925 sterling silver, finished in 20K gold.
+          </p>
+        </Reveal>
+
+        <div className="mt-24">
           <ProductGrid products={products} />
         </div>
       </div>

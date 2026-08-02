@@ -2,18 +2,22 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { getProducts } from "@/lib/shopify.functions";
 import { Hero } from "@/components/home/Hero";
-import { BeneathTheGold } from "@/components/home/BeneathTheGold";
-import { ShopStrip } from "@/components/home/ShopStrip";
-import { WhySelenExists } from "@/components/home/WhySelenExists";
 import { EditorialCollections } from "@/components/home/EditorialCollections";
-import { CraftsmanshipJourney } from "@/components/home/CraftsmanshipJourney";
-import { AiPersonalization } from "@/components/home/AiPersonalization";
-import { Testimonials } from "@/components/home/Testimonials";
+import { FeaturedProduct } from "@/components/home/FeaturedProduct";
+import { WhySelen } from "@/components/home/WhySelen";
+import { OurBelief } from "@/components/home/OurBelief";
+import { VisitStore } from "@/components/home/VisitStore";
+import { StoreInvitation } from "@/components/home/StoreInvitation";
 import { SiteFooter } from "@/components/home/SiteFooter";
 
-const TITLE = "SELEN";
+const TITLE = "SELEN — Gold Plated Sterling Silver Jewellery";
 const DESCRIPTION =
-  "BIS Hallmarked 925 sterling silver finished in premium 20K gold plating. Beautiful on the outside, precious on the inside.";
+  "925 sterling silver finished in 20K gold. Editorial collections of everyday fine jewellery, made to be worn and not stored.";
+
+const productsQuery = {
+  queryKey: ["products"],
+  queryFn: () => getProducts({ data: {} }),
+};
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -27,18 +31,10 @@ export const Route = createFileRoute("/")({
     ],
   }),
   loader: async ({ context }) => {
-    await context.queryClient.ensureQueryData({
-      queryKey: ["products"],
-      queryFn: () => getProducts({ data: {} }),
-    });
+    await context.queryClient.ensureQueryData(productsQuery);
   },
   component: Index,
 });
-
-const productsQuery = {
-  queryKey: ["products"],
-  queryFn: () => getProducts({ data: {} }),
-};
 
 function Index() {
   const { data: products } = useSuspenseQuery(productsQuery);
@@ -46,14 +42,13 @@ function Index() {
   return (
     <main className="bg-background">
       <Hero />
-      <ShopStrip products={products} />
-      <BeneathTheGold />
-      <WhySelenExists />
-      <EditorialCollections products={products} />
-      <CraftsmanshipJourney />
-      <AiPersonalization />
-      <Testimonials />
+      <EditorialCollections />
+      <FeaturedProduct products={products} />
+      <WhySelen />
+      <OurBelief />
+      <VisitStore />
       <SiteFooter />
+      <StoreInvitation />
     </main>
   );
 }
