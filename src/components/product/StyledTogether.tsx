@@ -23,7 +23,7 @@ export function StyledTogether({ products }: { products: ShopifyProduct[] }) {
             return (
               <Reveal key={p.id} delay={i * 0.06}>
                 <Link to="/product/$handle" params={{ handle: p.handle }} className="group block">
-                  <div className="aspect-[4/5] overflow-hidden bg-ivory">
+                  <div className="aspect-square overflow-hidden bg-ivory">
                     {img && (
                       <img
                         src={`${img.url}?width=800`}
