@@ -59,10 +59,12 @@ export function CartDrawer() {
         <div className="flex flex-1 min-h-0 flex-col pt-6">
           {items.length === 0 ? (
             <div className="flex flex-1 items-center justify-center">
-              <div className="text-center">
-                <ShoppingCart className="mx-auto mb-4 h-12 w-12 text-muted-foreground" />
-                <p className="text-muted-foreground">Your cart is empty</p>
-              </div>
+              <MascotEmptyState
+                pose="bag"
+                eyebrow="Your Bag"
+                title="Nothing chosen yet."
+                body="Take your time — the right piece has a way of finding you."
+              />
             </div>
           ) : (
             <>
