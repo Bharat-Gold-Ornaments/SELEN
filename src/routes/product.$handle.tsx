@@ -132,7 +132,7 @@ function ProductView({ product }: { product: ShopifyProduct }) {
                   loading={i === 0 ? "eager" : "lazy"}
                   className={
                     i < shopifyImages.length
-                      ? "aspect-[4/5] w-full object-contain p-8 sm:p-16"
+                      ? "aspect-[4/5] w-full object-contain p-4 sm:p-8"
                       : "aspect-[4/5] w-full object-cover"
                   }
                 />
