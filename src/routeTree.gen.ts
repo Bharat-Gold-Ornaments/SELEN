@@ -12,9 +12,11 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as AuthRouteImport } from './routes/auth'
+import { Route as ContactRouteImport } from './routes/contact'
 import { Route as DesignWithAiRouteImport } from './routes/design-with-ai'
 import { Route as McpRouteImport } from './routes/mcp'
 import { Route as ShopRouteImport } from './routes/shop'
+import { Route as VisitRouteImport } from './routes/visit'
 import { Route as Char91DotmcpChar93ListToolsRouteImport } from './routes/[.mcp]/list-tools'
 import { Route as Char91DotwellKnownChar93OauthProtectedResourceRouteImport } from './routes/[.well-known]/oauth-protected-resource'
 import { Route as CollectionsCategoryRouteImport } from './routes/collections.$category'
@@ -41,6 +43,11 @@ const AuthRoute = AuthRouteImport.update({
   path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DesignWithAiRoute = DesignWithAiRouteImport.update({
   id: '/design-with-ai',
   path: '/design-with-ai',
@@ -54,6 +61,11 @@ const McpRoute = McpRouteImport.update({
 const ShopRoute = ShopRouteImport.update({
   id: '/shop',
   path: '/shop',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VisitRoute = VisitRouteImport.update({
+  id: '/visit',
+  path: '/visit',
   getParentRoute: () => rootRouteImport,
 } as any)
 const Char91DotmcpChar93ListToolsRoute =
@@ -114,9 +126,11 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/auth': typeof AuthRoute
+  '/contact': typeof ContactRoute
   '/design-with-ai': typeof DesignWithAiRouteWithChildren
   '/mcp': typeof McpRoute
   '/shop': typeof ShopRoute
+  '/visit': typeof VisitRoute
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/collections/$category': typeof CollectionsCategoryRoute
@@ -132,8 +146,10 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/auth': typeof AuthRoute
+  '/contact': typeof ContactRoute
   '/mcp': typeof McpRoute
   '/shop': typeof ShopRoute
+  '/visit': typeof VisitRoute
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/collections/$category': typeof CollectionsCategoryRoute
@@ -150,9 +166,11 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/auth': typeof AuthRoute
+  '/contact': typeof ContactRoute
   '/design-with-ai': typeof DesignWithAiRouteWithChildren
   '/mcp': typeof McpRoute
   '/shop': typeof ShopRoute
+  '/visit': typeof VisitRoute
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/collections/$category': typeof CollectionsCategoryRoute
@@ -170,9 +188,11 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/auth'
+    | '/contact'
     | '/design-with-ai'
     | '/mcp'
     | '/shop'
+    | '/visit'
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
     | '/collections/$category'
@@ -188,8 +208,10 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/auth'
+    | '/contact'
     | '/mcp'
     | '/shop'
+    | '/visit'
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
     | '/collections/$category'
@@ -205,9 +227,11 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/auth'
+    | '/contact'
     | '/design-with-ai'
     | '/mcp'
     | '/shop'
+    | '/visit'
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
     | '/collections/$category'
@@ -224,9 +248,11 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   AuthRoute: typeof AuthRoute
+  ContactRoute: typeof ContactRoute
   DesignWithAiRoute: typeof DesignWithAiRouteWithChildren
   McpRoute: typeof McpRoute
   ShopRoute: typeof ShopRoute
+  VisitRoute: typeof VisitRoute
   Char91DotmcpChar93ListToolsRoute: typeof Char91DotmcpChar93ListToolsRoute
   Char91DotwellKnownChar93OauthProtectedResourceRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   CollectionsCategoryRoute: typeof CollectionsCategoryRoute
@@ -260,6 +286,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/design-with-ai': {
       id: '/design-with-ai'
       path: '/design-with-ai'
@@ -279,6 +312,13 @@ declare module '@tanstack/react-router' {
       path: '/shop'
       fullPath: '/shop'
       preLoaderRoute: typeof ShopRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/visit': {
+      id: '/visit'
+      path: '/visit'
+      fullPath: '/visit'
+      preLoaderRoute: typeof VisitRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/.mcp/list-tools': {
@@ -372,9 +412,11 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   AuthRoute: AuthRoute,
+  ContactRoute: ContactRoute,
   DesignWithAiRoute: DesignWithAiRouteWithChildren,
   McpRoute: McpRoute,
   ShopRoute: ShopRoute,
+  VisitRoute: VisitRoute,
   Char91DotmcpChar93ListToolsRoute: Char91DotmcpChar93ListToolsRoute,
   Char91DotwellKnownChar93OauthProtectedResourceRoute:
     Char91DotwellKnownChar93OauthProtectedResourceRoute,
