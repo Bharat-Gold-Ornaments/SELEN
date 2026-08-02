@@ -3,6 +3,7 @@ import { Link } from "@tanstack/react-router";
 import { AnimatePresence, motion } from "motion/react";
 import { X } from "lucide-react";
 import { PLACEHOLDER } from "@/lib/placeholders";
+import { MASCOT } from "@/lib/mascot";
 
 const KEY = "selen-store-invite-dismissed";
 
