@@ -5,7 +5,7 @@ import { CartDrawer } from "@/components/CartDrawer";
 import { NavDrawer } from "@/components/NavDrawer";
 
 const linkClass =
-  "text-[0.65rem] uppercase tracking-[0.28em] text-foreground/70 transition-colors hover:text-foreground";
+  "text-[0.775rem] uppercase tracking-[0.28em] text-foreground/70 transition-colors hover:text-foreground";
 
 export function Header() {
   const [open, setOpen] = useState(false);
@@ -21,7 +21,7 @@ export function Header() {
               className="flex items-center gap-3 text-foreground/70 transition-colors hover:text-foreground"
             >
               <Menu className="h-5 w-5 shrink-0" strokeWidth={1.2} />
-              <span className="hidden text-[0.65rem] uppercase tracking-[0.28em] sm:inline">Menu</span>
+              <span className="hidden text-[0.775rem] uppercase tracking-[0.28em] sm:inline">Menu</span>
             </button>
           </div>
 

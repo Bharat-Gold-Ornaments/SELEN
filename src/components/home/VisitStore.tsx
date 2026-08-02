@@ -27,13 +27,13 @@ export function VisitStore() {
             <div className="mt-9 flex flex-wrap gap-4">
               <Link
                 to="/contact"
-                className="border border-foreground/30 bg-background/80 px-8 py-3.5 text-[0.62rem] uppercase tracking-[0.3em] transition-colors hover:bg-foreground hover:text-background"
+                className="border border-foreground/30 bg-background/80 px-8 py-3.5 text-[0.745rem] uppercase tracking-[0.3em] transition-colors hover:bg-foreground hover:text-background"
               >
                 Book an Appointment
               </Link>
               <Link
                 to="/visit"
-                className="border border-foreground/20 px-8 py-3.5 text-[0.62rem] uppercase tracking-[0.3em] transition-colors hover:border-foreground/60"
+                className="border border-foreground/20 px-8 py-3.5 text-[0.745rem] uppercase tracking-[0.3em] transition-colors hover:border-foreground/60"
               >
                 Visit Our Store
               </Link>

@@ -44,7 +44,7 @@ function Chapter({
         transition={{ duration: 0.8 }}
         className="mx-auto max-w-3xl px-6"
       >
-        <p className="text-[0.65rem] uppercase tracking-[0.4em] text-muted-foreground">
+        <p className="text-[0.775rem] uppercase tracking-[0.4em] text-muted-foreground">
           {eyebrow}
         </p>
         <h2 className="mt-6 font-heading text-3xl font-normal leading-tight sm:text-4xl">
@@ -68,7 +68,7 @@ function About() {
           transition={{ duration: 1.1 }}
           className="mx-auto max-w-3xl py-28"
         >
-          <p className="text-[0.65rem] uppercase tracking-[0.4em] text-muted-foreground">
+          <p className="text-[0.775rem] uppercase tracking-[0.4em] text-muted-foreground">
             The Foundation
           </p>
           <h1 className="mt-8 font-heading text-4xl font-normal leading-[1.1] sm:text-6xl">

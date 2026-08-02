@@ -65,14 +65,14 @@ export function StoreInvitation() {
               <Link
                 to="/contact"
                 onClick={dismiss}
-                className="border-b border-foreground/40 pb-1 text-[0.62rem] uppercase tracking-[0.28em] transition-colors hover:border-foreground"
+                className="border-b border-foreground/40 pb-1 text-[0.745rem] uppercase tracking-[0.28em] transition-colors hover:border-foreground"
               >
                 Book an Appointment
               </Link>
               <Link
                 to="/visit"
                 onClick={dismiss}
-                className="border-b border-transparent pb-1 text-[0.62rem] uppercase tracking-[0.28em] text-muted-foreground transition-colors hover:text-foreground"
+                className="border-b border-transparent pb-1 text-[0.745rem] uppercase tracking-[0.28em] text-muted-foreground transition-colors hover:text-foreground"
               >
                 Visit Our Store
               </Link>

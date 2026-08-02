@@ -143,7 +143,7 @@ function ProductView({ product }: { product: ShopifyProduct }) {
 
         <div>
           <div className="lg:sticky lg:top-28">
-            <p className="text-[0.6rem] uppercase tracking-[0.4em] text-muted-foreground">
+            <p className="text-[0.725rem] uppercase tracking-[0.4em] text-muted-foreground">
               925 Silver · 20K Gold Plated
             </p>
             <h1 className="mt-6 font-heading text-3xl font-normal leading-[1.1] tracking-tight sm:text-5xl">
@@ -159,7 +159,7 @@ function ProductView({ product }: { product: ShopifyProduct }) {
               <div className="mt-10 space-y-4">
                 {product.options.map((option) => (
                   <div key={option.name}>
-                    <label className="mb-2 block text-[0.6rem] uppercase tracking-[0.3em] text-muted-foreground">
+                    <label className="mb-2 block text-[0.725rem] uppercase tracking-[0.3em] text-muted-foreground">
                       {option.name}
                     </label>
                     <select
@@ -181,7 +181,7 @@ function ProductView({ product }: { product: ShopifyProduct }) {
 
             <Button
               size="lg"
-              className="mt-10 w-full rounded-none py-6 text-[0.65rem] uppercase tracking-[0.3em]"
+              className="mt-10 w-full rounded-none py-6 text-[0.775rem] uppercase tracking-[0.3em]"
               onClick={handleAddToCart}
               disabled={isLoading || !selectedVariant?.availableForSale}
             >
@@ -246,7 +246,7 @@ function Panel({
 }) {
   return (
     <AccordionItem value={value} className="border-b border-border/70">
-      <AccordionTrigger className="py-5 text-[0.62rem] uppercase tracking-[0.28em] hover:no-underline">
+      <AccordionTrigger className="py-5 text-[0.745rem] uppercase tracking-[0.28em] hover:no-underline">
         {title}
       </AccordionTrigger>
       <AccordionContent className="pb-6 text-sm leading-relaxed text-muted-foreground">

@@ -53,7 +53,7 @@ function VisitPage() {
           </p>
           <Link
             to="/contact"
-            className="mt-10 inline-block border-b border-foreground/40 pb-1.5 text-[0.65rem] uppercase tracking-[0.32em] transition-colors hover:border-foreground"
+            className="mt-10 inline-block border-b border-foreground/40 pb-1.5 text-[0.775rem] uppercase tracking-[0.32em] transition-colors hover:border-foreground"
           >
             Book an appointment
           </Link>
@@ -62,7 +62,7 @@ function VisitPage() {
         <Reveal delay={0.1}>
           <dl className="space-y-10 border-t border-border/70 pt-10 text-sm">
             <div>
-              <dt className="text-[0.6rem] uppercase tracking-[0.36em] text-muted-foreground">
+              <dt className="text-[0.725rem] uppercase tracking-[0.36em] text-muted-foreground">
                 Address
               </dt>
               <dd className="mt-3 leading-relaxed text-muted-foreground">
@@ -74,7 +74,7 @@ function VisitPage() {
               </dd>
             </div>
             <div>
-              <dt className="text-[0.6rem] uppercase tracking-[0.36em] text-muted-foreground">
+              <dt className="text-[0.725rem] uppercase tracking-[0.36em] text-muted-foreground">
                 Hours
               </dt>
               <dd className="mt-3 leading-relaxed text-muted-foreground">
@@ -82,7 +82,7 @@ function VisitPage() {
               </dd>
             </div>
             <div>
-              <dt className="text-[0.6rem] uppercase tracking-[0.36em] text-muted-foreground">
+              <dt className="text-[0.725rem] uppercase tracking-[0.36em] text-muted-foreground">
                 Enquiries
               </dt>
               <dd className="mt-3 leading-relaxed text-muted-foreground">hello@selen.in</dd>

@@ -83,7 +83,7 @@ export function FeaturedProduct({ products }: { products: ProductEdge[] }) {
             <Link
               to="/product/$handle"
               params={{ handle: product.handle }}
-              className="mt-8 inline-block border-b border-foreground/40 pb-1.5 text-[0.65rem] uppercase tracking-[0.32em] transition-colors hover:border-foreground"
+              className="mt-8 inline-block border-b border-foreground/40 pb-1.5 text-[0.775rem] uppercase tracking-[0.32em] transition-colors hover:border-foreground"
             >
               View Piece
             </Link>

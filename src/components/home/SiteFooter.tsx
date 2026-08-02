@@ -96,7 +96,7 @@ export function SiteFooter() {
           </FooterColumn>
         </div>
 
-        <div className="mt-20 flex flex-col gap-3 border-t border-border/50 pt-8 text-[0.6rem] uppercase tracking-[0.3em] text-muted-foreground sm:flex-row sm:justify-between">
+        <div className="mt-20 flex flex-col gap-3 border-t border-border/50 pt-8 text-[0.725rem] uppercase tracking-[0.3em] text-muted-foreground sm:flex-row sm:justify-between">
           <span>© {new Date().getFullYear()} SELEN</span>
           <span>A KINMITRA BRAND</span>
         </div>
