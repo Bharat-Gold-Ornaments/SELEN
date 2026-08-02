@@ -44,18 +44,27 @@ export function StoreInvitation() {
           >
             <X className="h-4 w-4" strokeWidth={1.2} />
           </button>
-          <img
-            src={PLACEHOLDER.store}
-            alt=""
-            aria-hidden
-            loading="lazy"
-            className="h-32 w-full object-cover"
-          />
+          <div className="relative">
+            <img
+              src={PLACEHOLDER.store}
+              alt=""
+              aria-hidden
+              loading="lazy"
+              className="h-32 w-full object-cover"
+            />
+            <img
+              src={MASCOT.namaste}
+              alt=""
+              aria-hidden
+              loading="lazy"
+              className="absolute -bottom-2 right-4 h-24 w-24 object-contain object-top drop-shadow-[0_10px_20px_rgba(0,0,0,0.15)]"
+            />
+          </div>
           <div className="px-7 py-7">
             <p className="text-[0.58rem] uppercase tracking-[0.38em] text-muted-foreground">
               The Boutique
             </p>
-            <h3 className="mt-4 font-heading text-xl font-normal leading-snug tracking-tight">
+            <h3 className="mt-4 max-w-[70%] font-heading text-xl font-normal leading-snug tracking-tight">
               Some things are better held.
             </h3>
             <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
