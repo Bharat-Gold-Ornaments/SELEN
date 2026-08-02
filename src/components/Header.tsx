@@ -32,7 +32,7 @@ export function Header() {
               alt="SELEN"
               width={1500}
               height={780}
-              className="h-8 w-auto sm:h-9"
+              className="h-9 w-auto sm:h-11"
             />
           </Link>
 
