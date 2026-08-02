@@ -14,7 +14,7 @@ export function WhySterlingTeaser() {
           </h2>
           <p className="mt-8 max-w-md text-base leading-relaxed text-muted-foreground sm:text-lg">
             Most gold jewellery hides brass. Ours hides silver — BIS hallmarked 925,
-            precious all the way through, then finished in 20K gold.
+            precious all the way through, then finished in 20 Karat gold.
           </p>
           <Link
             to="/why-sterling-silver"

@@ -7,7 +7,7 @@ import { Reveal, SectionLabel } from "@/components/editorial/Reveal";
 
 const TITLE = "The Full Collection — SELEN";
 const DESCRIPTION =
-  "Every SELEN piece in one place: 925 sterling silver finished in 20K gold, photographed and made for everyday wear.";
+  "Every SELEN piece in one place: 925 sterling silver finished in 20 Karat gold, photographed and made for everyday wear.";
 
 const productsQuery = {
   queryKey: ["products"],
@@ -44,7 +44,7 @@ function ShopPage() {
             Everything we make.
           </h1>
           <p className="mt-5 max-w-sm text-sm leading-relaxed text-muted-foreground">
-            {products.length} pieces in 925 sterling silver, finished in 20K gold.
+            {products.length} pieces in 925 sterling silver, finished in 20 Karat gold.
           </p>
         </Reveal>
 

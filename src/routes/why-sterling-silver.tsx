@@ -7,7 +7,7 @@ import ringCutaway from "@/assets/ring-cutaway.jpg";
 
 const TITLE = "Why Sterling Silver — What's Beneath the Gold | SELEN";
 const DESCRIPTION =
-  "Inside every SELEN piece: BIS hallmarked 925 sterling silver finished in 20K gold. Why a precious core outlasts brass, and what that means for your skin and your money.";
+  "Inside every SELEN piece: BIS hallmarked 925 sterling silver finished in 20 Karat gold. Why a precious core outlasts brass, and what that means for your skin and your money.";
 
 export const Route = createFileRoute("/why-sterling-silver")({
   head: () => ({
@@ -31,7 +31,7 @@ const BENEFITS = [
   },
   {
     icon: Sparkles,
-    title: "Premium 20K Gold",
+    title: "Premium 20 Karat Gold",
     body: "A generous plating layer — warmer, deeper and far more durable than a flash coat.",
   },
   {
@@ -57,7 +57,7 @@ const BENEFITS = [
 ];
 
 const LAYERS = [
-  { label: "20K Gold Plating", detail: "The warmth you see — hand polished, generously applied." },
+  { label: "20 Karat Gold Plating", detail: "The warmth you see — hand polished, generously applied." },
   { label: "925 Sterling Silver", detail: "The precious core — hallmarked, solid, repairable." },
   { label: "Hand Finishing", detail: "Edges smoothed and stones seated by a person, not a press." },
 ];
@@ -85,7 +85,7 @@ function WhySterlingSilver() {
           <Reveal>
             <img
               src={ringCutaway}
-              alt="Cross-section of a SELEN ring showing 20K gold plating over a 925 sterling silver core"
+              alt="Cross-section of a SELEN ring showing 20 Karat gold plating over a 925 sterling silver core"
               loading="lazy"
               className="aspect-square w-full object-cover"
             />

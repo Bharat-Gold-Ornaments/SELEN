@@ -5,7 +5,6 @@ import { Hero } from "@/components/home/Hero";
 import { EditorialCollections } from "@/components/home/EditorialCollections";
 import { FeaturedProduct } from "@/components/home/FeaturedProduct";
 import { WhySterlingTeaser } from "@/components/home/WhySterlingTeaser";
-import { WhySelen } from "@/components/home/WhySelen";
 import { OurBelief } from "@/components/home/OurBelief";
 import { VisitStore } from "@/components/home/VisitStore";
 import { StoreInvitation } from "@/components/home/StoreInvitation";
@@ -13,7 +12,7 @@ import { SiteFooter } from "@/components/home/SiteFooter";
 
 const TITLE = "SELEN — Gold Plated Sterling Silver Jewellery";
 const DESCRIPTION =
-  "925 sterling silver finished in 20K gold. Editorial collections of everyday fine jewellery, made to be worn and not stored.";
+  "925 sterling silver finished in 20 Karat gold. Editorial collections of everyday fine jewellery, made to be worn and not stored.";
 
 const productsQuery = {
   queryKey: ["products"],
@@ -46,7 +45,6 @@ function Index() {
       <EditorialCollections />
       <FeaturedProduct products={products} />
       <WhySterlingTeaser />
-      <WhySelen />
       <OurBelief />
       <VisitStore />
       <SiteFooter />

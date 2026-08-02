@@ -29,7 +29,7 @@ export function OurBelief() {
             </p>
             <p>
               So we built jewellery on a precious foundation — solid 925 sterling silver, a thick
-              20K gold finish, stones set by hand — and then designed it quiet enough to wear on a
+              20 Karat gold finish, stones set by hand — and then designed it quiet enough to wear on a
               Tuesday.
             </p>
             <p>Made to be worn, not stored.</p>

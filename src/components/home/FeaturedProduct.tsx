@@ -71,7 +71,7 @@ export function FeaturedProduct({ products }: { products: ProductEdge[] }) {
             </p>
 
             <p className="mt-8 max-w-sm text-sm leading-relaxed text-muted-foreground">
-              925 sterling silver, finished in 20K gold. Made to be worn every day, not saved for
+              925 sterling silver, finished in 20 Karat gold. Made to be worn every day, not saved for
               later.
             </p>
 
