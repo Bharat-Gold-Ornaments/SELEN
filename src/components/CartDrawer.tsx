@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/sheet";
 import { ShoppingCart, Minus, Plus, Trash2, ExternalLink, Loader2 } from "lucide-react";
 import { useCartStore } from "@/stores/cartStore";
+import { MascotEmptyState } from "@/components/mascot/Mascot";
 
 export function CartDrawer() {
   const [isOpen, setIsOpen] = useState(false);
