@@ -104,7 +104,6 @@ function ProductView({ product }: { product: ShopifyProduct }) {
     ...shopifyImages,
     ...EDITORIAL_FALLBACKS.map((url) => ({ url, alt: "" })),
   ].slice(0, 5);
-  void gallery;
 
   const { intro, specs } = parseDescription(product.description);
 
