@@ -1,11 +1,14 @@
 import { Link } from "@tanstack/react-router";
 import { EDITORIAL_COLLECTIONS } from "@/lib/collections";
 import { MascotSeal } from "@/components/mascot/Mascot";
+import { SelenPromise } from "@/components/home/SelenPromise";
 
-const SHOP = ["earrings", "necklaces", "rings", "bracelets", "anklets"];
+const SHOP = ["earrings", "pendants", "necklaces", "rings", "bracelets", "anklets"];
 
 export function SiteFooter() {
   return (
+    <>
+    <SelenPromise />
     <footer className="border-t border-border/50 bg-background px-6 pb-14 pt-24 sm:px-10">
       <div className="mx-auto max-w-[1600px]">
         <div className="grid gap-14 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
@@ -51,6 +54,14 @@ export function SiteFooter() {
                 className="text-sm text-muted-foreground transition-colors hover:text-foreground"
               >
                 Our Belief
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/why-sterling-silver"
+                className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+              >
+                Why Sterling Silver
               </Link>
             </li>
             <li>
@@ -106,6 +117,7 @@ export function SiteFooter() {
         </div>
       </div>
     </footer>
+    </>
   );
 }
 

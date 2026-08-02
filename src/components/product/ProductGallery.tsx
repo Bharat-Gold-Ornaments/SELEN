@@ -62,7 +62,7 @@ export function ProductGallery({ images, title }: { images: GalleryImage[]; titl
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-              className="aspect-[4/5] w-full cursor-zoom-in touch-pan-y select-none object-contain p-4 sm:p-10"
+              className="aspect-square w-full cursor-zoom-in touch-pan-y select-none object-contain p-4 sm:p-10"
             />
           </AnimatePresence>
 

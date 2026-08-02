@@ -17,6 +17,7 @@ import { Route as DesignWithAiRouteImport } from './routes/design-with-ai'
 import { Route as McpRouteImport } from './routes/mcp'
 import { Route as ShopRouteImport } from './routes/shop'
 import { Route as VisitRouteImport } from './routes/visit'
+import { Route as WhySterlingSilverRouteImport } from './routes/why-sterling-silver'
 import { Route as Char91DotmcpChar93ListToolsRouteImport } from './routes/[.mcp]/list-tools'
 import { Route as Char91DotwellKnownChar93OauthProtectedResourceRouteImport } from './routes/[.well-known]/oauth-protected-resource'
 import { Route as CollectionsCategoryRouteImport } from './routes/collections.$category'
@@ -66,6 +67,11 @@ const ShopRoute = ShopRouteImport.update({
 const VisitRoute = VisitRouteImport.update({
   id: '/visit',
   path: '/visit',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WhySterlingSilverRoute = WhySterlingSilverRouteImport.update({
+  id: '/why-sterling-silver',
+  path: '/why-sterling-silver',
   getParentRoute: () => rootRouteImport,
 } as any)
 const Char91DotmcpChar93ListToolsRoute =
@@ -131,6 +137,7 @@ export interface FileRoutesByFullPath {
   '/mcp': typeof McpRoute
   '/shop': typeof ShopRoute
   '/visit': typeof VisitRoute
+  '/why-sterling-silver': typeof WhySterlingSilverRoute
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/collections/$category': typeof CollectionsCategoryRoute
@@ -150,6 +157,7 @@ export interface FileRoutesByTo {
   '/mcp': typeof McpRoute
   '/shop': typeof ShopRoute
   '/visit': typeof VisitRoute
+  '/why-sterling-silver': typeof WhySterlingSilverRoute
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/collections/$category': typeof CollectionsCategoryRoute
@@ -171,6 +179,7 @@ export interface FileRoutesById {
   '/mcp': typeof McpRoute
   '/shop': typeof ShopRoute
   '/visit': typeof VisitRoute
+  '/why-sterling-silver': typeof WhySterlingSilverRoute
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/collections/$category': typeof CollectionsCategoryRoute
@@ -193,6 +202,7 @@ export interface FileRouteTypes {
     | '/mcp'
     | '/shop'
     | '/visit'
+    | '/why-sterling-silver'
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
     | '/collections/$category'
@@ -212,6 +222,7 @@ export interface FileRouteTypes {
     | '/mcp'
     | '/shop'
     | '/visit'
+    | '/why-sterling-silver'
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
     | '/collections/$category'
@@ -232,6 +243,7 @@ export interface FileRouteTypes {
     | '/mcp'
     | '/shop'
     | '/visit'
+    | '/why-sterling-silver'
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
     | '/collections/$category'
@@ -253,6 +265,7 @@ export interface RootRouteChildren {
   McpRoute: typeof McpRoute
   ShopRoute: typeof ShopRoute
   VisitRoute: typeof VisitRoute
+  WhySterlingSilverRoute: typeof WhySterlingSilverRoute
   Char91DotmcpChar93ListToolsRoute: typeof Char91DotmcpChar93ListToolsRoute
   Char91DotwellKnownChar93OauthProtectedResourceRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   CollectionsCategoryRoute: typeof CollectionsCategoryRoute
@@ -319,6 +332,13 @@ declare module '@tanstack/react-router' {
       path: '/visit'
       fullPath: '/visit'
       preLoaderRoute: typeof VisitRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/why-sterling-silver': {
+      id: '/why-sterling-silver'
+      path: '/why-sterling-silver'
+      fullPath: '/why-sterling-silver'
+      preLoaderRoute: typeof WhySterlingSilverRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/.mcp/list-tools': {
@@ -417,6 +437,7 @@ const rootRouteChildren: RootRouteChildren = {
   McpRoute: McpRoute,
   ShopRoute: ShopRoute,
   VisitRoute: VisitRoute,
+  WhySterlingSilverRoute: WhySterlingSilverRoute,
   Char91DotmcpChar93ListToolsRoute: Char91DotmcpChar93ListToolsRoute,
   Char91DotwellKnownChar93OauthProtectedResourceRoute:
     Char91DotwellKnownChar93OauthProtectedResourceRoute,

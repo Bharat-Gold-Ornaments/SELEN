@@ -21,7 +21,7 @@ function NotFoundComponent() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <MascotEmptyState
-        pose="think"
+        pose="map"
         eyebrow="404"
         title="This page slipped away."
         body="The page you're looking for doesn't exist, or has quietly moved."

@@ -4,6 +4,7 @@ import { getProducts } from "@/lib/shopify.functions";
 import { Hero } from "@/components/home/Hero";
 import { EditorialCollections } from "@/components/home/EditorialCollections";
 import { FeaturedProduct } from "@/components/home/FeaturedProduct";
+import { WhySterlingTeaser } from "@/components/home/WhySterlingTeaser";
 import { WhySelen } from "@/components/home/WhySelen";
 import { OurBelief } from "@/components/home/OurBelief";
 import { VisitStore } from "@/components/home/VisitStore";
@@ -44,6 +45,7 @@ function Index() {
       <Hero />
       <EditorialCollections />
       <FeaturedProduct products={products} />
+      <WhySterlingTeaser />
       <WhySelen />
       <OurBelief />
       <VisitStore />

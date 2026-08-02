@@ -14,11 +14,15 @@ import collection3 from "@/assets/placeholders/collection-3.jpg";
 import collection4 from "@/assets/placeholders/collection-4.jpg";
 import collection5 from "@/assets/placeholders/collection-5.jpg";
 import collection6 from "@/assets/placeholders/collection-6.jpg";
+import sterlingTeaser from "@/assets/placeholders/sterling-teaser.jpg";
+import founders from "@/assets/placeholders/founders.jpg";
 
 export const PLACEHOLDER = {
   hero,
   banner,
   founder,
+  founders,
+  sterlingTeaser,
   store,
   lifestyle,
   collection1,
@@ -28,6 +32,7 @@ export const PLACEHOLDER = {
   collection5,
   collection6,
 } as const;
+
 
 /** Editorial fallbacks used when a product has fewer than five photographs. */
 export const EDITORIAL_FALLBACKS = [lifestyle, collection1, banner, collection5];

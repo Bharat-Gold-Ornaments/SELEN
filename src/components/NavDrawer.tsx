@@ -4,7 +4,7 @@ import { X } from "lucide-react";
 import { useEffect } from "react";
 import { EDITORIAL_COLLECTIONS } from "@/lib/collections";
 
-const SHOP = ["earrings", "necklaces", "rings", "bracelets", "anklets"];
+const SHOP = ["earrings", "pendants", "necklaces", "rings", "bracelets", "anklets"];
 
 export function NavDrawer({ open, onClose }: { open: boolean; onClose: () => void }) {
   useEffect(() => {
@@ -69,6 +69,9 @@ export function NavDrawer({ open, onClose }: { open: boolean; onClose: () => voi
               <Group label="About">
                 <DrawerLink to="/about" onClose={onClose}>
                   Our Belief
+                </DrawerLink>
+                <DrawerLink to="/why-sterling-silver" onClose={onClose}>
+                  Why Sterling Silver
                 </DrawerLink>
                 <DrawerLink to="/materials" onClose={onClose}>
                   Materials
