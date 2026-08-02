@@ -104,18 +104,22 @@ export function ProductGallery({ images, title }: { images: GalleryImage[]; titl
         </div>
       )}
 
-      <AnimatePresence>
-        {lightbox && (
-          <Lightbox
-            image={current}
-            title={title}
-            index={index}
-            count={count}
-            onClose={() => setLightbox(false)}
-            onGo={go}
-          />
+      {mounted &&
+        createPortal(
+          <AnimatePresence>
+            {lightbox && (
+              <Lightbox
+                image={current}
+                title={title}
+                index={index}
+                count={count}
+                onClose={() => setLightbox(false)}
+                onGo={go}
+              />
+            )}
+          </AnimatePresence>,
+          document.body
         )}
-      </AnimatePresence>
     </div>
   );
 }
