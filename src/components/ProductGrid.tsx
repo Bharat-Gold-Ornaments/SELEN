@@ -1,14 +1,25 @@
 import { Link } from "@tanstack/react-router";
 import { formatPrice } from "@/lib/categories";
 import { PLACEHOLDER } from "@/lib/placeholders";
+import { MascotEmptyState } from "@/components/mascot/Mascot";
 import type { ShopifyProduct } from "@/lib/shopify.server";
 
 export function ProductGrid({ products }: { products: ShopifyProduct[] }) {
   if (products.length === 0) {
     return (
-      <p className="py-24 text-center text-sm text-muted-foreground">
-        New pieces are being finished right now. Please look again soon.
-      </p>
+      <MascotEmptyState
+        pose="welcome"
+        eyebrow="Nothing here yet"
+        title="No pieces to show."
+        body="New pieces are being finished right now. Please look again soon."
+      >
+        <Link
+          to="/shop"
+          className="border-b border-foreground/40 pb-1 text-[0.745rem] uppercase tracking-[0.28em] transition-colors hover:border-foreground"
+        >
+          See Everything
+        </Link>
+      </MascotEmptyState>
     );
   }
   return (

@@ -8,6 +8,7 @@ import { Loader2 } from "lucide-react";
 import type { ShopifyProduct } from "@/lib/shopify.functions";
 import { SiteFooter } from "@/components/home/SiteFooter";
 import { StyledTogether } from "@/components/product/StyledTogether";
+import { ProductGallery } from "@/components/product/ProductGallery";
 import { Reveal } from "@/components/editorial/Reveal";
 import { EDITORIAL_FALLBACKS } from "@/lib/placeholders";
 import { formatPrice } from "@/lib/categories";
@@ -122,23 +123,10 @@ function ProductView({ product }: { product: ShopifyProduct }) {
   return (
     <section className="mx-auto max-w-[1600px] px-6 pt-10 sm:px-10 sm:pt-16">
       <div className="grid gap-16 lg:grid-cols-[1.25fr_1fr] lg:gap-24">
-        <div className="space-y-4 sm:space-y-6">
-          {gallery.map((image, i) => (
-            <Reveal key={i} delay={i === 0 ? 0 : 0.05}>
-              <div className="overflow-hidden bg-ivory">
-                <img
-                  src={image.url}
-                  alt={image.alt || product.title}
-                  loading={i === 0 ? "eager" : "lazy"}
-                  className={
-                    i < shopifyImages.length
-                      ? "aspect-[4/5] w-full object-contain p-4 sm:p-8"
-                      : "aspect-[4/5] w-full object-cover"
-                  }
-                />
-              </div>
-            </Reveal>
-          ))}
+        <div className="lg:sticky lg:top-24 lg:self-start">
+          <Reveal>
+            <ProductGallery images={gallery} title={product.title} />
+          </Reveal>
         </div>
 
         <div>
