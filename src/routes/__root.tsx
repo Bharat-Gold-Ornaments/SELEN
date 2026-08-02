@@ -15,6 +15,7 @@ import { Header } from "@/components/Header";
 import { useCartSync } from "@/hooks/useCartSync";
 import { ChatWidget } from "@/components/chat/ChatWidget";
 import { Toaster } from "@/components/ui/sonner";
+import { MascotEmptyState } from "@/components/mascot/Mascot";
 
 function NotFoundComponent() {
   return (
