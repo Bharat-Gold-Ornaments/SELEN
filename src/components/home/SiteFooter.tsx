@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { EDITORIAL_COLLECTIONS } from "@/lib/collections";
+import { MascotSeal } from "@/components/mascot/Mascot";
 
 const SHOP = ["earrings", "necklaces", "rings", "bracelets", "anklets"];
 
