@@ -11,7 +11,7 @@ export const CATEGORIES: Category[] = [
   {
     slug: "earrings",
     label: "Earrings",
-    line: "Studs, drops and hoops in 20K gold over 925 silver.",
+    line: "Studs, drops and hoops in 20 Karat gold over 925 silver.",
     match: /earring|stud|hoop|jhumk|drop/i,
   },
   {

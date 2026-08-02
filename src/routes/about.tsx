@@ -5,7 +5,7 @@ import { PLACEHOLDER } from "@/lib/placeholders";
 
 const TITLE = "About SELEN — Beautiful on the Outside, Precious on the Inside";
 const DESCRIPTION =
-  "The story behind SELEN: a Goan family house making BIS hallmarked 925 sterling silver jewellery finished in 20K gold, where tradition meets KinMitra's technology.";
+  "The story behind SELEN: a Goan family house making BIS hallmarked 925 sterling silver jewellery finished in 20 Karat gold, where tradition meets the technology of KinMitra, a Bharat Gold Ornaments Private Limited brand.";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -114,7 +114,7 @@ function About() {
         reverse
       >
         <p>
-          KinMitra is the quiet part of SELEN — tools that let someone describe the piece
+          KinMitra, a Bharat Gold Ornaments Private Limited brand, is the quiet part of SELEN — tools that let someone describe the piece
           they have in mind and watch it take shape before it is made.
         </p>
         <p>
@@ -139,7 +139,7 @@ function About() {
       >
         <p>
           Every piece starts with BIS hallmarked 925 sterling silver and is finished in
-          premium 20K gold. Precious all the way through — never brass, never plated base
+          premium 20 Karat gold. Precious all the way through — never brass, never plated base
           metal.
         </p>
         <p>

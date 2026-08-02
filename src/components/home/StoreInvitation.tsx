@@ -39,11 +39,12 @@ export function StoreInvitation() {
           aria-label="Visit the SELEN boutique"
         >
           <button
+            type="button"
             onClick={dismiss}
-            aria-label="Dismiss"
-            className="absolute right-3 top-3 text-muted-foreground transition-colors hover:text-foreground"
+            aria-label="Close"
+            className="absolute right-3 top-3 z-10 grid h-9 w-9 place-items-center rounded-full border border-border/60 bg-background/90 text-foreground shadow-sm backdrop-blur transition-colors hover:bg-background"
           >
-            <X className="h-4 w-4" strokeWidth={1.2} />
+            <X className="h-4 w-4" strokeWidth={1.4} />
           </button>
           <div className="relative">
             <img

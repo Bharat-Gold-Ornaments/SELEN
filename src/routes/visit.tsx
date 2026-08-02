@@ -49,7 +49,7 @@ function VisitPage() {
           </p>
           <p className="mt-5 max-w-md text-base leading-relaxed text-muted-foreground">
             Come to try on a piece you have been considering, to have an older one cleaned and
-            replated, or simply to see how 20K gold reads against your skin.
+            replated, or simply to see how 20 Karat gold reads against your skin.
           </p>
           <Link
             to="/contact"

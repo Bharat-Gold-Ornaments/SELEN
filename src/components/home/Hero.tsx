@@ -31,7 +31,7 @@ export function Hero() {
           transition={{ duration: 1.2, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
           className="mt-7 max-w-md text-base leading-relaxed text-foreground/70"
         >
-          925 sterling silver, finished in 20K gold.
+          925 sterling silver, finished in 20 Karat gold.
         </motion.p>
 
         <motion.div

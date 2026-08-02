@@ -9,7 +9,7 @@ const PROMISES = [
   },
   {
     icon: Sparkles,
-    title: "20K Gold Plating",
+    title: "20 Karat Gold Plating",
     body: "A generous layer of warm gold, polished by hand.",
   },
   {

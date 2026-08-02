@@ -40,16 +40,16 @@ export const materials: MaterialEntry[] = [
   },
   {
     slug: "gold-plating",
-    term: "20K Gold Plating",
+    term: "20 Karat Gold Plating",
     short: "A whisper-thin layer of real gold over a precious core.",
     summary:
       "Gold plating is a microscopic layer of gold bonded to a base metal through electroplating. What matters is two things: the karat of the gold and what lies beneath it.",
-    question: "What is 20K gold plating?",
+    question: "What is 20 Karat gold plating?",
     sections: [
       {
         heading: "Karat is only half the story",
         body: [
-          "20K plating gives a warm, deep tone rather than the brassy yellow of lower-karat finishes. But plating is measured in microns — no plating, at any karat, is permanent.",
+          "20 Karat plating gives a warm, deep tone rather than the brassy yellow of lower-karat finishes. But plating is measured in microns — no plating, at any karat, is permanent.",
           "That is exactly why the base matters. When plating on brass fades, you see brass. When plating on 925 sterling silver softens, you see silver.",
         ],
       },
@@ -62,7 +62,7 @@ export const materials: MaterialEntry[] = [
       },
     ],
     facts: [
-      { label: "Karat", value: "20K gold" },
+      { label: "Karat", value: "20 Karat gold" },
       { label: "Method", value: "Electroplated over 925 silver" },
       { label: "Base metal", value: "Never brass" },
     ],

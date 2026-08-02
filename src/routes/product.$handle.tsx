@@ -40,7 +40,7 @@ export const Route = createFileRoute("/product/$handle")({
       .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
       .join(" ");
     const title = `${name} — SELEN`;
-    const description = `${name} in BIS hallmarked 925 sterling silver with 20K gold plating. Made to be worn every day.`;
+    const description = `${name} in BIS hallmarked 925 sterling silver with 20 Karat gold plating. Made to be worn every day.`;
     return {
       meta: [
         { title },
@@ -132,7 +132,7 @@ function ProductView({ product }: { product: ShopifyProduct }) {
         <div>
           <div className="lg:sticky lg:top-28">
             <p className="text-[0.725rem] uppercase tracking-[0.4em] text-muted-foreground">
-              925 Silver · 20K Gold Plated
+              925 Silver · 20 Karat Gold Plated
             </p>
             <h1 className="mt-6 font-heading text-3xl font-normal leading-[1.1] tracking-tight sm:text-5xl">
               {product.title}
@@ -185,7 +185,7 @@ function ProductView({ product }: { product: ShopifyProduct }) {
               <Panel value="materials" title="Materials">
                 <p>
                   A solid core of BIS hallmarked 925 sterling silver, finished with a generous layer
-                  of 20K gold. Stones, where present, are hand-set cubic zirconia.
+                  of 20 Karat gold. Stones, where present, are hand-set cubic zirconia.
                 </p>
               </Panel>
               <Panel value="dimensions" title="Dimensions">

@@ -15,7 +15,7 @@ export function SiteFooter() {
           <div className="max-w-xs">
             <p className="font-heading text-lg tracking-[0.42em]">SELEN</p>
             <p className="mt-6 text-sm leading-relaxed text-muted-foreground">
-              925 sterling silver, finished in 20K gold. Made to be worn, not stored.
+              925 sterling silver, finished in 20 Karat gold. Made to be worn, not stored.
             </p>
           </div>
 
