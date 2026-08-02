@@ -163,7 +163,7 @@ function Lightbox({
       role="dialog"
       aria-modal="true"
       aria-label={`${title} gallery`}
-      className="fixed inset-0 z-[80] flex flex-col bg-background/98 backdrop-blur-sm"
+      className="fixed inset-0 z-[100] flex flex-col bg-background"
     >
       <div className="flex items-center justify-between px-6 py-6 sm:px-10">
         <span className="text-[0.7rem] uppercase tracking-[0.34em] text-muted-foreground">
