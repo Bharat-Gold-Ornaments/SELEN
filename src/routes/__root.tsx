@@ -19,21 +19,25 @@ import { Toaster } from "@/components/ui/sonner";
 function NotFoundComponent() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
-      <div className="max-w-md text-center">
-        <h1 className="text-7xl font-bold text-foreground">404</h1>
-        <h2 className="mt-4 text-xl font-semibold text-foreground">Page not found</h2>
-        <p className="mt-2 text-sm text-muted-foreground">
-          The page you're looking for doesn't exist or has been moved.
-        </p>
-        <div className="mt-6">
-          <Link
-            to="/"
-            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
-          >
-            Go home
-          </Link>
-        </div>
-      </div>
+      <MascotEmptyState
+        pose="think"
+        eyebrow="404"
+        title="This page slipped away."
+        body="The page you're looking for doesn't exist, or has quietly moved."
+      >
+        <Link
+          to="/"
+          className="border-b border-foreground/40 pb-1 text-[0.745rem] uppercase tracking-[0.28em] transition-colors hover:border-foreground"
+        >
+          Return Home
+        </Link>
+        <Link
+          to="/shop"
+          className="border-b border-transparent pb-1 text-[0.745rem] uppercase tracking-[0.28em] text-muted-foreground transition-colors hover:text-foreground"
+        >
+          Browse Pieces
+        </Link>
+      </MascotEmptyState>
     </div>
   );
 }
