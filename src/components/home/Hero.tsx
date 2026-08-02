@@ -29,7 +29,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.2, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
-          className="mt-7 max-w-sm text-sm leading-relaxed text-foreground/70"
+          className="mt-7 max-w-md text-base leading-relaxed text-foreground/70"
         >
           925 sterling silver, finished in 20K gold.
         </motion.p>

@@ -6,9 +6,9 @@ export function EditorialCollections() {
   return (
     <section id="collections" className="bg-background px-6 py-28 sm:px-10 sm:py-40">
       <div className="mx-auto max-w-[1600px]">
-        <Reveal className="max-w-xl">
+        <Reveal className="max-w-3xl">
           <SectionLabel>The Collections</SectionLabel>
-          <h2 className="mt-6 font-heading text-3xl font-normal leading-tight tracking-tight sm:text-5xl">
+          <h2 className="mt-6 font-heading text-3xl font-normal leading-tight tracking-tight text-balance whitespace-nowrap sm:text-5xl">
             Chosen for a mood, not a category.
           </h2>
         </Reveal>
