@@ -13,6 +13,8 @@ export type GalleryImage = { url: string; alt: string };
 export function ProductGallery({ images, title }: { images: GalleryImage[]; title: string }) {
   const [index, setIndex] = useState(0);
   const [lightbox, setLightbox] = useState(false);
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
   const count = images.length;
 
   const go = useCallback(
