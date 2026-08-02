@@ -63,7 +63,7 @@ export function ChatInterface({
           </div>
           <div>
             <h2 className="font-heading text-sm font-medium tracking-tight">{title}</h2>
-            <p className="text-[0.65rem] uppercase tracking-wider text-muted-foreground">
+            <p className="text-[0.775rem] uppercase tracking-wider text-muted-foreground">
               Design with AI
             </p>
           </div>
@@ -154,7 +154,7 @@ export function ChatInterface({
             <span className="sr-only">Send</span>
           </Button>
         </div>
-        <p className="mt-2 text-center text-[0.6rem] uppercase tracking-wider text-muted-foreground">
+        <p className="mt-2 text-center text-[0.725rem] uppercase tracking-wider text-muted-foreground">
           Powered by KINMITRA · AI-assisted design
         </p>
       </div>

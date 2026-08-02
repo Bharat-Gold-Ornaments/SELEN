@@ -3,9 +3,10 @@ import { Menu } from "lucide-react";
 import { useState } from "react";
 import { CartDrawer } from "@/components/CartDrawer";
 import { NavDrawer } from "@/components/NavDrawer";
+import logoAsset from "@/assets/selen-logo.png.asset.json";
 
 const linkClass =
-  "text-[0.65rem] uppercase tracking-[0.28em] text-foreground/70 transition-colors hover:text-foreground";
+  "text-[0.775rem] uppercase tracking-[0.28em] text-foreground/70 transition-colors hover:text-foreground";
 
 export function Header() {
   const [open, setOpen] = useState(false);
@@ -21,16 +22,18 @@ export function Header() {
               className="flex items-center gap-3 text-foreground/70 transition-colors hover:text-foreground"
             >
               <Menu className="h-5 w-5 shrink-0" strokeWidth={1.2} />
-              <span className="hidden text-[0.65rem] uppercase tracking-[0.28em] sm:inline">Menu</span>
+              <span className="hidden text-[0.775rem] uppercase tracking-[0.28em] sm:inline">Menu</span>
             </button>
           </div>
 
-          <Link
-            to="/"
-            className="font-heading text-xl tracking-[0.42em] sm:text-2xl"
-            aria-label="SELEN home"
-          >
-            SELEN
+          <Link to="/" className="flex items-center justify-center" aria-label="SELEN home">
+            <img
+              src={logoAsset.url}
+              alt="SELEN"
+              width={1500}
+              height={780}
+              className="h-9 w-auto sm:h-11"
+            />
           </Link>
 
           <div className="flex min-w-0 items-center justify-end gap-6">

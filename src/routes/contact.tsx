@@ -33,7 +33,7 @@ function ContactPage() {
 
           <dl className="mt-14 space-y-10 text-sm">
             <div>
-              <dt className="text-[0.6rem] uppercase tracking-[0.36em] text-muted-foreground">
+              <dt className="text-[0.725rem] uppercase tracking-[0.36em] text-muted-foreground">
                 Appointments
               </dt>
               <dd className="mt-3 leading-relaxed text-muted-foreground">
@@ -45,7 +45,7 @@ function ContactPage() {
               </dd>
             </div>
             <div>
-              <dt className="text-[0.6rem] uppercase tracking-[0.36em] text-muted-foreground">
+              <dt className="text-[0.725rem] uppercase tracking-[0.36em] text-muted-foreground">
                 Care & Repairs
               </dt>
               <dd className="mt-3 leading-relaxed text-muted-foreground">
@@ -53,7 +53,7 @@ function ContactPage() {
               </dd>
             </div>
             <div>
-              <dt className="text-[0.6rem] uppercase tracking-[0.36em] text-muted-foreground">
+              <dt className="text-[0.725rem] uppercase tracking-[0.36em] text-muted-foreground">
                 Studio Hours
               </dt>
               <dd className="mt-3 leading-relaxed text-muted-foreground">

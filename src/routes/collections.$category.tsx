@@ -71,7 +71,7 @@ function CollectionPage() {
         <div className="mt-24 text-center">
           <Link
             to="/shop"
-            className="inline-block border-b border-foreground/40 pb-1.5 text-[0.65rem] uppercase tracking-[0.32em] transition-colors hover:border-foreground"
+            className="inline-block border-b border-foreground/40 pb-1.5 text-[0.775rem] uppercase tracking-[0.32em] transition-colors hover:border-foreground"
           >
             View everything
           </Link>

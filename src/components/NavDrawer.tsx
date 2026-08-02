@@ -94,7 +94,7 @@ export function NavDrawer({ open, onClose }: { open: boolean; onClose: () => voi
 function Group({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <div>
-      <p className="text-[0.6rem] uppercase tracking-[0.4em] text-muted-foreground">{label}</p>
+      <p className="text-[0.725rem] uppercase tracking-[0.4em] text-muted-foreground">{label}</p>
       <ul className="mt-6 space-y-4">{children}</ul>
     </div>
   );

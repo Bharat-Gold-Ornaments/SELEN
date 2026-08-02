@@ -36,7 +36,7 @@ export function OurBelief() {
           </div>
           <Link
             to="/about"
-            className="mt-10 inline-block border-b border-foreground/40 pb-1.5 text-[0.65rem] uppercase tracking-[0.32em] transition-colors hover:border-foreground"
+            className="mt-10 inline-block border-b border-foreground/40 pb-1.5 text-[0.775rem] uppercase tracking-[0.32em] transition-colors hover:border-foreground"
           >
             Read our story
           </Link>

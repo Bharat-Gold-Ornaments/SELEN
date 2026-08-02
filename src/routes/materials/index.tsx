@@ -40,7 +40,7 @@ function MaterialLibrary() {
     <main className="bg-background">
       <section className="border-b border-border/50 bg-ivory px-6 py-28 sm:py-36">
         <div className="mx-auto max-w-3xl">
-          <p className="text-[0.65rem] uppercase tracking-[0.4em] text-muted-foreground">
+          <p className="text-[0.775rem] uppercase tracking-[0.4em] text-muted-foreground">
             Material Library
           </p>
           <h1 className="mt-8 font-heading text-4xl font-normal leading-[1.1] sm:text-6xl">
@@ -73,7 +73,7 @@ function MaterialLibrary() {
                 <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
                   {m.short}
                 </p>
-                <span className="mt-6 inline-block text-[0.65rem] uppercase tracking-[0.3em] text-gold-deep">
+                <span className="mt-6 inline-block text-[0.775rem] uppercase tracking-[0.3em] text-gold-deep">
                   Read
                 </span>
               </Link>

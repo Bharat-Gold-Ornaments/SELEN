@@ -46,7 +46,7 @@ function MaterialPage() {
           <div className="mx-auto max-w-3xl">
             <Link
               to="/materials"
-              className="text-[0.65rem] uppercase tracking-[0.4em] text-muted-foreground hover:text-foreground"
+              className="text-[0.775rem] uppercase tracking-[0.4em] text-muted-foreground hover:text-foreground"
             >
               Material Library
             </Link>
@@ -63,7 +63,7 @@ function MaterialPage() {
           <dl className="grid grid-cols-1 gap-px overflow-hidden rounded-sm bg-border/60 sm:grid-cols-3">
             {material.facts.map((f) => (
               <div key={f.label} className="bg-background p-6">
-                <dt className="text-[0.6rem] uppercase tracking-[0.3em] text-muted-foreground">
+                <dt className="text-[0.725rem] uppercase tracking-[0.3em] text-muted-foreground">
                   {f.label}
                 </dt>
                 <dd className="mt-3 font-heading text-lg">{f.value}</dd>
@@ -85,7 +85,7 @@ function MaterialPage() {
           </div>
 
           <div className="mt-20 border-t border-border/60 pt-10">
-            <p className="text-[0.65rem] uppercase tracking-[0.4em] text-muted-foreground">
+            <p className="text-[0.775rem] uppercase tracking-[0.4em] text-muted-foreground">
               Keep reading
             </p>
             <ul className="mt-6 space-y-3">

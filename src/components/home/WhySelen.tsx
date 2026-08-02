@@ -28,9 +28,9 @@ export function WhySelen() {
   return (
     <section className="bg-background px-6 py-28 sm:px-10 sm:py-40">
       <div className="mx-auto max-w-[1400px]">
-        <Reveal className="max-w-xl">
+        <Reveal className="max-w-3xl">
           <SectionLabel>Why SELEN</SectionLabel>
-          <h2 className="mt-6 font-heading text-3xl font-normal leading-tight tracking-tight sm:text-5xl">
+          <h2 className="mt-6 font-heading text-3xl font-normal leading-tight tracking-tight text-balance sm:whitespace-nowrap sm:text-5xl">
             Quality you can feel before you see.
           </h2>
         </Reveal>
