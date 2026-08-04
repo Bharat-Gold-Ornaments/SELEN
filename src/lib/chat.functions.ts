@@ -3,55 +3,16 @@ import { z } from "zod";
 
 const N8N_WEBHOOK_URL = process.env.N8N_CHAT_WEBHOOK_URL;
 
-const CreateThreadInput = z.object({
-  title: z.string().optional().default("New design chat"),
-});
-
-const ThreadAuthInput = z.object({
-  threadId: z.string().uuid(),
-  secret: z.string().uuid().optional(),
-});
-
 const SendMessageInput = z.object({
-  threadId: z.string().uuid(),
-  secret: z.string().uuid().optional(),
+  threadId: z.string(),
   content: z.string().min(1).max(4000),
+  history: z.array(
+    z.object({
+      role: z.enum(["user", "assistant"]),
+      content: z.string(),
+    }),
+  ),
 });
-
-async function getThreadWithAuth(threadId: string, secret?: string) {
-  const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
-  const { data: thread, error } = await supabaseAdmin
-    .from("threads")
-    .select("id, title, secret, user_id, created_at, updated_at")
-    .eq("id", threadId)
-    .single();
-
-  if (error || !thread) {
-    throw new Error("Thread not found");
-  }
-
-  if (thread.secret !== secret) {
-    throw new Error("Unauthorized");
-  }
-
-  return thread;
-}
-
-async function fetchMessages(threadId: string) {
-  const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
-  const { data: messages, error } = await supabaseAdmin
-    .from("messages")
-    .select("id, role, content, created_at")
-    .eq("thread_id", threadId)
-    .order("created_at", { ascending: true });
-
-  if (error) {
-    console.error("Error fetching messages:", error);
-    throw new Error("Failed to fetch messages");
-  }
-
-  return messages ?? [];
-}
 
 async function callN8nWebhook(threadId: string, history: { role: string; content: string }[], latestMessage: string) {
   const url = N8N_WEBHOOK_URL ?? "";
@@ -97,100 +58,23 @@ async function callN8nWebhook(threadId: string, history: { role: string; content
   return data;
 }
 
-export const createThread = createServerFn({ method: "POST" })
-  .validator((input) => CreateThreadInput.parse(input))
-  .handler(async ({ data }) => {
-    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
-    const { data: thread, error } = await supabaseAdmin
-      .from("threads")
-      .insert({
-        title: data.title,
-      })
-      .select("id, secret, title, created_at")
-      .single();
-
-    if (error || !thread) {
-      console.error("Error creating thread:", error);
-      throw new Error("Failed to create thread");
-    }
-
-    return thread;
-  });
-
-export const getThread = createServerFn({ method: "POST" })
-  .validator((input) => ThreadAuthInput.parse(input))
-  .handler(async ({ data }) => {
-    const thread = await getThreadWithAuth(data.threadId, data.secret);
-    const messages = await fetchMessages(data.threadId);
-
-    return {
-      thread: {
-        id: thread.id,
-        title: thread.title,
-        createdAt: thread.created_at,
-        updatedAt: thread.updated_at,
-      },
-      messages,
-    };
-  });
-
 export const sendMessage = createServerFn({ method: "POST" })
   .validator((input) => SendMessageInput.parse(input))
   .handler(async ({ data }) => {
-    await getThreadWithAuth(data.threadId, data.secret);
-
-    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
-
-    const { error: insertError } = await supabaseAdmin.from("messages").insert({
-      thread_id: data.threadId,
-      role: "user",
-      content: data.content,
-    });
-
-    if (insertError) {
-      console.error("Error saving user message:", insertError);
-      throw new Error("Failed to save message");
-    }
-
-    const messages = await fetchMessages(data.threadId);
-    const history = messages.map((m) => ({ role: m.role, content: m.content }));
-
     let n8nResponse: unknown;
     try {
-      n8nResponse = await callN8nWebhook(data.threadId, history, data.content);
+      n8nResponse = await callN8nWebhook(data.threadId, data.history, data.content);
     } catch (error) {
       console.error("n8n error:", error);
       throw new Error("The design assistant is temporarily unavailable. Please try again.");
     }
 
-    const replyText = extractReplyText(n8nResponse);
-    const title = generateTitle(data.content);
-
-    const [{ error: assistantInsertError }, { error: updateError }] = await Promise.all([
-      supabaseAdmin.from("messages").insert({
-        thread_id: data.threadId,
-        role: "assistant",
-        content: replyText,
-      }),
-      data.content.length > 10 && messages.length <= 2
-        ? supabaseAdmin.from("threads").update({ title }).eq("id", data.threadId)
-        : Promise.resolve({ error: null }),
-    ]);
-
-    if (assistantInsertError) {
-      console.error("Error saving assistant message:", assistantInsertError);
-      throw new Error("Failed to save assistant response");
-    }
-    if (updateError) {
-      console.error("Error updating thread title:", updateError);
-    }
-
     return {
       message: {
         role: "assistant" as const,
-        content: replyText,
+        content: extractReplyText(n8nResponse),
       },
-      title,
+      title: generateTitle(data.content),
     };
   });
 

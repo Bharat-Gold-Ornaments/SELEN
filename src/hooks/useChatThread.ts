@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import { useServerFn } from "@tanstack/react-start";
-import { createThread, getThread, sendMessage } from "@/lib/chat.functions";
+import { sendMessage } from "@/lib/chat.functions";
 
 export type ChatMessage = {
   id: string;
@@ -9,7 +9,34 @@ export type ChatMessage = {
   createdAt: string;
 };
 
-const STORAGE_KEY = "selen_chat_thread";
+type StoredThread = {
+  title: string;
+  messages: ChatMessage[];
+};
+
+const CURRENT_THREAD_KEY = "selen_chat_current_id";
+const threadDataKey = (id: string) => `selen_chat_data:${id}`;
+const DEFAULT_TITLE = "Design with AI";
+
+function loadThread(id: string): StoredThread | null {
+  if (typeof window === "undefined") return null;
+  const raw = localStorage.getItem(threadDataKey(id));
+  if (!raw) return null;
+  try {
+    return JSON.parse(raw) as StoredThread;
+  } catch {
+    return null;
+  }
+}
+
+function saveThread(id: string, thread: StoredThread) {
+  if (typeof window === "undefined") return;
+  localStorage.setItem(threadDataKey(id), JSON.stringify(thread));
+}
+
+function newThreadId() {
+  return crypto.randomUUID();
+}
 
 function useIsMounted() {
   const [mounted, setMounted] = useState(false);
@@ -19,218 +46,124 @@ function useIsMounted() {
   return mounted;
 }
 
-export function useWidgetChatThread() {
-  const mounted = useIsMounted();
-  const createThreadFn = useServerFn(createThread);
-  const getThreadFn = useServerFn(getThread);
+function useChatSession(initialThreadId: string | null) {
   const sendMessageFn = useServerFn(sendMessage);
 
-  const [threadId, setThreadId] = useState<string | null>(null);
-  const [secret, setSecret] = useState<string | null>(null);
-  const [title, setTitle] = useState<string>("Design with AI");
+  const [threadId, setThreadId] = useState<string | null>(initialThreadId);
+  const [title, setTitle] = useState<string>(DEFAULT_TITLE);
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [status, setStatus] = useState<"idle" | "loading" | "error">("idle");
   const [error, setError] = useState<string | null>(null);
-  const bootstrapped = useRef(false);
 
-  const storeThread = useCallback((id: string, sec: string) => {
+  const load = useCallback((id: string) => {
+    const stored = loadThread(id);
     setThreadId(id);
-    setSecret(sec);
-    if (typeof window !== "undefined") {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify({ id, secret: sec }));
-    }
+    setTitle(stored?.title ?? DEFAULT_TITLE);
+    setMessages(stored?.messages ?? []);
   }, []);
+
+  const handleSend = useCallback(
+    async (content: string) => {
+      if (!threadId || !content.trim()) return;
+      const isFirstMessage = messages.length === 0;
+      const history = messages.map((m) => ({ role: m.role, content: m.content }));
+
+      const userMessage: ChatMessage = {
+        id: `local-${Date.now()}`,
+        role: "user",
+        content: content.trim(),
+        createdAt: new Date().toISOString(),
+      };
+      const nextMessages = [...messages, userMessage];
+      setMessages(nextMessages);
+      setStatus("loading");
+      setError(null);
+
+      try {
+        const result = await sendMessageFn({ data: { threadId, content: content.trim(), history } });
+        const assistantMessage: ChatMessage = {
+          id: `msg-${Date.now()}`,
+          role: result.message.role,
+          content: result.message.content,
+          createdAt: new Date().toISOString(),
+        };
+        const finalMessages = [...nextMessages, assistantMessage];
+        const finalTitle = isFirstMessage && content.trim().length > 10 ? result.title : title;
+
+        setMessages(finalMessages);
+        setTitle(finalTitle);
+        setStatus("idle");
+        saveThread(threadId, { title: finalTitle, messages: finalMessages });
+      } catch (err) {
+        console.error("Send message error:", err);
+        setStatus("error");
+        setError("The assistant is unavailable. Please try again.");
+        saveThread(threadId, { title, messages: nextMessages });
+      }
+    },
+    [threadId, messages, title, sendMessageFn],
+  );
+
+  return { threadId, title, messages, status, error, handleSend, load };
+}
+
+export function useWidgetChatThread() {
+  const mounted = useIsMounted();
+  const session = useChatSession(null);
+  const bootstrapped = useRef(false);
 
   useEffect(() => {
     if (!mounted || bootstrapped.current) return;
     bootstrapped.current = true;
 
-    const init = async () => {
-      try {
-        const stored = typeof window !== "undefined" ? localStorage.getItem(STORAGE_KEY) : null;
-        if (stored) {
-          const parsed = JSON.parse(stored) as { id: string; secret: string };
-          const data = await getThreadFn({ data: { threadId: parsed.id, secret: parsed.secret } });
-          setThreadId(parsed.id);
-          setSecret(parsed.secret);
-          setTitle(data.thread.title ?? "Design with AI");
-          setMessages((data.messages ?? []).map((m) => ({ id: m.id, role: m.role as "user" | "assistant", content: m.content, createdAt: m.created_at })));
-        } else {
-          const thread = await createThreadFn({ data: { title: "Design with AI" } });
-          storeThread(thread.id, thread.secret);
-        }
-      } catch (err) {
-        console.error("Chat bootstrap error:", err);
-        setError("Could not start chat.");
-        setStatus("error");
-        try {
-          const thread = await createThreadFn({ data: { title: "Design with AI" } });
-          storeThread(thread.id, thread.secret);
-          setError(null);
-          setStatus("idle");
-        } catch (err2) {
-          console.error("Chat recovery error:", err2);
-        }
-      }
-    };
-
-    init();
-  }, [mounted, createThreadFn, getThreadFn, storeThread]);
-
-  const handleSend = useCallback(
-    async (content: string) => {
-      if (!threadId || !secret || !content.trim()) return;
-      const userMessage: ChatMessage = {
-        id: `local-${Date.now()}`,
-        role: "user",
-        content: content.trim(),
-        createdAt: new Date().toISOString(),
-      };
-      setMessages((prev) => [...prev, userMessage]);
-      setStatus("loading");
-      setError(null);
-
-      try {
-        const result = await sendMessageFn({ data: { threadId, secret, content: content.trim() } });
-        const assistantMessage: ChatMessage = {
-          id: `msg-${Date.now()}`,
-          role: result.message.role,
-          content: result.message.content,
-          createdAt: new Date().toISOString(),
-        };
-        setMessages((prev) => {
-          const filtered = prev.filter((m) => m.id !== userMessage.id);
-          return [...filtered, assistantMessage];
-        });
-        if (result.title) {
-          setTitle(result.title);
-        }
-        setStatus("idle");
-      } catch (err) {
-        console.error("Send message error:", err);
-        setStatus("error");
-        setError("The assistant is unavailable. Please try again.");
-      }
-    },
-    [threadId, secret, sendMessageFn],
-  );
+    const existingId = localStorage.getItem(CURRENT_THREAD_KEY);
+    const id = existingId ?? newThreadId();
+    if (!existingId) {
+      localStorage.setItem(CURRENT_THREAD_KEY, id);
+      saveThread(id, { title: DEFAULT_TITLE, messages: [] });
+    }
+    session.load(id);
+  }, [mounted]);
 
   return {
-    threadId,
-    secret,
-    title,
-    messages,
-    status,
-    error,
-    sendMessage: handleSend,
-    isReady: !!threadId && !!secret,
+    threadId: session.threadId,
+    title: session.title,
+    messages: session.messages,
+    status: session.status,
+    error: session.error,
+    sendMessage: session.handleSend,
+    isReady: !!session.threadId,
   };
 }
 
 export function usePageChatThread(initialThreadId: string) {
-  const createThreadFn = useServerFn(createThread);
-  const getThreadFn = useServerFn(getThread);
-  const sendMessageFn = useServerFn(sendMessage);
-
-  const [threadId, setThreadId] = useState<string | null>(initialThreadId);
-  const [secret, setSecret] = useState<string | null>(null);
-  const [title, setTitle] = useState<string>("Design with AI");
-  const [messages, setMessages] = useState<ChatMessage[]>([]);
-  const [status, setStatus] = useState<"idle" | "loading" | "error">("idle");
-  const [error, setError] = useState<string | null>(null);
+  const session = useChatSession(initialThreadId);
   const initialized = useRef(false);
-
-  const storeThread = useCallback((id: string, sec: string) => {
-    setThreadId(id);
-    setSecret(sec);
-    if (typeof window !== "undefined") {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify({ id, secret: sec }));
-    }
-  }, []);
 
   useEffect(() => {
     if (initialized.current) return;
     initialized.current = true;
-
-    const load = async () => {
-      try {
-        const stored = typeof window !== "undefined" ? localStorage.getItem(STORAGE_KEY) : null;
-        const parsed = stored ? (JSON.parse(stored) as { id: string; secret: string }) : null;
-        if (parsed && parsed.id === initialThreadId) {
-          const data = await getThreadFn({ data: { threadId: parsed.id, secret: parsed.secret } });
-          setSecret(parsed.secret);
-          setTitle(data.thread.title ?? "Design with AI");
-          setMessages((data.messages ?? []).map((m) => ({ id: m.id, role: m.role as "user" | "assistant", content: m.content, createdAt: m.created_at })));
-        } else {
-          const data = await getThreadFn({ data: { threadId: initialThreadId } });
-          setSecret("");
-          setTitle(data.thread.title ?? "Design with AI");
-          setMessages((data.messages ?? []).map((m) => ({ id: m.id, role: m.role as "user" | "assistant", content: m.content, createdAt: m.created_at })));
-        }
-      } catch (err) {
-        console.error("Page chat load error:", err);
-        setError("Could not load this conversation.");
-        setStatus("error");
-      }
-    };
-
-    load();
-  }, [initialThreadId, getThreadFn]);
-
-  const handleSend = useCallback(
-    async (content: string) => {
-      if (!threadId || !content.trim()) return;
-      const userMessage: ChatMessage = {
-        id: `local-${Date.now()}`,
-        role: "user",
-        content: content.trim(),
-        createdAt: new Date().toISOString(),
-      };
-      setMessages((prev) => [...prev, userMessage]);
-      setStatus("loading");
-      setError(null);
-
-      try {
-        const result = await sendMessageFn({ data: { threadId, secret: secret ?? undefined, content: content.trim() } });
-        const assistantMessage: ChatMessage = {
-          id: `msg-${Date.now()}`,
-          role: result.message.role,
-          content: result.message.content,
-          createdAt: new Date().toISOString(),
-        };
-        setMessages((prev) => {
-          const filtered = prev.filter((m) => m.id !== userMessage.id);
-          return [...filtered, assistantMessage];
-        });
-        if (result.title) {
-          setTitle(result.title);
-        }
-        setStatus("idle");
-      } catch (err) {
-        console.error("Send message error:", err);
-        setStatus("error");
-        setError("The assistant is unavailable. Please try again.");
-      }
-    },
-    [threadId, secret, sendMessageFn],
-  );
+    session.load(initialThreadId);
+    if (typeof window !== "undefined") {
+      localStorage.setItem(CURRENT_THREAD_KEY, initialThreadId);
+    }
+  }, [initialThreadId]);
 
   return {
-    threadId,
-    secret,
-    title,
-    messages,
-    status,
-    error,
-    sendMessage: handleSend,
-    isReady: !!threadId,
+    threadId: session.threadId,
+    title: session.title,
+    messages: session.messages,
+    status: session.status,
+    error: session.error,
+    sendMessage: session.handleSend,
+    isReady: !!session.threadId,
     createNewThread: async () => {
-      const thread = await createThreadFn({ data: { title: "Design with AI" } });
-      storeThread(thread.id, thread.secret);
-      setMessages([]);
-      setTitle("Design with AI");
-      setError(null);
-      return thread;
+      const id = newThreadId();
+      saveThread(id, { title: DEFAULT_TITLE, messages: [] });
+      if (typeof window !== "undefined") {
+        localStorage.setItem(CURRENT_THREAD_KEY, id);
+      }
+      return { id };
     },
   };
 }
