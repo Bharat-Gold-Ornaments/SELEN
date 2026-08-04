@@ -39,6 +39,6 @@ const csrfMiddleware = createCsrfMiddleware({
 });
 
 export const startInstance = createStart(() => ({
-  functionMiddleware: [safeAttachSupabaseAuth],
+  functionMiddleware: [attachSupabaseAuth, safeAttachSupabaseAuth],
   requestMiddleware: [errorMiddleware, csrfMiddleware],
 }));
