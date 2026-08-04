@@ -3,6 +3,19 @@ import { createStart, createCsrfMiddleware, createMiddleware } from "@tanstack/r
 import { renderErrorPage } from "./lib/error-page";
 import { attachSupabaseAuth } from "@/integrations/supabase/auth-attacher";
 
+// The generated attacher throws if Supabase env vars are absent (e.g. a
+// self-hosted deploy without them). Auth is optional for public server fns
+// like the chat webhook, so degrade gracefully instead of failing every call.
+const safeAttachSupabaseAuth = createMiddleware({ type: "function" }).client(
+  async ({ next }) => {
+    try {
+      return await attachSupabaseAuth.options.client!({ next } as never);
+    } catch {
+      return next();
+    }
+  },
+);
+
 const errorMiddleware = createMiddleware().server(async ({ next }) => {
   try {
     return await next();
