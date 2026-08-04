@@ -1,7 +1,6 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 
-const N8N_WEBHOOK_URL = process.env.N8N_CHAT_WEBHOOK_URL;
 
 const SendMessageInput = z.object({
   threadId: z.string(),
@@ -15,7 +14,8 @@ const SendMessageInput = z.object({
 });
 
 async function callN8nWebhook(threadId: string, history: { role: string; content: string }[], latestMessage: string) {
-  const url = N8N_WEBHOOK_URL ?? "";
+  // Read at call time: env is not populated at module scope on serverless hosts.
+  const url = process.env['N8N_CHAT_WEBHOOK_URL'] ?? "";
   if (!url) {
     throw new Error("N8N chat webhook URL is not configured");
   }
