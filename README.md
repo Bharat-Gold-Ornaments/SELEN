@@ -1,26 +1,28 @@
-# Gilded Silver Studio
+# SELEN — Gilded Silver Studio
 
-I want to create shopping website for my selen brand, which is gold plated silver jewellery
+Shopping website for the SELEN brand: gold-plated 925 sterling silver jewellery.
 
-This project was built with [Lovable](https://lovable.dev).
-
-**Live app**: https://selen-sparkle-shop.lovable.app
-
-## Build with Lovable
-
-Continue developing this project in the [Lovable editor](https://lovable.dev/projects/724bc73a-dd24-4c3f-baee-c7751c21246d).
-
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: every change made in Lovable is committed straight to this repository.
-- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
+Built with [TanStack Start](https://tanstack.com/start) (React 19 + TanStack Router), styled with Tailwind CSS, and backed by the Shopify Storefront API for products and cart/checkout.
 
 ## Development
 
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
-
 ```sh
-git clone <this-repository-url>
-cd <repository-name>
 npm i
 npm run dev
 ```
+
+Copy `.env` and fill in:
+
+- `SHOPIFY_STOREFRONT_ACCESS_TOKEN` — a Shopify Storefront API access token for the `s3iphy-ah.myshopify.com` store (see [src/lib/shopify.server.ts](src/lib/shopify.server.ts)).
+- `N8N_CHAT_WEBHOOK_URL` — the n8n webhook URL that powers the "Design with AI" chat widget (see [src/lib/chat.functions.ts](src/lib/chat.functions.ts)).
+
+## Build
+
+```sh
+npm run build
+npm run preview
+```
+
+## Deploy
+
+The build targets Vercel via nitro's `vercel` preset (configured in [vite.config.ts](vite.config.ts)). Connect the repository to a Vercel project and set the environment variables above in the project settings.

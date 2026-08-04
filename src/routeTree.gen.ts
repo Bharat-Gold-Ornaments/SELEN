@@ -11,23 +11,17 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
-import { Route as AuthRouteImport } from './routes/auth'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as DesignWithAiRouteImport } from './routes/design-with-ai'
-import { Route as McpRouteImport } from './routes/mcp'
 import { Route as ShopRouteImport } from './routes/shop'
 import { Route as VisitRouteImport } from './routes/visit'
 import { Route as WhySterlingSilverRouteImport } from './routes/why-sterling-silver'
-import { Route as Char91DotmcpChar93ListToolsRouteImport } from './routes/[.mcp]/list-tools'
-import { Route as Char91DotwellKnownChar93OauthProtectedResourceRouteImport } from './routes/[.well-known]/oauth-protected-resource'
 import { Route as CollectionsCategoryRouteImport } from './routes/collections.$category'
 import { Route as DesignWithAiIndexRouteImport } from './routes/design-with-ai.index'
 import { Route as DesignWithAiThreadIdRouteImport } from './routes/design-with-ai.$threadId'
 import { Route as MaterialsIndexRouteImport } from './routes/materials/index'
 import { Route as MaterialsSlugRouteImport } from './routes/materials/$slug'
 import { Route as ProductHandleRouteImport } from './routes/product.$handle'
-import { Route as DotlovableOauthConsentRouteImport } from './routes/[.]lovable.oauth.consent'
-import { Route as Char91DotmcpChar93InvokeToolToolRouteImport } from './routes/[.mcp]/invoke-tool/$tool'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -39,11 +33,6 @@ const AboutRoute = AboutRouteImport.update({
   path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AuthRoute = AuthRouteImport.update({
-  id: '/auth',
-  path: '/auth',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
@@ -52,11 +41,6 @@ const ContactRoute = ContactRouteImport.update({
 const DesignWithAiRoute = DesignWithAiRouteImport.update({
   id: '/design-with-ai',
   path: '/design-with-ai',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const McpRoute = McpRouteImport.update({
-  id: '/mcp',
-  path: '/mcp',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ShopRoute = ShopRouteImport.update({
@@ -74,18 +58,6 @@ const WhySterlingSilverRoute = WhySterlingSilverRouteImport.update({
   path: '/why-sterling-silver',
   getParentRoute: () => rootRouteImport,
 } as any)
-const Char91DotmcpChar93ListToolsRoute =
-  Char91DotmcpChar93ListToolsRouteImport.update({
-    id: '/.mcp/list-tools',
-    path: '/.mcp/list-tools',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const Char91DotwellKnownChar93OauthProtectedResourceRoute =
-  Char91DotwellKnownChar93OauthProtectedResourceRouteImport.update({
-    id: '/.well-known/oauth-protected-resource',
-    path: '/.well-known/oauth-protected-resource',
-    getParentRoute: () => rootRouteImport,
-  } as any)
 const CollectionsCategoryRoute = CollectionsCategoryRouteImport.update({
   id: '/collections/$category',
   path: '/collections/$category',
@@ -116,164 +88,111 @@ const ProductHandleRoute = ProductHandleRouteImport.update({
   path: '/product/$handle',
   getParentRoute: () => rootRouteImport,
 } as any)
-const DotlovableOauthConsentRoute = DotlovableOauthConsentRouteImport.update({
-  id: '/.lovable/oauth/consent',
-  path: '/.lovable/oauth/consent',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const Char91DotmcpChar93InvokeToolToolRoute =
-  Char91DotmcpChar93InvokeToolToolRouteImport.update({
-    id: '/.mcp/invoke-tool/$tool',
-    path: '/.mcp/invoke-tool/$tool',
-    getParentRoute: () => rootRouteImport,
-  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/auth': typeof AuthRoute
   '/contact': typeof ContactRoute
   '/design-with-ai': typeof DesignWithAiRouteWithChildren
-  '/mcp': typeof McpRoute
   '/shop': typeof ShopRoute
   '/visit': typeof VisitRoute
   '/why-sterling-silver': typeof WhySterlingSilverRoute
-  '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
-  '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/collections/$category': typeof CollectionsCategoryRoute
   '/design-with-ai/$threadId': typeof DesignWithAiThreadIdRoute
   '/materials/$slug': typeof MaterialsSlugRoute
   '/product/$handle': typeof ProductHandleRoute
   '/design-with-ai/': typeof DesignWithAiIndexRoute
   '/materials/': typeof MaterialsIndexRoute
-  '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
-  '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/auth': typeof AuthRoute
   '/contact': typeof ContactRoute
-  '/mcp': typeof McpRoute
   '/shop': typeof ShopRoute
   '/visit': typeof VisitRoute
   '/why-sterling-silver': typeof WhySterlingSilverRoute
-  '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
-  '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/collections/$category': typeof CollectionsCategoryRoute
   '/design-with-ai/$threadId': typeof DesignWithAiThreadIdRoute
   '/materials/$slug': typeof MaterialsSlugRoute
   '/product/$handle': typeof ProductHandleRoute
   '/design-with-ai': typeof DesignWithAiIndexRoute
   '/materials': typeof MaterialsIndexRoute
-  '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
-  '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/auth': typeof AuthRoute
   '/contact': typeof ContactRoute
   '/design-with-ai': typeof DesignWithAiRouteWithChildren
-  '/mcp': typeof McpRoute
   '/shop': typeof ShopRoute
   '/visit': typeof VisitRoute
   '/why-sterling-silver': typeof WhySterlingSilverRoute
-  '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
-  '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/collections/$category': typeof CollectionsCategoryRoute
   '/design-with-ai/$threadId': typeof DesignWithAiThreadIdRoute
   '/materials/$slug': typeof MaterialsSlugRoute
   '/product/$handle': typeof ProductHandleRoute
   '/design-with-ai/': typeof DesignWithAiIndexRoute
   '/materials/': typeof MaterialsIndexRoute
-  '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
-  '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
     | '/about'
-    | '/auth'
     | '/contact'
     | '/design-with-ai'
-    | '/mcp'
     | '/shop'
     | '/visit'
     | '/why-sterling-silver'
-    | '/.mcp/list-tools'
-    | '/.well-known/oauth-protected-resource'
     | '/collections/$category'
     | '/design-with-ai/$threadId'
     | '/materials/$slug'
     | '/product/$handle'
     | '/design-with-ai/'
     | '/materials/'
-    | '/.lovable/oauth/consent'
-    | '/.mcp/invoke-tool/$tool'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/about'
-    | '/auth'
     | '/contact'
-    | '/mcp'
     | '/shop'
     | '/visit'
     | '/why-sterling-silver'
-    | '/.mcp/list-tools'
-    | '/.well-known/oauth-protected-resource'
     | '/collections/$category'
     | '/design-with-ai/$threadId'
     | '/materials/$slug'
     | '/product/$handle'
     | '/design-with-ai'
     | '/materials'
-    | '/.lovable/oauth/consent'
-    | '/.mcp/invoke-tool/$tool'
   id:
     | '__root__'
     | '/'
     | '/about'
-    | '/auth'
     | '/contact'
     | '/design-with-ai'
-    | '/mcp'
     | '/shop'
     | '/visit'
     | '/why-sterling-silver'
-    | '/.mcp/list-tools'
-    | '/.well-known/oauth-protected-resource'
     | '/collections/$category'
     | '/design-with-ai/$threadId'
     | '/materials/$slug'
     | '/product/$handle'
     | '/design-with-ai/'
     | '/materials/'
-    | '/.lovable/oauth/consent'
-    | '/.mcp/invoke-tool/$tool'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
-  AuthRoute: typeof AuthRoute
   ContactRoute: typeof ContactRoute
   DesignWithAiRoute: typeof DesignWithAiRouteWithChildren
-  McpRoute: typeof McpRoute
   ShopRoute: typeof ShopRoute
   VisitRoute: typeof VisitRoute
   WhySterlingSilverRoute: typeof WhySterlingSilverRoute
-  Char91DotmcpChar93ListToolsRoute: typeof Char91DotmcpChar93ListToolsRoute
-  Char91DotwellKnownChar93OauthProtectedResourceRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   CollectionsCategoryRoute: typeof CollectionsCategoryRoute
   MaterialsSlugRoute: typeof MaterialsSlugRoute
   ProductHandleRoute: typeof ProductHandleRoute
   MaterialsIndexRoute: typeof MaterialsIndexRoute
-  DotlovableOauthConsentRoute: typeof DotlovableOauthConsentRoute
-  Char91DotmcpChar93InvokeToolToolRoute: typeof Char91DotmcpChar93InvokeToolToolRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -292,13 +211,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/auth': {
-      id: '/auth'
-      path: '/auth'
-      fullPath: '/auth'
-      preLoaderRoute: typeof AuthRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/contact': {
       id: '/contact'
       path: '/contact'
@@ -311,13 +223,6 @@ declare module '@tanstack/react-router' {
       path: '/design-with-ai'
       fullPath: '/design-with-ai'
       preLoaderRoute: typeof DesignWithAiRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/mcp': {
-      id: '/mcp'
-      path: '/mcp'
-      fullPath: '/mcp'
-      preLoaderRoute: typeof McpRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/shop': {
@@ -339,20 +244,6 @@ declare module '@tanstack/react-router' {
       path: '/why-sterling-silver'
       fullPath: '/why-sterling-silver'
       preLoaderRoute: typeof WhySterlingSilverRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/.mcp/list-tools': {
-      id: '/.mcp/list-tools'
-      path: '/.mcp/list-tools'
-      fullPath: '/.mcp/list-tools'
-      preLoaderRoute: typeof Char91DotmcpChar93ListToolsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/.well-known/oauth-protected-resource': {
-      id: '/.well-known/oauth-protected-resource'
-      path: '/.well-known/oauth-protected-resource'
-      fullPath: '/.well-known/oauth-protected-resource'
-      preLoaderRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/collections/$category': {
@@ -397,20 +288,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProductHandleRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/.lovable/oauth/consent': {
-      id: '/.lovable/oauth/consent'
-      path: '/.lovable/oauth/consent'
-      fullPath: '/.lovable/oauth/consent'
-      preLoaderRoute: typeof DotlovableOauthConsentRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/.mcp/invoke-tool/$tool': {
-      id: '/.mcp/invoke-tool/$tool'
-      path: '/.mcp/invoke-tool/$tool'
-      fullPath: '/.mcp/invoke-tool/$tool'
-      preLoaderRoute: typeof Char91DotmcpChar93InvokeToolToolRouteImport
-      parentRoute: typeof rootRouteImport
-    }
   }
 }
 
@@ -431,22 +308,15 @@ const DesignWithAiRouteWithChildren = DesignWithAiRoute._addFileChildren(
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
-  AuthRoute: AuthRoute,
   ContactRoute: ContactRoute,
   DesignWithAiRoute: DesignWithAiRouteWithChildren,
-  McpRoute: McpRoute,
   ShopRoute: ShopRoute,
   VisitRoute: VisitRoute,
   WhySterlingSilverRoute: WhySterlingSilverRoute,
-  Char91DotmcpChar93ListToolsRoute: Char91DotmcpChar93ListToolsRoute,
-  Char91DotwellKnownChar93OauthProtectedResourceRoute:
-    Char91DotwellKnownChar93OauthProtectedResourceRoute,
   CollectionsCategoryRoute: CollectionsCategoryRoute,
   MaterialsSlugRoute: MaterialsSlugRoute,
   ProductHandleRoute: ProductHandleRoute,
   MaterialsIndexRoute: MaterialsIndexRoute,
-  DotlovableOauthConsentRoute: DotlovableOauthConsentRoute,
-  Char91DotmcpChar93InvokeToolToolRoute: Char91DotmcpChar93InvokeToolToolRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
