@@ -3,7 +3,7 @@ import { Menu } from "lucide-react";
 import { useState } from "react";
 import { CartDrawer } from "@/components/CartDrawer";
 import { NavDrawer } from "@/components/NavDrawer";
-import logoAsset from "@/assets/selen-logo.png.asset.json";
+import logoUrl from "@/assets/selen-logo.png";
 
 const linkClass =
   "text-[0.775rem] uppercase tracking-[0.28em] text-foreground/70 transition-colors hover:text-foreground";
@@ -28,7 +28,7 @@ export function Header() {
 
           <Link to="/" className="flex items-center justify-center" aria-label="SELEN home">
             <img
-              src={logoAsset.url}
+              src={logoUrl}
               alt="SELEN"
               width={1500}
               height={780}

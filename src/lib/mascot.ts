@@ -4,30 +4,30 @@
  * wishlist, no results, search, 404) and the Design with AI surface.
  * Never in nav, hero, product cards, product gallery or repeating patterns.
  */
-import wave from "@/assets/mascot/mascot-wave.png.asset.json";
-import namaste from "@/assets/mascot/mascot-namaste.png.asset.json";
-import bag from "@/assets/mascot/mascot-bag.png.asset.json";
-import gift from "@/assets/mascot/mascot-gift.png.asset.json";
-import think from "@/assets/mascot/mascot-think.png.asset.json";
-import welcome from "@/assets/mascot/mascot-welcome.png.asset.json";
-import heart from "@/assets/mascot/mascot-heart.png.asset.json";
-import search from "@/assets/mascot/mascot-search.png.asset.json";
-import map from "@/assets/mascot/mascot-map.png.asset.json";
-import shrug from "@/assets/mascot/mascot-shrug.png.asset.json";
-import sketch from "@/assets/mascot/mascot-sketch.png.asset.json";
+import wave from "@/assets/mascot/mascot-wave.png";
+import namaste from "@/assets/mascot/mascot-namaste.png";
+import bag from "@/assets/mascot/mascot-bag.png";
+import gift from "@/assets/mascot/mascot-gift.png";
+import think from "@/assets/mascot/mascot-think.png";
+import welcome from "@/assets/mascot/mascot-welcome.png";
+import heart from "@/assets/mascot/mascot-heart.png";
+import search from "@/assets/mascot/mascot-search.png";
+import map from "@/assets/mascot/mascot-map.png";
+import shrug from "@/assets/mascot/mascot-shrug.png";
+import sketch from "@/assets/mascot/mascot-sketch.png";
 
 export const MASCOT = {
-  wave: wave.url,
-  namaste: namaste.url,
-  bag: bag.url,
-  gift: gift.url,
-  think: think.url,
-  welcome: welcome.url,
-  heart: heart.url,
-  search: search.url,
-  map: map.url,
-  shrug: shrug.url,
-  sketch: sketch.url,
+  wave,
+  namaste,
+  bag,
+  gift,
+  think,
+  welcome,
+  heart,
+  search,
+  map,
+  shrug,
+  sketch,
 } as const;
 
 export type MascotPose = keyof typeof MASCOT;
