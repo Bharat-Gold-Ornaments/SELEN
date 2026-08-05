@@ -1,12 +1,16 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import { useServerFn } from "@tanstack/react-start";
-import { sendMessage } from "@/lib/chat.functions";
+import { sendMessage, type ChatItem } from "@/lib/chat.functions";
+
+export type { ChatItem };
 
 export type ChatMessage = {
   id: string;
   role: "user" | "assistant";
   content: string;
   createdAt: string;
+  items?: ChatItem[];
+  quickReplies?: string[];
 };
 
 type StoredThread = {
@@ -86,6 +90,8 @@ function useChatSession(initialThreadId: string | null) {
           role: result.message.role,
           content: result.message.content,
           createdAt: new Date().toISOString(),
+          items: result.message.items,
+          quickReplies: result.message.quickReplies,
         };
         const finalMessages = [...nextMessages, assistantMessage];
         const finalTitle = isFirstMessage && content.trim().length > 10 ? result.title : title;

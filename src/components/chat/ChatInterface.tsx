@@ -81,32 +81,88 @@ export function ChatInterface({
             </div>
           )}
 
-          {messages.map((message) => (
-            <div
-              key={message.id}
-              className={`flex items-end gap-2 ${message.role === "user" ? "justify-end" : "justify-start"}`}
-            >
-              {message.role === "assistant" && (
-                <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-gold/10">
-                  <Sparkles className="h-3 w-3 text-gold-deep" />
+          {messages.map((message, index) => {
+            const isLastAssistant = message.role === "assistant" && index === messages.length - 1;
+            return (
+              <div key={message.id} className="space-y-2">
+                <div
+                  className={`flex items-end gap-2 ${message.role === "user" ? "justify-end" : "justify-start"}`}
+                >
+                  {message.role === "assistant" && (
+                    <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-gold/10">
+                      <Sparkles className="h-3 w-3 text-gold-deep" />
+                    </div>
+                  )}
+                  <div
+                    className={`max-w-[85%] rounded-2xl px-4 py-2.5 text-sm leading-relaxed ${
+                      message.role === "user"
+                        ? "rounded-br-sm bg-primary text-primary-foreground"
+                        : "rounded-bl-sm bg-muted text-foreground"
+                    }`}
+                  >
+                    {message.content}
+                  </div>
+                  {message.role === "user" && (
+                    <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-silver/30">
+                      <User className="h-3 w-3 text-silver-deep" />
+                    </div>
+                  )}
                 </div>
-              )}
-              <div
-                className={`max-w-[85%] rounded-2xl px-4 py-2.5 text-sm leading-relaxed ${
-                  message.role === "user"
-                    ? "rounded-br-sm bg-primary text-primary-foreground"
-                    : "rounded-bl-sm bg-muted text-foreground"
-                }`}
-              >
-                {message.content}
+
+                {message.role === "assistant" && message.items && message.items.length > 0 && (
+                  <div className="ml-8 grid grid-cols-2 gap-2">
+                    {message.items.map((item, itemIndex) => (
+                      <a
+                        key={itemIndex}
+                        href={item.checkoutUrl ?? undefined}
+                        target={item.checkoutUrl ? "_blank" : undefined}
+                        rel={item.checkoutUrl ? "noopener noreferrer" : undefined}
+                        className={`overflow-hidden rounded-xl border border-border/60 bg-background text-left transition-colors ${
+                          item.checkoutUrl ? "hover:border-gold cursor-pointer" : "cursor-default"
+                        }`}
+                      >
+                        {item.photo && (
+                          <img
+                            src={item.photo}
+                            alt={item.name}
+                            className="h-24 w-full object-cover"
+                            loading="lazy"
+                          />
+                        )}
+                        <div className="p-2">
+                          <p className="line-clamp-1 text-xs font-medium">{item.name}</p>
+                          {item.price && (
+                            <p className="text-[0.7rem] text-muted-foreground">₹{item.price}</p>
+                          )}
+                          {item.checkoutUrl && (
+                            <span className="mt-1 inline-block text-[0.65rem] uppercase tracking-wide text-gold-deep">
+                              Buy now →
+                            </span>
+                          )}
+                        </div>
+                      </a>
+                    ))}
+                  </div>
+                )}
+
+                {isLastAssistant && message.quickReplies && message.quickReplies.length > 0 && (
+                  <div className="ml-8 flex flex-wrap gap-2">
+                    {message.quickReplies.map((reply, replyIndex) => (
+                      <button
+                        key={replyIndex}
+                        type="button"
+                        disabled={status === "loading"}
+                        onClick={() => onSend(reply)}
+                        className="rounded-full border border-gold/40 bg-gold/5 px-3 py-1.5 text-xs text-gold-deep transition-colors hover:bg-gold/15 disabled:cursor-not-allowed disabled:opacity-50"
+                      >
+                        {reply}
+                      </button>
+                    ))}
+                  </div>
+                )}
               </div>
-              {message.role === "user" && (
-                <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-silver/30">
-                  <User className="h-3 w-3 text-silver-deep" />
-                </div>
-              )}
-            </div>
-          ))}
+            );
+          })}
 
           {status === "loading" && (
             <div className="flex items-start gap-2">

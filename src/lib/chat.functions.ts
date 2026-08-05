@@ -58,6 +58,13 @@ async function callN8nWebhook(threadId: string, history: { role: string; content
   return data;
 }
 
+export type ChatItem = {
+  name: string;
+  price: string | null;
+  photo: string | null;
+  checkoutUrl: string | null;
+};
+
 export const sendMessage = createServerFn({ method: "POST" })
   .validator((input) => SendMessageInput.parse(input))
   .handler(async ({ data }) => {
@@ -73,10 +80,47 @@ export const sendMessage = createServerFn({ method: "POST" })
       message: {
         role: "assistant" as const,
         content: extractReplyText(n8nResponse),
+        items: extractItems(n8nResponse),
+        quickReplies: extractQuickReplies(n8nResponse),
       },
       title: generateTitle(data.content),
     };
   });
+
+function toTrimmedStringOrNull(value: unknown): string | null {
+  return typeof value === "string" && value.trim() ? value.trim() : null;
+}
+
+function extractItems(data: unknown): ChatItem[] {
+  if (!data || typeof data !== "object") return [];
+  const raw = (data as Record<string, unknown>).items;
+  if (!Array.isArray(raw)) return [];
+
+  return raw
+    .filter((item): item is Record<string, unknown> => !!item && typeof item === "object")
+    .map((item) => ({
+      name: toTrimmedStringOrNull(item.name) ?? "Untitled piece",
+      price: typeof item.price === "number" ? String(item.price) : toTrimmedStringOrNull(item.price),
+      photo: toTrimmedStringOrNull(item.photo),
+      checkoutUrl: toTrimmedStringOrNull(item.checkout_url) ?? toTrimmedStringOrNull(item.checkoutUrl),
+    }))
+    .filter((item) => item.photo !== null);
+}
+
+function extractQuickReplies(data: unknown): string[] {
+  if (!data || typeof data !== "object") return [];
+  const obj = data as Record<string, unknown>;
+  const candidates = [obj.quick_replies, obj.suggestions, obj.buttons, obj.options];
+
+  for (const candidate of candidates) {
+    if (!Array.isArray(candidate)) continue;
+    const strings = candidate.filter(
+      (entry): entry is string => typeof entry === "string" && entry.trim().length > 0,
+    );
+    if (strings.length > 0) return strings.slice(0, 6);
+  }
+  return [];
+}
 
 function extractReplyText(data: unknown): string {
   if (typeof data === "string") {
