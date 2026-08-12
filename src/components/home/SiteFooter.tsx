@@ -11,7 +11,7 @@ export function SiteFooter() {
     <SelenPromise />
     <footer className="border-t border-border/50 bg-background px-6 pb-14 pt-24 sm:px-10">
       <div className="mx-auto max-w-[1600px]">
-        <div className="grid gap-14 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
+        <div className="grid gap-14 md:grid-cols-[1.4fr_1fr_1fr_1fr_1fr]">
           <div className="max-w-xs">
             <p className="font-heading text-lg tracking-[0.42em]">SELEN</p>
             <p className="mt-6 text-sm leading-relaxed text-muted-foreground">
@@ -103,6 +103,33 @@ export function SiteFooter() {
                 className="text-sm text-muted-foreground transition-colors hover:text-foreground"
               >
                 Design with AI
+              </Link>
+            </li>
+          </FooterColumn>
+
+          <FooterColumn title="Legal">
+            <li>
+              <Link
+                to="/refund-policy"
+                className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+              >
+                Refund Policy
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/terms-of-service"
+                className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+              >
+                Terms of Service
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/privacy-policy"
+                className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+              >
+                Privacy Policy
               </Link>
             </li>
           </FooterColumn>

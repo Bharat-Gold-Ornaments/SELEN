@@ -13,7 +13,10 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as DesignWithAiRouteImport } from './routes/design-with-ai'
+import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
+import { Route as RefundPolicyRouteImport } from './routes/refund-policy'
 import { Route as ShopRouteImport } from './routes/shop'
+import { Route as TermsOfServiceRouteImport } from './routes/terms-of-service'
 import { Route as VisitRouteImport } from './routes/visit'
 import { Route as WhySterlingSilverRouteImport } from './routes/why-sterling-silver'
 import { Route as CollectionsCategoryRouteImport } from './routes/collections.$category'
@@ -43,9 +46,24 @@ const DesignWithAiRoute = DesignWithAiRouteImport.update({
   path: '/design-with-ai',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PrivacyPolicyRoute = PrivacyPolicyRouteImport.update({
+  id: '/privacy-policy',
+  path: '/privacy-policy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RefundPolicyRoute = RefundPolicyRouteImport.update({
+  id: '/refund-policy',
+  path: '/refund-policy',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ShopRoute = ShopRouteImport.update({
   id: '/shop',
   path: '/shop',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TermsOfServiceRoute = TermsOfServiceRouteImport.update({
+  id: '/terms-of-service',
+  path: '/terms-of-service',
   getParentRoute: () => rootRouteImport,
 } as any)
 const VisitRoute = VisitRouteImport.update({
@@ -94,7 +112,10 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
   '/design-with-ai': typeof DesignWithAiRouteWithChildren
+  '/privacy-policy': typeof PrivacyPolicyRoute
+  '/refund-policy': typeof RefundPolicyRoute
   '/shop': typeof ShopRoute
+  '/terms-of-service': typeof TermsOfServiceRoute
   '/visit': typeof VisitRoute
   '/why-sterling-silver': typeof WhySterlingSilverRoute
   '/collections/$category': typeof CollectionsCategoryRoute
@@ -108,7 +129,10 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
+  '/privacy-policy': typeof PrivacyPolicyRoute
+  '/refund-policy': typeof RefundPolicyRoute
   '/shop': typeof ShopRoute
+  '/terms-of-service': typeof TermsOfServiceRoute
   '/visit': typeof VisitRoute
   '/why-sterling-silver': typeof WhySterlingSilverRoute
   '/collections/$category': typeof CollectionsCategoryRoute
@@ -124,7 +148,10 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
   '/design-with-ai': typeof DesignWithAiRouteWithChildren
+  '/privacy-policy': typeof PrivacyPolicyRoute
+  '/refund-policy': typeof RefundPolicyRoute
   '/shop': typeof ShopRoute
+  '/terms-of-service': typeof TermsOfServiceRoute
   '/visit': typeof VisitRoute
   '/why-sterling-silver': typeof WhySterlingSilverRoute
   '/collections/$category': typeof CollectionsCategoryRoute
@@ -141,7 +168,10 @@ export interface FileRouteTypes {
     | '/about'
     | '/contact'
     | '/design-with-ai'
+    | '/privacy-policy'
+    | '/refund-policy'
     | '/shop'
+    | '/terms-of-service'
     | '/visit'
     | '/why-sterling-silver'
     | '/collections/$category'
@@ -155,7 +185,10 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/contact'
+    | '/privacy-policy'
+    | '/refund-policy'
     | '/shop'
+    | '/terms-of-service'
     | '/visit'
     | '/why-sterling-silver'
     | '/collections/$category'
@@ -170,7 +203,10 @@ export interface FileRouteTypes {
     | '/about'
     | '/contact'
     | '/design-with-ai'
+    | '/privacy-policy'
+    | '/refund-policy'
     | '/shop'
+    | '/terms-of-service'
     | '/visit'
     | '/why-sterling-silver'
     | '/collections/$category'
@@ -186,7 +222,10 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   ContactRoute: typeof ContactRoute
   DesignWithAiRoute: typeof DesignWithAiRouteWithChildren
+  PrivacyPolicyRoute: typeof PrivacyPolicyRoute
+  RefundPolicyRoute: typeof RefundPolicyRoute
   ShopRoute: typeof ShopRoute
+  TermsOfServiceRoute: typeof TermsOfServiceRoute
   VisitRoute: typeof VisitRoute
   WhySterlingSilverRoute: typeof WhySterlingSilverRoute
   CollectionsCategoryRoute: typeof CollectionsCategoryRoute
@@ -225,11 +264,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DesignWithAiRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/privacy-policy': {
+      id: '/privacy-policy'
+      path: '/privacy-policy'
+      fullPath: '/privacy-policy'
+      preLoaderRoute: typeof PrivacyPolicyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/refund-policy': {
+      id: '/refund-policy'
+      path: '/refund-policy'
+      fullPath: '/refund-policy'
+      preLoaderRoute: typeof RefundPolicyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/shop': {
       id: '/shop'
       path: '/shop'
       fullPath: '/shop'
       preLoaderRoute: typeof ShopRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/terms-of-service': {
+      id: '/terms-of-service'
+      path: '/terms-of-service'
+      fullPath: '/terms-of-service'
+      preLoaderRoute: typeof TermsOfServiceRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/visit': {
@@ -310,7 +370,10 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   ContactRoute: ContactRoute,
   DesignWithAiRoute: DesignWithAiRouteWithChildren,
+  PrivacyPolicyRoute: PrivacyPolicyRoute,
+  RefundPolicyRoute: RefundPolicyRoute,
   ShopRoute: ShopRoute,
+  TermsOfServiceRoute: TermsOfServiceRoute,
   VisitRoute: VisitRoute,
   WhySterlingSilverRoute: WhySterlingSilverRoute,
   CollectionsCategoryRoute: CollectionsCategoryRoute,
