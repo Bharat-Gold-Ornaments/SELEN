@@ -26,7 +26,7 @@ export const Route = createFileRoute("/contact")({
 });
 
 const SOCIALS = [
-  { icon: MessageCircle, label: "WhatsApp", href: "https://wa.me/919000000000" },
+  { icon: MessageCircle, label: "WhatsApp", href: "https://wa.me/919403880777" },
   { icon: Instagram, label: "Instagram", href: "https://instagram.com/selen" },
   { icon: Mail, label: "Email", href: "mailto:hello@selen.in" },
 ];

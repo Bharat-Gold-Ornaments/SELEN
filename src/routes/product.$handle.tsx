@@ -9,6 +9,7 @@ import type { ShopifyProduct } from "@/lib/shopify.functions";
 import { SiteFooter } from "@/components/home/SiteFooter";
 import { StyledTogether } from "@/components/product/StyledTogether";
 import { ProductGallery } from "@/components/product/ProductGallery";
+import { ProductPhotoNote } from "@/components/product/ProductPhotoNote";
 import { Reveal } from "@/components/editorial/Reveal";
 import { EDITORIAL_FALLBACKS } from "@/lib/placeholders";
 import { formatPrice } from "@/lib/categories";
@@ -126,6 +127,7 @@ function ProductView({ product }: { product: ShopifyProduct }) {
         <div className="lg:sticky lg:top-24 lg:self-start">
           <Reveal>
             <ProductGallery images={gallery} title={product.title} />
+            <ProductPhotoNote productTitle={product.title} />
           </Reveal>
         </div>
 
