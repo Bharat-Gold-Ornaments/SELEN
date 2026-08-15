@@ -3,6 +3,7 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 import { getProducts } from "@/lib/shopify.functions";
 import { ProductGrid } from "@/components/ProductGrid";
 import { SiteFooter } from "@/components/home/SiteFooter";
+import { SuggestionInvite } from "@/components/shop/SuggestionInvite";
 import { Reveal, SectionLabel } from "@/components/editorial/Reveal";
 
 const TITLE = "The Full Collection — SELEN";
@@ -53,6 +54,7 @@ function ShopPage() {
         </div>
       </div>
       <SiteFooter />
+      <SuggestionInvite />
     </main>
   );
 }

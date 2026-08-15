@@ -23,7 +23,7 @@ export function ProductPhotoNote({ productTitle }: { productTitle: string }) {
           className="mt-4 flex items-center gap-2 text-[0.7rem] uppercase tracking-[0.28em] text-muted-foreground transition-colors hover:text-foreground"
         >
           <Info className="h-3.5 w-3.5" strokeWidth={1.2} />
-          Images are AI-generated
+          Images are processed with AI
         </button>
       </DialogTrigger>
       <DialogContent className="rounded-none sm:max-w-sm">
@@ -32,7 +32,7 @@ export function ProductPhotoNote({ productTitle }: { productTitle: string }) {
             Product Note
           </DialogTitle>
           <DialogDescription className="pt-2 text-sm leading-relaxed">
-            Images are AI-generated and may vary slightly from the actual product.
+            Images are processed with AI and may vary slightly from the actual product.
           </DialogDescription>
         </DialogHeader>
         <p className="text-sm leading-relaxed text-muted-foreground">

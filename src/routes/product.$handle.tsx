@@ -10,6 +10,7 @@ import { SiteFooter } from "@/components/home/SiteFooter";
 import { StyledTogether } from "@/components/product/StyledTogether";
 import { ProductGallery } from "@/components/product/ProductGallery";
 import { ProductPhotoNote } from "@/components/product/ProductPhotoNote";
+import { SuggestionInvite } from "@/components/shop/SuggestionInvite";
 import { Reveal } from "@/components/editorial/Reveal";
 import { EDITORIAL_FALLBACKS } from "@/lib/placeholders";
 import { formatPrice } from "@/lib/categories";
@@ -84,6 +85,7 @@ function ProductDetail() {
       <ProductView product={product} />
       <StyledTogether products={related} />
       <SiteFooter />
+      <SuggestionInvite />
     </main>
   );
 }
