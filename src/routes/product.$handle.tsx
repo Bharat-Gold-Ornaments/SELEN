@@ -109,7 +109,8 @@ function ProductView({ product }: { product: ShopifyProduct }) {
     ...EDITORIAL_FALLBACKS.map((url) => ({ url, alt: "" })),
   ].slice(0, 5);
 
-  const { intro, specs } = parseDescription(product.description);
+  const intro = parseDescription(product.description);
+  const specs = buildProductSpecs(product.metafields ?? []);
 
   const handleAddToCart = async () => {
     if (!selectedVariant) return;
@@ -192,7 +193,7 @@ function ProductView({ product }: { product: ShopifyProduct }) {
                   of 20 Karat gold. Stones, where present, are hand-set cubic zirconia.
                 </p>
               </Panel>
-              <Panel value="dimensions" title="Dimensions">
+              <Panel value="specifications" title="Product Specifications">
                 {specs.length > 0 ? (
                   <dl className="space-y-2">
                     {specs.map((spec) => (
@@ -203,7 +204,7 @@ function ProductView({ product }: { product: ShopifyProduct }) {
                     ))}
                   </dl>
                 ) : (
-                  <p>Full measurements are shown in the dimensions illustration in the gallery.</p>
+                  <p>Specifications for this piece will be added soon.</p>
                 )}
               </Panel>
               <Panel value="shipping" title="Shipping & Returns">
@@ -250,24 +251,53 @@ function Panel({
 
 const SPEC_LABELS = ["Material", "Stone", "Weight", "Dimensions", "SKU", "Finish", "Closure"];
 
-function parseDescription(description: string) {
+function parseDescription(description: string): string {
   const rest = description.replace(/\s+/g, " ").trim();
-  const specs: Array<{ label: string; value: string }> = [];
 
   const firstLabel = SPEC_LABELS.map((l) => rest.indexOf(`${l}:`))
     .filter((i) => i >= 0)
     .sort((a, b) => a - b)[0];
 
-  let intro = rest;
-  if (firstLabel !== undefined && firstLabel > 0) {
-    intro = rest.slice(0, firstLabel).trim();
-    const tail = rest.slice(firstLabel);
-    const parts = tail.split(new RegExp(`(?=(?:${SPEC_LABELS.join("|")}):)`));
-    for (const part of parts) {
-      const match = part.match(/^([A-Za-z ]+):\s*(.+)$/);
-      if (match) specs.push({ label: match[1].trim(), value: match[2].trim() });
-    }
-  }
+  return firstLabel !== undefined && firstLabel > 0 ? rest.slice(0, firstLabel).trim() : rest;
+}
 
-  return { intro, specs };
+type ProductMetafield = { key: string; value: string; type: string } | null;
+
+const DIMENSION_UNIT_LABELS: Record<string, string> = {
+  MILLIMETERS: "mm",
+  CENTIMETERS: "cm",
+  METERS: "m",
+  INCHES: "in",
+  FEET: "ft",
+  YARDS: "yd",
+};
+
+function formatMetafieldValue(metafield: NonNullable<ProductMetafield>): string | undefined {
+  if (metafield.type !== "dimension") return metafield.value || undefined;
+  try {
+    const { value, unit } = JSON.parse(metafield.value) as { value: number; unit: string };
+    return `${value} ${DIMENSION_UNIT_LABELS[unit] ?? unit.toLowerCase()}`;
+  } catch {
+    return undefined;
+  }
+}
+
+const SPEC_FIELDS = [
+  { key: "short_description", label: "Description" },
+  { key: "weight_display", label: "Weight" },
+  { key: "stone", label: "Stone" },
+  { key: "material", label: "Material" },
+  { key: "width_cm", label: "Width" },
+  { key: "length_cm", label: "Length" },
+];
+
+function buildProductSpecs(
+  metafields: ProductMetafield[],
+): Array<{ label: string; value: string }> {
+  return SPEC_FIELDS.flatMap(({ key, label }) => {
+    const metafield = metafields.find((m) => m?.key === key);
+    if (!metafield) return [];
+    const value = formatMetafieldValue(metafield);
+    return value ? [{ label, value }] : [];
+  });
 }

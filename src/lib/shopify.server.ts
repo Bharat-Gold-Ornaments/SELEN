@@ -52,6 +52,11 @@ export interface ShopifyProduct {
     name: string;
     values: string[];
   }>;
+  metafields?: Array<{
+    key: string;
+    value: string;
+    type: string;
+  } | null>;
 }
 
 export interface ProductEdge {
@@ -175,6 +180,18 @@ const GET_PRODUCT_BY_HANDLE_QUERY = `
       options {
         name
         values
+      }
+      metafields(identifiers: [
+        { namespace: "custom", key: "short_description" }
+        { namespace: "custom", key: "weight_display" }
+        { namespace: "custom", key: "stone" }
+        { namespace: "custom", key: "material" }
+        { namespace: "custom", key: "width_cm" }
+        { namespace: "custom", key: "length_cm" }
+      ]) {
+        key
+        value
+        type
       }
     }
   }
