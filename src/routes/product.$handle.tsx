@@ -15,7 +15,7 @@ import { SuggestionInvite } from "@/components/shop/SuggestionInvite";
 import { Reveal } from "@/components/editorial/Reveal";
 import { EDITORIAL_FALLBACKS } from "@/lib/placeholders";
 import { formatPrice } from "@/lib/categories";
-import { isRingSizeOption } from "@/lib/ringSize";
+import { isRingSizeOption, RING_SIZE_DISPLAY_RANGE } from "@/lib/ringSize";
 import {
   Accordion,
   AccordionContent,
@@ -155,54 +155,59 @@ function ProductView({ product }: { product: ShopifyProduct }) {
 
             <p className="mt-8 max-w-md text-sm leading-relaxed text-muted-foreground">{intro}</p>
 
-            {product.options.length > 0 && product.options.some((o) => o.values.length > 1) && (
+            {product.options.some((o) => isRingSizeOption(o.name) || o.values.length > 1) && (
               <div className="mt-10 space-y-4">
-                {product.options.map((option) =>
-                  isRingSizeOption(option.name) ? (
-                    <div key={option.name} className="mt-2">
-                      <label className="mb-2 block text-[0.725rem] uppercase tracking-[0.3em] text-muted-foreground">
-                        Size
-                      </label>
-                      <RingSizeSelector
-                        sizes={option.values}
-                        availableSizes={
-                          new Set(
-                            variants
-                              .filter((v) => v.availableForSale)
-                              .map(
-                                (v) =>
-                                  v.selectedOptions.find((o) => o.name === option.name)?.value,
-                              )
-                              .filter((v): v is string => !!v),
-                          )
-                        }
-                        selected={selectedOptions[option.name]}
-                        onSelect={(size) =>
-                          setSelectedOptions((prev) => ({ ...prev, [option.name]: size }))
-                        }
-                      />
-                    </div>
-                  ) : (
-                    <div key={option.name}>
-                      <label className="mb-2 block text-[0.725rem] uppercase tracking-[0.3em] text-muted-foreground">
-                        {option.name}
-                      </label>
-                      <select
-                        className="w-full border border-input bg-background px-3 py-3 text-sm"
-                        onChange={(e) =>
-                          setSelectedOptions((prev) => ({ ...prev, [option.name]: e.target.value }))
-                        }
-                        value={selectedOptions[option.name] ?? ""}
-                      >
-                        {option.values.map((value) => (
-                          <option key={value} value={value}>
-                            {value}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-                  ),
-                )}
+                {product.options
+                  .filter((o) => isRingSizeOption(o.name) || o.values.length > 1)
+                  .map((option) =>
+                    isRingSizeOption(option.name) ? (
+                      <div key={option.name} className="mt-2">
+                        <label className="mb-2 block text-[0.725rem] uppercase tracking-[0.3em] text-muted-foreground">
+                          Size
+                        </label>
+                        <RingSizeSelector
+                          sizes={RING_SIZE_DISPLAY_RANGE}
+                          availableSizes={
+                            new Set(
+                              variants
+                                .filter((v) => v.availableForSale)
+                                .map(
+                                  (v) =>
+                                    v.selectedOptions.find((o) => o.name === option.name)?.value,
+                                )
+                                .filter((v): v is string => !!v),
+                            )
+                          }
+                          selected={selectedOptions[option.name]}
+                          onSelect={(size) =>
+                            setSelectedOptions((prev) => ({ ...prev, [option.name]: size }))
+                          }
+                        />
+                      </div>
+                    ) : (
+                      <div key={option.name}>
+                        <label className="mb-2 block text-[0.725rem] uppercase tracking-[0.3em] text-muted-foreground">
+                          {option.name}
+                        </label>
+                        <select
+                          className="w-full border border-input bg-background px-3 py-3 text-sm"
+                          onChange={(e) =>
+                            setSelectedOptions((prev) => ({
+                              ...prev,
+                              [option.name]: e.target.value,
+                            }))
+                          }
+                          value={selectedOptions[option.name] ?? ""}
+                        >
+                          {option.values.map((value) => (
+                            <option key={value} value={value}>
+                              {value}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+                    ),
+                  )}
               </div>
             )}
 

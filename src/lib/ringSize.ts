@@ -22,11 +22,18 @@ export const RING_SIZES: RingSizeEntry[] = [
   { size: "24", innerDiameterMm: 20.4, innerCircumferenceMm: 64.0 },
 ];
 
-/** Shopify product option name that identifies a ring's size option (case-insensitive match). */
-export const RING_SIZE_OPTION_NAME = "Size";
+/**
+ * Sizes shown on every ring product page, regardless of which sizes that specific ring has
+ * configured as Shopify variants. Sizes with no matching in-stock variant are shown disabled
+ * rather than hidden, so customers always see the full standard range.
+ */
+export const RING_SIZE_DISPLAY_RANGE = ["8", "10", "12", "14", "16", "18"];
+
+/** Shopify product option names that identify a ring's size option (case-insensitive match). */
+const RING_SIZE_OPTION_NAMES = ["size", "ring size"];
 
 export function isRingSizeOption(optionName: string): boolean {
-  return optionName.trim().toLowerCase() === RING_SIZE_OPTION_NAME.toLowerCase();
+  return RING_SIZE_OPTION_NAMES.includes(optionName.trim().toLowerCase());
 }
 
 export function getRingSize(size: string): RingSizeEntry | undefined {

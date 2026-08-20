@@ -49,6 +49,8 @@ export function RingSizeSelector({
             <span className="text-foreground">Size {selectedEntry.size}</span> &mdash;{" "}
             {formatRingMeasurement(selectedEntry)}
           </>
+        ) : selected ? (
+          <span className="text-foreground">Size {selected}</span>
         ) : (
           "Select a size to see the measurement."
         )}
