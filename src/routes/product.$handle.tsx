@@ -4,7 +4,7 @@ import { useState } from "react";
 import { getProductByHandle, getProducts } from "@/lib/shopify.functions";
 import { Button } from "@/components/ui/button";
 import { useCartStore } from "@/stores/cartStore";
-import { Loader2 } from "lucide-react";
+import { Info, Loader2 } from "lucide-react";
 import type { ShopifyProduct } from "@/lib/shopify.functions";
 import { SiteFooter } from "@/components/home/SiteFooter";
 import { StyledTogether } from "@/components/product/StyledTogether";
@@ -142,8 +142,9 @@ function ProductView({ product }: { product: ShopifyProduct }) {
             <h1 className="mt-6 font-heading text-3xl font-normal leading-[1.1] tracking-tight sm:text-5xl">
               {product.title}
             </h1>
-            <p className="mt-5 text-sm tracking-wide text-muted-foreground">
+            <p className="mt-5 flex items-center gap-1.5 text-sm tracking-wide text-muted-foreground">
               {formatPrice(price.amount, price.currencyCode)}
+              <GstNote />
             </p>
 
             <p className="mt-8 max-w-md text-sm leading-relaxed text-muted-foreground">{intro}</p>
@@ -225,6 +226,37 @@ function ProductView({ product }: { product: ShopifyProduct }) {
         </div>
       </div>
     </section>
+  );
+}
+
+function GstNote() {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <span
+      className="relative inline-flex"
+      onMouseEnter={() => setOpen(true)}
+      onMouseLeave={() => setOpen(false)}
+    >
+      <button
+        type="button"
+        aria-label="GST information"
+        aria-expanded={open}
+        onClick={() => setOpen((v) => !v)}
+        onBlur={() => setOpen(false)}
+        className="text-muted-foreground/70 transition-colors hover:text-foreground"
+      >
+        <Info className="h-3.5 w-3.5" />
+      </button>
+      {open && (
+        <span
+          role="tooltip"
+          className="absolute left-1/2 top-full z-10 mt-2 w-max max-w-[13rem] -translate-x-1/2 rounded-sm bg-foreground px-2.5 py-1.5 text-[0.7rem] leading-snug text-background shadow-sm"
+        >
+          Price excludes GST, added at checkout.
+        </span>
+      )}
+    </span>
   );
 }
 
