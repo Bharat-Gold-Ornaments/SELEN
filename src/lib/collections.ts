@@ -15,7 +15,7 @@ export interface EditorialCollection {
 export const EDITORIAL_COLLECTIONS: EditorialCollection[] = [
   {
     slug: "everyday-luxury",
-    title: "Everyday Luxury",
+    title: "Essentials",
     line: "Pieces made to be lived in.",
     note: "Quiet weight, warm shine, nothing precious about wearing it daily.",
     image: PLACEHOLDER.collection1,
@@ -30,16 +30,17 @@ export const EDITORIAL_COLLECTIONS: EditorialCollection[] = [
     categories: ["rings", "bracelets"],
   },
   {
-    slug: "celestial-dreams",
-    title: "Celestial Dreams",
-    line: "Moons, stars, quiet wonder.",
-    note: "Delicate silhouettes drawn from the night sky.",
-    image: PLACEHOLDER.collection3,
-    categories: ["pendants", "necklaces"],
+    slug: "made-for-gifting",
+    title: "Made for Gifting",
+    line: "Wrapped, ribboned, remembered.",
+    note: "Each piece arrives in ivory board and satin, ready to be given.",
+    image: PLACEHOLDER.collection6,
+    categories: ["pendants", "earrings"],
   },
+  /*
   {
     slug: "quiet-elegance",
-    title: "Quiet Elegance",
+    title: "Quiet Forms",
     line: "Restraint, worn well.",
     note: "The smallest pieces in the house, and the most considered.",
     image: PLACEHOLDER.collection4,
@@ -54,13 +55,14 @@ export const EDITORIAL_COLLECTIONS: EditorialCollection[] = [
     categories: ["necklaces", "rings"],
   },
   {
-    slug: "made-for-gifting",
-    title: "Made for Gifting",
-    line: "Wrapped, ribboned, remembered.",
-    note: "Each piece arrives in ivory board and satin, ready to be given.",
-    image: PLACEHOLDER.collection6,
-    categories: ["pendants", "earrings"],
+    slug: "celestial-dreams",
+    title: "Coastal Reverie",
+    line: "For days that drift beautifully.",
+    note: "Delicate silhouettes drawn from the night sky.",
+    image: PLACEHOLDER.collection3,
+    categories: ["pendants", "necklaces"],
   },
+  */
 ];
 
 const CATEGORY_IMAGES: Record<string, string> = {

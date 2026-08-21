@@ -134,11 +134,11 @@ function GalleryArrow({ side, onClick }: { side: "left" | "right"; onClick: () =
       type="button"
       onClick={onClick}
       aria-label={side === "left" ? "Previous image" : "Next image"}
-      className={`absolute top-1/2 -translate-y-1/2 p-4 text-foreground/45 opacity-100 transition-all duration-500 ease-out hover:text-foreground lg:opacity-0 lg:group-hover/gallery:opacity-100 ${
-        side === "left" ? "left-1 sm:left-3" : "right-1 sm:right-3"
+      className={`absolute top-1/2 grid -translate-y-1/2 place-items-center rounded-full border border-foreground/20 bg-background/70 p-3 text-foreground/70 opacity-100 backdrop-blur-sm transition-all duration-500 ease-out hover:border-foreground/50 hover:text-foreground lg:opacity-0 lg:group-hover/gallery:opacity-100 ${
+        side === "left" ? "left-2 sm:left-4" : "right-2 sm:right-4"
       }`}
     >
-      <Icon className="h-5 w-5" strokeWidth={1} />
+      <Icon className="h-5 w-5" strokeWidth={1.75} />
     </button>
   );
 }
@@ -223,17 +223,17 @@ function Lightbox({
               type="button"
               onClick={() => onGo(-1)}
               aria-label="Previous image"
-              className="absolute left-2 top-1/2 -translate-y-1/2 p-4 text-foreground/45 transition-colors hover:text-foreground sm:left-6"
+              className="absolute left-2 top-1/2 grid -translate-y-1/2 place-items-center rounded-full border border-foreground/20 bg-background/70 p-3 text-foreground/70 backdrop-blur-sm transition-colors hover:border-foreground/50 hover:text-foreground sm:left-6"
             >
-              <ArrowLeft className="h-5 w-5" strokeWidth={1} />
+              <ArrowLeft className="h-5 w-5" strokeWidth={1.75} />
             </button>
             <button
               type="button"
               onClick={() => onGo(1)}
               aria-label="Next image"
-              className="absolute right-2 top-1/2 -translate-y-1/2 p-4 text-foreground/45 transition-colors hover:text-foreground sm:right-6"
+              className="absolute right-2 top-1/2 grid -translate-y-1/2 place-items-center rounded-full border border-foreground/20 bg-background/70 p-3 text-foreground/70 backdrop-blur-sm transition-colors hover:border-foreground/50 hover:text-foreground sm:right-6"
             >
-              <ArrowRight className="h-5 w-5" strokeWidth={1} />
+              <ArrowRight className="h-5 w-5" strokeWidth={1.75} />
             </button>
           </>
         )}

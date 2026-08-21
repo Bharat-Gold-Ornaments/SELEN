@@ -140,7 +140,7 @@ export function SiteFooter() {
             <MascotSeal pose="wave" className="h-11 w-11" />
             <span>© {new Date().getFullYear()} SELEN</span>
           </div>
-          <span>A KINMITRA BRAND</span>
+          <span>A BHARAT GOLD ORNAMENTS PVT LTD BRAND</span>
         </div>
       </div>
     </footer>

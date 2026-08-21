@@ -37,16 +37,16 @@ export function FeaturedProduct({ products }: { products: ProductEdge[] }) {
           <button
             onClick={() => go(-1)}
             aria-label="Previous product"
-            className="absolute left-4 top-1/2 -translate-y-1/2 p-3 text-foreground/40 transition-colors hover:text-foreground sm:left-8"
+            className="absolute left-4 top-1/2 grid -translate-y-1/2 place-items-center rounded-full border border-foreground/20 bg-background/70 p-3 text-foreground/70 backdrop-blur-sm transition-colors hover:border-foreground/50 hover:text-foreground sm:left-8"
           >
-            <ArrowLeft className="h-5 w-5" strokeWidth={1} />
+            <ArrowLeft className="h-5 w-5" strokeWidth={1.75} />
           </button>
           <button
             onClick={() => go(1)}
             aria-label="Next product"
-            className="absolute right-4 top-1/2 -translate-y-1/2 p-3 text-foreground/40 transition-colors hover:text-foreground sm:right-8"
+            className="absolute right-4 top-1/2 grid -translate-y-1/2 place-items-center rounded-full border border-foreground/20 bg-background/70 p-3 text-foreground/70 backdrop-blur-sm transition-colors hover:border-foreground/50 hover:text-foreground sm:right-8"
           >
-            <ArrowRight className="h-5 w-5" strokeWidth={1} />
+            <ArrowRight className="h-5 w-5" strokeWidth={1.75} />
           </button>
         </div>
 
@@ -91,16 +91,21 @@ export function FeaturedProduct({ products }: { products: ProductEdge[] }) {
               </Link>
             </div>
 
-            <div className="mt-14 flex flex-wrap gap-3">
+            <div className="mt-14 flex flex-wrap gap-1" role="tablist" aria-label="Featured pieces">
               {items.map((item, i) => (
                 <button
                   key={item.id}
                   onClick={() => setIndex(i)}
                   aria-label={`Show ${item.title}`}
-                  className={`h-px w-12 transition-colors ${
-                    i === index ? "bg-foreground/70" : "bg-foreground/20"
-                  }`}
-                />
+                  aria-current={i === index}
+                  className="group py-3 pr-2"
+                >
+                  <span
+                    className={`block h-[5px] w-10 rounded-full transition-colors ${
+                      i === index ? "bg-primary" : "bg-foreground/15 group-hover:bg-foreground/40"
+                    }`}
+                  />
+                </button>
               ))}
             </div>
           </Reveal>

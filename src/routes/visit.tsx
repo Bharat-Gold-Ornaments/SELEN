@@ -66,11 +66,13 @@ function VisitPage() {
                 Address
               </dt>
               <dd className="mt-3 leading-relaxed text-muted-foreground">
-                SELEN Boutique
+                Goa Trading
                 <br />
-                Ground Floor, Jubilee Hills
+                31st January Road
                 <br />
-                Hyderabad, India
+                Panaji Goa India
+                <br />
+                403001
               </dd>
             </div>
             <div>

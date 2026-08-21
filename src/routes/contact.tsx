@@ -9,7 +9,7 @@ const DESCRIPTION =
   "Reach the SELEN team for appointments, care and repairs, or order support — or visit our boutique in Goa, open Tuesday to Sunday.";
 
 const MAP_SRC =
-  "https://www.google.com/maps?q=Panaji,%20Goa,%20India&output=embed";
+  "https://www.google.com/maps?q=15.4995102,73.8315962&output=embed";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -48,14 +48,14 @@ function ContactPage() {
           <Reveal>
             <SectionLabel>Address</SectionLabel>
             <p className="mt-6 font-heading text-2xl font-normal leading-snug tracking-tight">
-              SELEN Boutique
+              Goa Trading
             </p>
             <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-              18 Ourem Road
+              31st January Road
               <br />
-              Panaji, Goa 403001
+              Panaji Goa India
               <br />
-              India
+              403001
             </p>
             <p className="mt-8 text-[0.725rem] uppercase tracking-[0.36em] text-muted-foreground">
               Tuesday &ndash; Sunday · 11:00 &mdash; 19:00
