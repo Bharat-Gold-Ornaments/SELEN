@@ -13,7 +13,6 @@ import { ProductPhotoNote } from "@/components/product/ProductPhotoNote";
 import { RingSizeSelector } from "@/components/product/RingSizeSelector";
 import { SuggestionInvite } from "@/components/shop/SuggestionInvite";
 import { Reveal } from "@/components/editorial/Reveal";
-import { EDITORIAL_FALLBACKS } from "@/lib/placeholders";
 import { formatPrice } from "@/lib/categories";
 import { isRingSizeOption, RING_SIZE_DISPLAY_RANGE } from "@/lib/ringSize";
 import {
@@ -105,15 +104,10 @@ function ProductView({ product }: { product: ShopifyProduct }) {
     variants[0];
   const price = selectedVariant?.price ?? product.priceRange.minVariantPrice;
 
-  /** Hero, lifestyle, detail, alternate angle, dimensions — topped up with editorial placeholders. */
-  const shopifyImages = product.images.edges.map((e) => ({
+  const gallery = product.images.edges.map((e) => ({
     url: `${e.node.url}?width=1600`,
     alt: e.node.altText ?? product.title,
   }));
-  const gallery = [
-    ...shopifyImages,
-    ...EDITORIAL_FALLBACKS.map((url) => ({ url, alt: "" })),
-  ].slice(0, 5);
 
   const intro = parseDescription(product.description);
   const specs = buildProductSpecs(product.metafields ?? []);

@@ -32,7 +32,3 @@ export const PLACEHOLDER = {
   collection5,
   collection6,
 } as const;
-
-
-/** Editorial fallbacks used when a product has fewer than five photographs. */
-export const EDITORIAL_FALLBACKS = [lifestyle, collection1, banner, collection5];
