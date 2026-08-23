@@ -28,7 +28,7 @@ export const Route = createFileRoute("/contact")({
 const SOCIALS = [
   { icon: MessageCircle, label: "WhatsApp", href: "https://wa.me/919403880777" },
   { icon: Instagram, label: "Instagram", href: "https://instagram.com/selen" },
-  { icon: Mail, label: "Email", href: "mailto:hello@selen.in" },
+  { icon: Mail, label: "Email", href: "mailto:support@selen.in" },
 ];
 
 function ContactPage() {
@@ -71,10 +71,10 @@ function ContactPage() {
                 </dt>
                 <dd className="mt-3 leading-relaxed text-muted-foreground">
                   <a
-                    href="mailto:hello@selen.in"
+                    href="mailto:support@selen.in"
                     className="text-foreground underline-offset-4 hover:underline"
                   >
-                    hello@selen.in
+                    support@selen.in
                   </a>{" "}
                   — send a preferred day and time and we will hold the room for you.
                 </dd>
@@ -85,10 +85,10 @@ function ContactPage() {
                 </dt>
                 <dd className="mt-3 leading-relaxed text-muted-foreground">
                   <a
-                    href="mailto:orders@selen.in"
+                    href="mailto:support@selen.in"
                     className="text-foreground underline-offset-4 hover:underline"
                   >
-                    orders@selen.in
+                    support@selen.in
                   </a>{" "}
                   — deliveries, exchanges and gift notes.
                 </dd>
@@ -99,10 +99,10 @@ function ContactPage() {
                 </dt>
                 <dd className="mt-3 leading-relaxed text-muted-foreground">
                   <a
-                    href="mailto:care@selen.in"
+                    href="mailto:support@selen.in"
                     className="text-foreground underline-offset-4 hover:underline"
                   >
-                    care@selen.in
+                    support@selen.in
                   </a>{" "}
                   — replating, resizing and cleaning for every SELEN piece.
                 </dd>

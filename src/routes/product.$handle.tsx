@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { getProductByHandle, getProducts } from "@/lib/shopify.functions";
@@ -243,7 +243,16 @@ function ProductView({ product }: { product: ShopifyProduct }) {
               <Panel value="shipping" title="Shipping & Returns">
                 <p>
                   Complimentary insured shipping across India, dispatched within two working days.
-                  Returns accepted within 14 days, unworn and in the original box.
+                  We offer a 7-day exchange window from the date of delivery for items that are
+                  unworn and in their original packaging; we do not offer cash refunds for
+                  change-of-mind returns. See our{" "}
+                  <Link
+                    to="/refund-policy"
+                    className="underline underline-offset-4 hover:text-foreground"
+                  >
+                    Refund & Cancellation Policy
+                  </Link>{" "}
+                  for full details.
                 </p>
               </Panel>
               <Panel value="care" title="Jewellery Care">

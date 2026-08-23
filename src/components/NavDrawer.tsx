@@ -4,7 +4,7 @@ import { X } from "lucide-react";
 import { useEffect } from "react";
 import { EDITORIAL_COLLECTIONS } from "@/lib/collections";
 
-const SHOP = ["earrings", "pendants", "necklaces", "rings", "bracelets", "anklets"];
+const SHOP = ["earrings", "pendants", "necklaces", "rings"];
 
 export function NavDrawer({ open, onClose }: { open: boolean; onClose: () => void }) {
   useEffect(() => {

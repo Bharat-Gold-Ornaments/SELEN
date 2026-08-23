@@ -87,7 +87,7 @@ function VisitPage() {
               <dt className="text-[0.725rem] uppercase tracking-[0.36em] text-muted-foreground">
                 Enquiries
               </dt>
-              <dd className="mt-3 leading-relaxed text-muted-foreground">hello@selen.in</dd>
+              <dd className="mt-3 leading-relaxed text-muted-foreground">support@selen.in</dd>
             </div>
           </dl>
         </Reveal>
