@@ -11,10 +11,12 @@ import { StyledTogether } from "@/components/product/StyledTogether";
 import { ProductGallery } from "@/components/product/ProductGallery";
 import { ProductPhotoNote } from "@/components/product/ProductPhotoNote";
 import { RingSizeSelector } from "@/components/product/RingSizeSelector";
+import { ColorSwatchSelector } from "@/components/product/ColorSwatchSelector";
 import { SuggestionInvite } from "@/components/shop/SuggestionInvite";
 import { Reveal } from "@/components/editorial/Reveal";
 import { formatPrice } from "@/lib/categories";
 import { isRingSizeOption, RING_SIZE_DISPLAY_RANGE } from "@/lib/ringSize";
+import { isColorOption } from "@/lib/colorOption";
 import {
   Accordion,
   AccordionContent,
@@ -95,13 +97,14 @@ function ProductView({ product }: { product: ShopifyProduct }) {
   const addItem = useCartStore((state) => state.addItem);
   const isLoading = useCartStore((state) => state.isLoading);
   const variants = product.variants.edges.map((e) => e.node);
-  const [selectedOptions, setSelectedOptions] = useState<Record<string, string>>(() =>
-    Object.fromEntries((variants[0]?.selectedOptions ?? []).map((o) => [o.name, o.value])),
-  );
+  const [selectedOptions, setSelectedOptions] = useState<Record<string, string>>(() => {
+    const defaultVariant = variants.find((v) => v.availableForSale) ?? variants[0];
+    return Object.fromEntries((defaultVariant?.selectedOptions ?? []).map((o) => [o.name, o.value]));
+  });
 
-  const selectedVariant =
-    variants.find((v) => v.selectedOptions.every((o) => selectedOptions[o.name] === o.value)) ??
-    variants[0];
+  const selectedVariant = variants.find((v) =>
+    v.selectedOptions.every((o) => selectedOptions[o.name] === o.value),
+  );
   const price = selectedVariant?.price ?? product.priceRange.minVariantPrice;
 
   const gallery = product.images.edges.map((e) => ({
@@ -111,6 +114,57 @@ function ProductView({ product }: { product: ShopifyProduct }) {
 
   const intro = parseDescription(product.description);
   const specs = buildProductSpecs(product.metafields ?? []);
+  const productUrl = `https://selen.in/product/${product.handle}`;
+
+  /**
+   * Color ranks above Size: it's the primary choice, so its availability is never narrowed by
+   * whatever size happens to be selected (a color out of stock in one size but not another must
+   * still show as pickable). Size, being dependent, is narrowed by the currently selected color.
+   */
+  const optionRank = (name: string) => (isColorOption(name) ? 0 : isRingSizeOption(name) ? 1 : 2);
+
+  /** Values available for one option, given whatever is currently selected on *earlier-ranked* axes. */
+  const availableValuesForOption = (optionName: string) => {
+    const rank = optionRank(optionName);
+    return new Set(
+      variants
+        .filter((v) => v.availableForSale)
+        .filter((v) =>
+          v.selectedOptions.every((o) => {
+            if (o.name === optionName || optionRank(o.name) > rank) return true;
+            return selectedOptions[o.name] === o.value;
+          }),
+        )
+        .map((v) => v.selectedOptions.find((o) => o.name === optionName)?.value)
+        .filter((v): v is string => !!v),
+    );
+  };
+
+  /**
+   * Picking a value on one axis can strand the current pick on another axis (e.g. choosing
+   * Rose Gold when size 14 only exists in Yellow Gold). When that happens, clear the other
+   * choosable options rather than silently keeping a now-invalid combination selected.
+   */
+  const handleOptionSelect = (optionName: string, value: string) => {
+    setSelectedOptions((prev) => {
+      const attempted = { ...prev, [optionName]: value };
+      const hasAvailableMatch = variants.some(
+        (v) => v.availableForSale && v.selectedOptions.every((o) => attempted[o.name] === o.value),
+      );
+      if (hasAvailableMatch) return attempted;
+
+      const cleared = { ...attempted };
+      for (const opt of product.options) {
+        if (opt.name !== optionName && opt.values.length > 1) delete cleared[opt.name];
+      }
+      return cleared;
+    });
+  };
+
+  const visibleOptions = product.options
+    .filter((o) => isRingSizeOption(o.name) || isColorOption(o.name) || o.values.length > 1)
+    .sort((a, b) => optionRank(a.name) - optionRank(b.name));
+  const allOptionsChosen = visibleOptions.every((o) => !!selectedOptions[o.name]);
 
   const handleAddToCart = async () => {
     if (!selectedVariant) return;
@@ -149,59 +203,63 @@ function ProductView({ product }: { product: ShopifyProduct }) {
 
             <p className="mt-8 max-w-md text-sm leading-relaxed text-muted-foreground">{intro}</p>
 
-            {product.options.some((o) => isRingSizeOption(o.name) || o.values.length > 1) && (
-              <div className="mt-10 space-y-4">
-                {product.options
-                  .filter((o) => isRingSizeOption(o.name) || o.values.length > 1)
-                  .map((option) =>
-                    isRingSizeOption(option.name) ? (
+            {visibleOptions.length > 0 && (
+              <div className="mt-10 space-y-6">
+                {visibleOptions.map((option) => {
+                  if (isColorOption(option.name)) {
+                    return (
+                      <div key={option.name}>
+                        <label className="mb-2 block text-[0.725rem] uppercase tracking-[0.3em] text-muted-foreground">
+                          Color
+                        </label>
+                        <ColorSwatchSelector
+                          colors={option.values}
+                          availableColors={availableValuesForOption(option.name)}
+                          selected={selectedOptions[option.name]}
+                          onSelect={(color) => handleOptionSelect(option.name, color)}
+                          productName={product.title}
+                          productUrl={productUrl}
+                          metafields={product.metafields}
+                        />
+                      </div>
+                    );
+                  }
+
+                  if (isRingSizeOption(option.name)) {
+                    return (
                       <div key={option.name} className="mt-2">
                         <label className="mb-2 block text-[0.725rem] uppercase tracking-[0.3em] text-muted-foreground">
                           Size
                         </label>
                         <RingSizeSelector
                           sizes={RING_SIZE_DISPLAY_RANGE}
-                          availableSizes={
-                            new Set(
-                              variants
-                                .filter((v) => v.availableForSale)
-                                .map(
-                                  (v) =>
-                                    v.selectedOptions.find((o) => o.name === option.name)?.value,
-                                )
-                                .filter((v): v is string => !!v),
-                            )
-                          }
+                          availableSizes={availableValuesForOption(option.name)}
                           selected={selectedOptions[option.name]}
-                          onSelect={(size) =>
-                            setSelectedOptions((prev) => ({ ...prev, [option.name]: size }))
-                          }
+                          onSelect={(size) => handleOptionSelect(option.name, size)}
                         />
                       </div>
-                    ) : (
-                      <div key={option.name}>
-                        <label className="mb-2 block text-[0.725rem] uppercase tracking-[0.3em] text-muted-foreground">
-                          {option.name}
-                        </label>
-                        <select
-                          className="w-full border border-input bg-background px-3 py-3 text-sm"
-                          onChange={(e) =>
-                            setSelectedOptions((prev) => ({
-                              ...prev,
-                              [option.name]: e.target.value,
-                            }))
-                          }
-                          value={selectedOptions[option.name] ?? ""}
-                        >
-                          {option.values.map((value) => (
-                            <option key={value} value={value}>
-                              {value}
-                            </option>
-                          ))}
-                        </select>
-                      </div>
-                    ),
-                  )}
+                    );
+                  }
+
+                  return (
+                    <div key={option.name}>
+                      <label className="mb-2 block text-[0.725rem] uppercase tracking-[0.3em] text-muted-foreground">
+                        {option.name}
+                      </label>
+                      <select
+                        className="w-full border border-input bg-background px-3 py-3 text-sm"
+                        onChange={(e) => handleOptionSelect(option.name, e.target.value)}
+                        value={selectedOptions[option.name] ?? ""}
+                      >
+                        {option.values.map((value) => (
+                          <option key={value} value={value}>
+                            {value}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  );
+                })}
               </div>
             )}
 
@@ -215,7 +273,9 @@ function ProductView({ product }: { product: ShopifyProduct }) {
             </Button>
             {!selectedVariant?.availableForSale && (
               <p className="mt-3 text-xs text-muted-foreground">
-                This option is currently unavailable.
+                {allOptionsChosen
+                  ? "This option is currently unavailable."
+                  : "Select all options to continue."}
               </p>
             )}
 
@@ -294,7 +354,7 @@ function GstNote() {
           role="tooltip"
           className="absolute left-1/2 top-full z-10 mt-2 w-max max-w-[13rem] -translate-x-1/2 rounded-sm bg-foreground px-2.5 py-1.5 text-[0.7rem] leading-snug text-background shadow-sm"
         >
-          Price excludes GST, added at checkout.
+          Price is inclusive of GST.
         </span>
       )}
     </span>

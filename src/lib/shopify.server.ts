@@ -56,6 +56,9 @@ export interface ShopifyProduct {
     key: string;
     value: string;
     type: string;
+    references?: {
+      edges: Array<{ node: { image?: { url: string; altText: string | null } | null } }>;
+    } | null;
   } | null>;
 }
 
@@ -188,10 +191,25 @@ const GET_PRODUCT_BY_HANDLE_QUERY = `
         { namespace: "custom", key: "material" }
         { namespace: "custom", key: "width_cm" }
         { namespace: "custom", key: "length_cm" }
+        { namespace: "custom", key: "gallery_yellow_gold" }
+        { namespace: "custom", key: "gallery_rose_gold" }
+        { namespace: "custom", key: "gallery_silver" }
       ]) {
         key
         value
         type
+        references(first: 10) {
+          edges {
+            node {
+              ... on MediaImage {
+                image {
+                  url
+                  altText
+                }
+              }
+            }
+          }
+        }
       }
     }
   }
