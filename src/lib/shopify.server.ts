@@ -21,6 +21,7 @@ export interface ShopifyProductVariant {
   };
   availableForSale: boolean;
   selectedOptions: Array<{ name: string; value: string }>;
+  image: { url: string; altText: string | null } | null;
 }
 
 export interface ShopifyProduct {
@@ -128,6 +129,10 @@ const GET_PRODUCTS_QUERY = `
                   name
                   value
                 }
+                image {
+                  url
+                  altText
+                }
               }
             }
           }
@@ -176,6 +181,10 @@ const GET_PRODUCT_BY_HANDLE_QUERY = `
             selectedOptions {
               name
               value
+            }
+            image {
+              url
+              altText
             }
           }
         }
@@ -491,6 +500,7 @@ export const CartItemSchema = z.object({
   product: z.any(),
   variantId: z.string(),
   variantTitle: z.string(),
+  image: z.object({ url: z.string(), altText: z.string().nullable() }).nullable(),
   price: z.object({ amount: z.string(), currencyCode: z.string() }),
   quantity: z.number().int().positive(),
   selectedOptions: z.array(z.object({ name: z.string(), value: z.string() })),

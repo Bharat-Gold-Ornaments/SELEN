@@ -20,7 +20,7 @@ export function CartDrawer() {
   const totalItems = items.reduce((sum, item) => sum + item.quantity, 0);
   const totalPrice = items.reduce(
     (sum, item) => sum + parseFloat(item.price.amount) * item.quantity,
-    0
+    0,
   );
   const currency = items[0]?.price.currencyCode ?? "";
 
@@ -71,60 +71,68 @@ export function CartDrawer() {
             <>
               <div className="min-h-0 flex-1 overflow-y-auto pr-2">
                 <div className="space-y-4">
-                  {items.map((item) => (
-                    <div key={item.variantId} data-cart-item className="flex gap-4 p-2">
-                      <div className="flex h-16 w-16 flex-shrink-0 overflow-hidden rounded-md bg-secondary/20">
-                        {item.product.images?.edges?.[0]?.node && (
-                          <img
-                            src={`${item.product.images.edges[0].node.url}?width=200`}
-                            alt={item.product.images.edges[0].node.altText ?? item.product.title}
-                            className="h-full w-full object-cover"
-                          />
-                        )}
-                      </div>
-                      <div className="min-w-0 flex-1">
-                        <h4 className="truncate font-medium">{item.product.title}</h4>
-                        <p className="text-sm text-muted-foreground">
-                          {item.selectedOptions
-                            .filter((option) => option.value !== "Default Title")
-                            .map((option) => option.value)
-                            .join(" · ")}
-                        </p>
-                        <p className="font-heading font-semibold">
-                          {item.price.currencyCode} {parseFloat(item.price.amount).toFixed(0)}
-                        </p>
-                      </div>
-                      <div className="flex flex-shrink-0 flex-col items-end gap-2">
-                        <Button
-                          variant="ghost"
-                          size="icon"
-                          className="h-6 w-6"
-                          onClick={() => removeItem(item.variantId)}
-                        >
-                          <Trash2 className="h-3 w-3" />
-                        </Button>
-                        <div className="flex items-center gap-1">
+                  {items.map((item) => {
+                    // The variant's own photo first — shows the actual color/
+                    // size that's in the cart, not just whichever photo
+                    // happens to be first in the product's flat list. Falls
+                    // back to that flat list only when the variant has no
+                    // dedicated photo of its own.
+                    const cartImage = item.image ?? item.product.images?.edges?.[0]?.node ?? null;
+                    return (
+                      <div key={item.variantId} data-cart-item className="flex gap-4 p-2">
+                        <div className="flex h-16 w-16 flex-shrink-0 overflow-hidden rounded-md bg-secondary/20">
+                          {cartImage && (
+                            <img
+                              src={`${cartImage.url}?width=200`}
+                              alt={cartImage.altText ?? item.product.title}
+                              className="h-full w-full object-cover"
+                            />
+                          )}
+                        </div>
+                        <div className="min-w-0 flex-1">
+                          <h4 className="truncate font-medium">{item.product.title}</h4>
+                          <p className="text-sm text-muted-foreground">
+                            {item.selectedOptions
+                              .filter((option) => option.value !== "Default Title")
+                              .map((option) => option.value)
+                              .join(" · ")}
+                          </p>
+                          <p className="font-heading font-semibold">
+                            {item.price.currencyCode} {parseFloat(item.price.amount).toFixed(0)}
+                          </p>
+                        </div>
+                        <div className="flex flex-shrink-0 flex-col items-end gap-2">
                           <Button
-                            variant="outline"
+                            variant="ghost"
                             size="icon"
                             className="h-6 w-6"
-                            onClick={() => updateQuantity(item.variantId, item.quantity - 1)}
+                            onClick={() => removeItem(item.variantId)}
                           >
-                            <Minus className="h-3 w-3" />
+                            <Trash2 className="h-3 w-3" />
                           </Button>
-                          <span className="w-8 text-center text-sm">{item.quantity}</span>
-                          <Button
-                            variant="outline"
-                            size="icon"
-                            className="h-6 w-6"
-                            onClick={() => updateQuantity(item.variantId, item.quantity + 1)}
-                          >
-                            <Plus className="h-3 w-3" />
-                          </Button>
+                          <div className="flex items-center gap-1">
+                            <Button
+                              variant="outline"
+                              size="icon"
+                              className="h-6 w-6"
+                              onClick={() => updateQuantity(item.variantId, item.quantity - 1)}
+                            >
+                              <Minus className="h-3 w-3" />
+                            </Button>
+                            <span className="w-8 text-center text-sm">{item.quantity}</span>
+                            <Button
+                              variant="outline"
+                              size="icon"
+                              className="h-6 w-6"
+                              onClick={() => updateQuantity(item.variantId, item.quantity + 1)}
+                            >
+                              <Plus className="h-3 w-3" />
+                            </Button>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
               </div>
               <div className="flex-shrink-0 space-y-4 border-t bg-background pt-4">

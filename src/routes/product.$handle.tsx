@@ -16,7 +16,7 @@ import { SuggestionInvite } from "@/components/shop/SuggestionInvite";
 import { Reveal } from "@/components/editorial/Reveal";
 import { formatPrice } from "@/lib/categories";
 import { isRingSizeOption, RING_SIZE_DISPLAY_RANGE } from "@/lib/ringSize";
-import { isColorOption } from "@/lib/colorOption";
+import { getColorGallery, isColorOption } from "@/lib/colorOption";
 import {
   Accordion,
   AccordionContent,
@@ -99,7 +99,9 @@ function ProductView({ product }: { product: ShopifyProduct }) {
   const variants = product.variants.edges.map((e) => e.node);
   const [selectedOptions, setSelectedOptions] = useState<Record<string, string>>(() => {
     const defaultVariant = variants.find((v) => v.availableForSale) ?? variants[0];
-    return Object.fromEntries((defaultVariant?.selectedOptions ?? []).map((o) => [o.name, o.value]));
+    return Object.fromEntries(
+      (defaultVariant?.selectedOptions ?? []).map((o) => [o.name, o.value]),
+    );
   });
 
   const selectedVariant = variants.find((v) =>
@@ -107,10 +109,17 @@ function ProductView({ product }: { product: ShopifyProduct }) {
   );
   const price = selectedVariant?.price ?? product.priceRange.minVariantPrice;
 
-  const gallery = product.images.edges.map((e) => ({
+  const flatGallery = product.images.edges.map((e) => ({
     url: `${e.node.url}?width=1600`,
     alt: e.node.altText ?? product.title,
   }));
+
+  const colorOptionName = product.options.find((o) => isColorOption(o.name))?.name;
+  const selectedColor = colorOptionName ? selectedOptions[colorOptionName] : undefined;
+  const colorGallery = selectedColor
+    ? getColorGallery(product.metafields, variants, selectedColor)
+    : [];
+  const gallery = colorGallery.length > 0 ? colorGallery : flatGallery;
 
   const intro = parseDescription(product.description);
   const specs = buildProductSpecs(product.metafields ?? []);
@@ -172,6 +181,7 @@ function ProductView({ product }: { product: ShopifyProduct }) {
       product,
       variantId: selectedVariant.id,
       variantTitle: selectedVariant.title,
+      image: selectedVariant.image,
       price: selectedVariant.price,
       quantity: 1,
       selectedOptions: selectedVariant.selectedOptions,
@@ -219,6 +229,7 @@ function ProductView({ product }: { product: ShopifyProduct }) {
                           onSelect={(color) => handleOptionSelect(option.name, color)}
                           productName={product.title}
                           productUrl={productUrl}
+                          variants={variants}
                           metafields={product.metafields}
                         />
                       </div>

@@ -14,6 +14,8 @@ export interface CartItem {
   product: ShopifyProduct;
   variantId: string;
   variantTitle: string;
+  /** The selected variant's own photo (see ShopifyProductVariant.image in shopify.functions.ts) — shown in the cart instead of always falling back to the product's first flat photo, which may be a different color than what was actually added. Null when the variant has no dedicated photo (falls back to the product's own images in the cart UI). */
+  image: { url: string; altText: string | null } | null;
   price: { amount: string; currencyCode: string };
   quantity: number;
   selectedOptions: Array<{ name: string; value: string }>;
@@ -49,7 +51,9 @@ export const useCartStore = create<CartStore>()(
         set({ isLoading: true });
         try {
           if (!cartId) {
-            const result = await createCart({ data: { variantId: item.variantId, quantity: item.quantity } });
+            const result = await createCart({
+              data: { variantId: item.variantId, quantity: item.quantity },
+            });
             if (result) {
               set({
                 cartId: result.cartId,
@@ -70,7 +74,7 @@ export const useCartStore = create<CartStore>()(
               const currentItems = get().items;
               set({
                 items: currentItems.map((i) =>
-                  i.variantId === item.variantId ? { ...i, quantity: newQuantity } : i
+                  i.variantId === item.variantId ? { ...i, quantity: newQuantity } : i,
                 ),
               });
             } else if (result.cartNotFound) {
@@ -179,6 +183,6 @@ export const useCartStore = create<CartStore>()(
         cartId: state.cartId,
         checkoutUrl: state.checkoutUrl,
       }),
-    }
-  )
+    },
+  ),
 );

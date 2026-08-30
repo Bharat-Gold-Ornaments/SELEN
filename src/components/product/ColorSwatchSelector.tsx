@@ -1,5 +1,5 @@
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { getColorGallery, getColorSwatch } from "@/lib/colorOption";
+import { getColorGallery, getColorSwatch, type VariantForGallery } from "@/lib/colorOption";
 import type { ShopifyProduct } from "@/lib/shopify.functions";
 
 const WHATSAPP_NUMBER = "919403880777";
@@ -11,6 +11,7 @@ export function ColorSwatchSelector({
   onSelect,
   productName,
   productUrl,
+  variants,
   metafields,
 }: {
   colors: string[];
@@ -19,6 +20,7 @@ export function ColorSwatchSelector({
   onSelect: (color: string) => void;
   productName: string;
   productUrl: string;
+  variants: VariantForGallery[];
   metafields: ShopifyProduct["metafields"];
 }) {
   return (
@@ -64,7 +66,7 @@ export function ColorSwatchSelector({
           );
         }
 
-        const gallery = getColorGallery(metafields, color);
+        const gallery = getColorGallery(metafields, variants, color);
         const message = `Hi! I'm interested in the ${productName} in ${label}. Please notify me when it's back in stock.\n${productUrl}`;
         const whatsappHref = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
 
