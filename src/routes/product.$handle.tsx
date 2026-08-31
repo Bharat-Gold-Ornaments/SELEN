@@ -45,7 +45,7 @@ export const Route = createFileRoute("/product/$handle")({
       .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
       .join(" ");
     const title = `${name} — SELEN`;
-    const description = `${name} in BIS hallmarked 925 sterling silver with 20 Karat gold plating. Made to be worn every day.`;
+    const description = `${name} in BIS hallmarked 925 sterling silver with a 20 Karat gold finish. Made to be worn every day.`;
     return {
       meta: [
         { title },
@@ -122,7 +122,15 @@ function ProductView({ product }: { product: ShopifyProduct }) {
   const gallery = colorGallery.length > 0 ? colorGallery : flatGallery;
 
   const intro = parseDescription(product.description);
-  const specs = buildProductSpecs(product.metafields ?? []);
+  // The selected size's own weight (e.g. a ring's "Size 12" vs "Size 14")
+  // overrides the static product-level "Weight" spec when present — falls
+  // back to that product-wide value for anything without per-size data yet
+  // (non-ring products, or a size nobody entered a weight for).
+  const specs = buildProductSpecs(product.metafields ?? []).map((spec) =>
+    spec.label === "Weight" && selectedVariant?.variantWeight?.value
+      ? { ...spec, value: selectedVariant.variantWeight.value }
+      : spec,
+  );
   const productUrl = `https://selen.in/product/${product.handle}`;
 
   /**
@@ -201,7 +209,7 @@ function ProductView({ product }: { product: ShopifyProduct }) {
         <div>
           <div className="lg:sticky lg:top-28">
             <p className="text-[0.725rem] uppercase tracking-[0.4em] text-muted-foreground">
-              925 Silver · 20 Karat Gold Plated
+              925 Silver · 20 Karat Gold Finish
             </p>
             <h1 className="mt-6 font-heading text-3xl font-normal leading-[1.1] tracking-tight sm:text-5xl">
               {product.title}
@@ -329,7 +337,7 @@ function ProductView({ product }: { product: ShopifyProduct }) {
               <Panel value="care" title="Jewellery Care">
                 <p>
                   Last on, first off. Keep away from perfume and water, wipe with the enclosed cloth
-                  after wear, and store in its pouch. Complimentary replating is offered at our
+                  after wear, and store in its pouch. Complimentary refinishing is offered at our
                   boutique.
                 </p>
               </Panel>

@@ -9,9 +9,9 @@ export const Route = createFileRoute("/design-with-ai/$threadId")({
   head: () => ({
     meta: [
       { title: "Design with AI — SELEN" },
-      { name: "description", content: "Co-create your perfect piece of gold-plated silver jewellery with SELEN's AI design assistant." },
+      { name: "description", content: "Co-create your perfect piece of gold-finished silver jewellery with SELEN's AI design assistant." },
       { property: "og:title", content: "Design with AI — SELEN" },
-      { property: "og:description", content: "Co-create your perfect piece of gold-plated silver jewellery with SELEN's AI design assistant." },
+      { property: "og:description", content: "Co-create your perfect piece of gold-finished silver jewellery with SELEN's AI design assistant." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],

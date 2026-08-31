@@ -41,7 +41,7 @@ function TermsOfService() {
 
       <LegalSection heading="2. Products">
         <p>
-          SELEN products are crafted using 925 sterling silver with 20 karat gold plating and
+          SELEN products are crafted using 925 sterling silver with a 20 karat gold finish and
           cubic zirconia (CZ) or similar stones, unless otherwise stated on the product page. We
           make every effort to display product colours, finishes and dimensions accurately;
           however, actual appearance may vary slightly due to photography, lighting and screen

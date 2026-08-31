@@ -10,7 +10,7 @@ import { VisitStore } from "@/components/home/VisitStore";
 import { StoreInvitation } from "@/components/home/StoreInvitation";
 import { SiteFooter } from "@/components/home/SiteFooter";
 
-const TITLE = "SELEN — Gold Plated Sterling Silver Jewellery";
+const TITLE = "SELEN — Gold Finish Sterling Silver Jewellery";
 const DESCRIPTION =
   "925 sterling silver finished in 20 Karat gold. Editorial collections of everyday fine jewellery, made to be worn and not stored.";
 

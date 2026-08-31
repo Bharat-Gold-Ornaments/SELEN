@@ -32,7 +32,7 @@ const BENEFITS = [
   {
     icon: Sparkles,
     title: "Premium 20 Karat Gold",
-    body: "A generous plating layer — warmer, deeper and far more durable than a flash coat.",
+    body: "A generous gold finish — warmer, deeper and far more durable than a flash coat.",
   },
   {
     icon: Gem,
@@ -52,12 +52,12 @@ const BENEFITS = [
   {
     icon: Recycle,
     title: "A Second Life",
-    body: "Silver can be cleaned, replated, resized and repaired. Brass simply wears out.",
+    body: "Silver can be cleaned, refinished, resized and repaired. Brass simply wears out.",
   },
 ];
 
 const LAYERS = [
-  { label: "20 Karat Gold Plating", detail: "The warmth you see — hand polished, generously applied." },
+  { label: "20 Karat Gold Finish", detail: "The warmth you see — hand polished, generously applied." },
   { label: "925 Sterling Silver", detail: "The precious core — hallmarked, solid, repairable." },
   { label: "Hand Finishing", detail: "Edges smoothed and stones seated by a person, not a press." },
 ];
@@ -85,7 +85,7 @@ function WhySterlingSilver() {
           <Reveal>
             <img
               src={ringCutaway}
-              alt="Cross-section of a SELEN ring showing 20 Karat gold plating over a 925 sterling silver core"
+              alt="Cross-section of a SELEN ring showing 20 Karat gold finish over a 925 sterling silver core"
               loading="lazy"
               className="aspect-square w-full object-cover"
             />

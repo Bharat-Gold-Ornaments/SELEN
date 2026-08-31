@@ -3,9 +3,9 @@ import { motion } from "motion/react";
 import { materials } from "@/lib/materials";
 import { SiteFooter } from "@/components/home/SiteFooter";
 
-const TITLE = "Material Library — 925 Silver, Gold Plating & CZ Explained";
+const TITLE = "Material Library — 925 Silver, Gold Finish & CZ Explained";
 const DESCRIPTION =
-  "Plain-language guides to 925 sterling silver, 20 Karat gold plating, cubic zirconia, BIS hallmarking, tarnish and jewellery care from SELEN.";
+  "Plain-language guides to 925 sterling silver, 20 Karat gold finish, cubic zirconia, BIS hallmarking, tarnish and jewellery care from SELEN.";
 
 export const Route = createFileRoute("/materials/")({
   head: () => ({

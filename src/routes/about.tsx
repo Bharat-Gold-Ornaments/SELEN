@@ -135,11 +135,11 @@ function About() {
         eyebrow="Why Sterling Silver"
         title="What's beneath the gold?"
         image={PLACEHOLDER.sterlingTeaser}
-        alt="Gold plated sterling silver ring on ivory linen"
+        alt="Gold-finished sterling silver ring on ivory linen"
       >
         <p>
           Every piece starts with BIS hallmarked 925 sterling silver and is finished in
-          premium 20 Karat gold. Precious all the way through — never brass, never plated base
+          premium 20 Karat gold. Precious all the way through — never brass, never a coated base
           metal.
         </p>
         <p>

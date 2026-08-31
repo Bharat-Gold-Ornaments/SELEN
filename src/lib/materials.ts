@@ -14,7 +14,7 @@ export const materials: MaterialEntry[] = [
     term: "925 Sterling Silver",
     short: "The precious foundation beneath every SELEN piece.",
     summary:
-      "925 sterling silver is 92.5% pure silver alloyed with 7.5% other metals for strength. It is a precious metal — not a plated base — which is why it can be polished, repaired and worn for decades.",
+      "925 sterling silver is 92.5% pure silver alloyed with 7.5% other metals for strength. It is a precious metal — not a coated base metal — which is why it can be polished, repaired and worn for decades.",
     question: "What is 925 sterling silver?",
     sections: [
       {
@@ -39,31 +39,31 @@ export const materials: MaterialEntry[] = [
     ],
   },
   {
-    slug: "gold-plating",
-    term: "20 Karat Gold Plating",
+    slug: "gold-finish",
+    term: "20 Karat Gold Finish",
     short: "A whisper-thin layer of real gold over a precious core.",
     summary:
-      "Gold plating is a microscopic layer of gold bonded to a base metal through electroplating. What matters is two things: the karat of the gold and what lies beneath it.",
-    question: "What is 20 Karat gold plating?",
+      "A gold finish is a microscopic layer of gold bonded to a base metal by electrolysis. What matters is two things: the karat of the gold and what lies beneath it.",
+    question: "What is a 20 Karat gold finish?",
     sections: [
       {
         heading: "Karat is only half the story",
         body: [
-          "20 Karat plating gives a warm, deep tone rather than the brassy yellow of lower-karat finishes. But plating is measured in microns — no plating, at any karat, is permanent.",
-          "That is exactly why the base matters. When plating on brass fades, you see brass. When plating on 925 sterling silver softens, you see silver.",
+          "A 20 Karat finish gives a warm, deep tone rather than the brassy yellow of lower-karat finishes. But the finish is measured in microns — no finish, at any karat, is permanent.",
+          "That is exactly why the base matters. When the finish on brass fades, you see brass. When the finish on 925 sterling silver softens, you see silver.",
         ],
       },
       {
-        heading: "How to make plating last",
+        heading: "How to make the finish last",
         body: [
           "Put jewellery on last, after perfume, lotion and hairspray. Take it off before swimming, showering and sleeping.",
-          "Store pieces separately in a soft pouch so the plating is not abraded by other metal.",
+          "Store pieces separately in a soft pouch so the finish is not abraded by other metal.",
         ],
       },
     ],
     facts: [
       { label: "Karat", value: "20 Karat gold" },
-      { label: "Method", value: "Electroplated over 925 silver" },
+      { label: "Method", value: "Bonded to 925 silver by electrolysis" },
       { label: "Base metal", value: "Never brass" },
     ],
   },
@@ -148,10 +148,10 @@ export const materials: MaterialEntry[] = [
   {
     slug: "jewellery-care",
     term: "Jewellery Care",
-    short: "Five habits that keep gold-plated silver looking new.",
+    short: "Five habits that keep gold-finished silver looking new.",
     summary:
       "Most jewellery does not wear out. It gets worn out — by chemicals, friction and storage. Care is a handful of small habits.",
-    question: "How do I care for gold-plated silver jewellery?",
+    question: "How do I care for gold-finished silver jewellery?",
     sections: [
       {
         heading: "The five habits",
@@ -160,7 +160,7 @@ export const materials: MaterialEntry[] = [
           "Keep it dry: no showers, pools or sea water.",
           "Wipe after wearing with a soft dry cloth to lift skin oils.",
           "Store separately in a pouch, away from other metal.",
-          "Polish gently and only when needed — over-polishing thins plating.",
+          "Polish gently and only when needed — over-polishing thins the finish.",
         ],
       },
     ],
@@ -191,7 +191,7 @@ export const materials: MaterialEntry[] = [
       {
         heading: "Year two",
         body: [
-          "Imitation jewellery is usually discarded. A sterling silver piece can be polished, re-plated and worn again — which makes it far less expensive than it first appeared.",
+          "Imitation jewellery is usually discarded. A sterling silver piece can be polished, refinished and worn again — which makes it far less expensive than it first appeared.",
         ],
       },
     ],

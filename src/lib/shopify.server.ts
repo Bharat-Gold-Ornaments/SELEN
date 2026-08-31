@@ -22,6 +22,8 @@ export interface ShopifyProductVariant {
   availableForSale: boolean;
   selectedOptions: Array<{ name: string; value: string }>;
   image: { url: string; altText: string | null } | null;
+  /** Plain-text `custom.variant_weight` metafield — this size's own weight, e.g. "3.2g". Null when not set for this variant (non-ring products, or a size nobody entered a weight for). */
+  variantWeight: { value: string } | null;
 }
 
 export interface ShopifyProduct {
@@ -67,7 +69,10 @@ export interface ProductEdge {
   node: ShopifyProduct;
 }
 
-async function storefrontApiRequest<T>(query: string, variables: Record<string, unknown> = {}): Promise<T> {
+async function storefrontApiRequest<T>(
+  query: string,
+  variables: Record<string, unknown> = {},
+): Promise<T> {
   const response = await fetch(storefrontUrl(), {
     method: "POST",
     headers: {
@@ -79,12 +84,14 @@ async function storefrontApiRequest<T>(query: string, variables: Record<string, 
 
   if (response.status === 402) {
     throw new Error(
-      "Shopify: Payment required. Storefront API access requires an active Shopify billing plan."
+      "Shopify: Payment required. Storefront API access requires an active Shopify billing plan.",
     );
   }
 
   if (!response.ok) {
-    throw new Error(`Shopify Storefront API request failed: ${response.status} ${response.statusText}`);
+    throw new Error(
+      `Shopify Storefront API request failed: ${response.status} ${response.statusText}`,
+    );
   }
 
   const data = (await response.json()) as T;
@@ -185,6 +192,9 @@ const GET_PRODUCT_BY_HANDLE_QUERY = `
             image {
               url
               altText
+            }
+            variantWeight: metafield(namespace: "custom", key: "variant_weight") {
+              value
             }
           }
         }
@@ -324,18 +334,21 @@ export function formatCheckoutUrl(checkoutUrl: string): string {
   }
 }
 
-function isCartNotFoundError(userErrors: Array<{ field: string[] | null; message: string }>): boolean {
-  return userErrors.some((e) =>
-    e.message.toLowerCase().includes("cart not found") ||
-    e.message.toLowerCase().includes("does not exist")
+function isCartNotFoundError(
+  userErrors: Array<{ field: string[] | null; message: string }>,
+): boolean {
+  return userErrors.some(
+    (e) =>
+      e.message.toLowerCase().includes("cart not found") ||
+      e.message.toLowerCase().includes("does not exist"),
   );
 }
 
 export async function fetchProducts(query?: string): Promise<ProductEdge[]> {
-  const data = (await storefrontApiRequest<{
+  const data = await storefrontApiRequest<{
     data: { products: { edges: ProductEdge[] } };
     errors?: Array<{ message: string }>;
-  }>(GET_PRODUCTS_QUERY, { first: 50, query: query ?? null }));
+  }>(GET_PRODUCTS_QUERY, { first: 50, query: query ?? null });
 
   if (data.errors) {
     throw new Error(`Shopify error: ${data.errors.map((e) => e.message).join(", ")}`);
@@ -345,10 +358,10 @@ export async function fetchProducts(query?: string): Promise<ProductEdge[]> {
 }
 
 export async function fetchProductByHandle(handle: string): Promise<ShopifyProduct | null> {
-  const data = (await storefrontApiRequest<{
+  const data = await storefrontApiRequest<{
     data: { product: ShopifyProduct | null };
     errors?: Array<{ message: string }>;
-  }>(GET_PRODUCT_BY_HANDLE_QUERY, { handle }));
+  }>(GET_PRODUCT_BY_HANDLE_QUERY, { handle });
 
   if (data.errors) {
     throw new Error(`Shopify error: ${data.errors.map((e) => e.message).join(", ")}`);
@@ -409,7 +422,7 @@ export interface CartLineResult {
 export async function addLineToShopifyCart(
   cartId: string,
   variantId: string,
-  quantity: number
+  quantity: number,
 ): Promise<CartLineResult> {
   const data = await storefrontApiRequest<{
     data: {
@@ -441,7 +454,7 @@ export async function addLineToShopifyCart(
 export async function updateShopifyCartLine(
   cartId: string,
   lineId: string,
-  quantity: number
+  quantity: number,
 ): Promise<{ success: boolean; cartNotFound?: boolean }> {
   const data = await storefrontApiRequest<{
     data: {
@@ -466,7 +479,7 @@ export async function updateShopifyCartLine(
 
 export async function removeLineFromShopifyCart(
   cartId: string,
-  lineId: string
+  lineId: string,
 ): Promise<{ success: boolean; cartNotFound?: boolean }> {
   const data = await storefrontApiRequest<{
     data: {

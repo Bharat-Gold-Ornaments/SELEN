@@ -27,7 +27,7 @@ export function WhySterlingTeaser() {
         <Reveal delay={0.1}>
           <img
             src={PLACEHOLDER.sterlingTeaser}
-            alt="A gold plated sterling silver ring resting on ivory linen"
+            alt="A gold-finished sterling silver ring resting on ivory linen"
             loading="lazy"
             width={1024}
             height={1024}

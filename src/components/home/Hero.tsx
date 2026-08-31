@@ -7,7 +7,7 @@ export function Hero() {
     <section className="relative h-[92vh] min-h-[560px] w-full overflow-hidden">
       <img
         src={PLACEHOLDER.hero}
-        alt="Gold-plated sterling silver chain resting on ivory silk"
+        alt="Gold-finished sterling silver chain resting on ivory silk"
         width={1920}
         height={1080}
         className="absolute inset-0 h-full w-full object-cover"

@@ -9,7 +9,7 @@ const PROMISES = [
   },
   {
     icon: Sparkles,
-    title: "20 Karat Gold Plating",
+    title: "20 Karat Gold Finish",
     body: "A generous layer of warm gold, polished by hand.",
   },
   {
@@ -20,7 +20,7 @@ const PROMISES = [
   {
     icon: InfinityIcon,
     title: "Designed to Last",
-    body: "Made to be worn daily, cleaned, replated and kept.",
+    body: "Made to be worn daily, cleaned, refinished and kept.",
   },
 ];
 

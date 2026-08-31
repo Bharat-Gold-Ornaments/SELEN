@@ -104,7 +104,7 @@ function ContactPage() {
                   >
                     support@selen.in
                   </a>{" "}
-                  — replating, resizing and cleaning for every SELEN piece.
+                  — refinishing, resizing and cleaning for every SELEN piece.
                 </dd>
               </div>
             </dl>
