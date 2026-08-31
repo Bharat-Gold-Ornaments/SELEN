@@ -6,7 +6,7 @@ import { Reveal, SectionLabel } from "@/components/editorial/Reveal";
 
 const TITLE = "Contact SELEN — Appointments, Support & Our Store";
 const DESCRIPTION =
-  "Reach the SELEN team for appointments, care and repairs, or order support — or visit our boutique in Goa, open Tuesday to Sunday.";
+  "Reach the SELEN team for appointments, care and repairs, or order support — or visit our boutique in Goa, open Monday to Saturday.";
 
 const MAP_SRC =
   "https://www.google.com/maps?q=15.4995102,73.8315962&output=embed";
@@ -58,7 +58,7 @@ function ContactPage() {
               403001
             </p>
             <p className="mt-8 text-[0.725rem] uppercase tracking-[0.36em] text-muted-foreground">
-              Tuesday &ndash; Sunday · 11:00 &mdash; 19:00
+              Monday &ndash; Saturday · 10:00 &mdash; 18:00
             </p>
           </Reveal>
 

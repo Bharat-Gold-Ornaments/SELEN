@@ -161,7 +161,7 @@ function About() {
         reverse
       >
         <p>
-          Our boutique in Goa is open Tuesday to Sunday, 11:00 &mdash; 19:00. Try pieces on,
+          Our boutique in Goa is open Monday to Saturday, 10:00 &mdash; 18:00. Try pieces on,
           have something resized, or simply sit with a cup of tea.
         </p>
         <p>

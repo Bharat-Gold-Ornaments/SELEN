@@ -80,7 +80,7 @@ function VisitPage() {
                 Hours
               </dt>
               <dd className="mt-3 leading-relaxed text-muted-foreground">
-                Tuesday — Sunday, 11:00 to 19:00
+                Monday — Saturday, 10:00 to 18:00
               </dd>
             </div>
             <div>
