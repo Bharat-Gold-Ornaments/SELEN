@@ -3,8 +3,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { X } from "lucide-react";
 import { useEffect } from "react";
 import { EDITORIAL_COLLECTIONS } from "@/lib/collections";
-
-const SHOP = ["earrings", "pendants", "necklaces", "rings"];
+import { VISIBLE_CATEGORIES } from "@/lib/categories";
 
 export function NavDrawer({ open, onClose }: { open: boolean; onClose: () => void }) {
   useEffect(() => {
@@ -46,9 +45,14 @@ export function NavDrawer({ open, onClose }: { open: boolean; onClose: () => voi
 
             <nav className="mt-16 space-y-14">
               <Group label="Shop">
-                {SHOP.map((slug) => (
-                  <DrawerLink key={slug} to="/collections/$category" params={{ category: slug }} onClose={onClose}>
-                    {slug.charAt(0).toUpperCase() + slug.slice(1)}
+                {VISIBLE_CATEGORIES.map((c) => (
+                  <DrawerLink
+                    key={c.slug}
+                    to="/collections/$category"
+                    params={{ category: c.slug }}
+                    onClose={onClose}
+                  >
+                    {c.label}
                   </DrawerLink>
                 ))}
               </Group>

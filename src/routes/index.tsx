@@ -2,9 +2,9 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { getProducts } from "@/lib/shopify.functions";
 import { Hero } from "@/components/home/Hero";
+import { ShopByCategory } from "@/components/home/ShopByCategory";
 import { EditorialCollections } from "@/components/home/EditorialCollections";
 import { FeaturedProduct } from "@/components/home/FeaturedProduct";
-import { WhySterlingTeaser } from "@/components/home/WhySterlingTeaser";
 import { OurBelief } from "@/components/home/OurBelief";
 import { VisitStore } from "@/components/home/VisitStore";
 import { StoreInvitation } from "@/components/home/StoreInvitation";
@@ -42,9 +42,9 @@ function Index() {
   return (
     <main className="bg-background">
       <Hero />
-      <EditorialCollections />
+      <ShopByCategory />
       <FeaturedProduct products={products} />
-      <WhySterlingTeaser />
+      <EditorialCollections />
       <OurBelief />
       <VisitStore />
       <SiteFooter />

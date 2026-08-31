@@ -47,6 +47,11 @@ export const CATEGORIES: Category[] = [
 ];
 
 
+/** Categories with live products. Bracelets and anklets are excluded until stocked. */
+export const VISIBLE_CATEGORIES = CATEGORIES.filter((c) =>
+  ["earrings", "pendants", "necklaces", "rings"].includes(c.slug),
+);
+
 export function getCategory(slug: string) {
   return CATEGORIES.find((c) => c.slug === slug);
 }

@@ -65,7 +65,7 @@ export const EDITORIAL_COLLECTIONS: EditorialCollection[] = [
   */
 ];
 
-const CATEGORY_IMAGES: Record<string, string> = {
+export const CATEGORY_IMAGES: Record<string, string> = {
   earrings: PLACEHOLDER.collection4,
   necklaces: PLACEHOLDER.collection3,
   pendants: PLACEHOLDER.collection3,
