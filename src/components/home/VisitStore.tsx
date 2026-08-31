@@ -15,7 +15,7 @@ export function VisitStore() {
           <div className="grid gap-16 lg:grid-cols-[1.3fr_1fr] lg:gap-24">
             <div>
               <SectionLabel>Visit Us</SectionLabel>
-              <h2 className="mt-5 max-w-xl font-heading text-3xl font-normal leading-tight tracking-tight sm:text-5xl">
+              <h2 className="mt-5 font-heading text-3xl font-normal leading-tight tracking-tight text-balance sm:whitespace-nowrap sm:text-5xl">
                 See it in the light it was made for.
               </h2>
               <p className="mt-5 max-w-sm text-sm leading-relaxed text-foreground/75">
@@ -57,7 +57,7 @@ export function VisitStore() {
                   Hours
                 </dt>
                 <dd className="mt-3 leading-relaxed text-foreground/80">
-                  Tuesday — Sunday, 11:00 to 19:00
+                  Monday — Saturday, 10:00 to 18:00
                 </dd>
               </div>
             </dl>
