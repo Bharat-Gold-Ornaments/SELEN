@@ -116,8 +116,15 @@ function ProductView({ product }: { product: ShopifyProduct }) {
 
   const colorOptionName = product.options.find((o) => isColorOption(o.name))?.name;
   const selectedColor = colorOptionName ? selectedOptions[colorOptionName] : undefined;
-  const colorGallery = selectedColor
-    ? getColorGallery(product.metafields, variants, selectedColor)
+  /**
+   * The gallery preview tracks whichever color was last clicked, not just the purchasable
+   * selection — so an out-of-stock swatch still shows its own photos even though it can't
+   * become the actual selectedOptions value.
+   */
+  const [previewColor, setPreviewColor] = useState<string | undefined>(selectedColor);
+  const galleryColor = previewColor ?? selectedColor;
+  const colorGallery = galleryColor
+    ? getColorGallery(product.metafields, variants, galleryColor)
     : [];
   const gallery = colorGallery.length > 0 ? colorGallery : flatGallery;
 
@@ -178,6 +185,11 @@ function ProductView({ product }: { product: ShopifyProduct }) {
     });
   };
 
+  const handleColorSelect = (optionName: string, color: string) => {
+    handleOptionSelect(optionName, color);
+    setPreviewColor(color);
+  };
+
   const visibleOptions = product.options
     .filter((o) => isRingSizeOption(o.name) || isColorOption(o.name) || o.values.length > 1)
     .sort((a, b) => optionRank(a.name) - optionRank(b.name));
@@ -234,7 +246,9 @@ function ProductView({ product }: { product: ShopifyProduct }) {
                           colors={option.values}
                           availableColors={availableValuesForOption(option.name)}
                           selected={selectedOptions[option.name]}
-                          onSelect={(color) => handleOptionSelect(option.name, color)}
+                          previewColor={previewColor}
+                          onSelect={(color) => handleColorSelect(option.name, color)}
+                          onPreview={setPreviewColor}
                           productName={product.title}
                           productUrl={productUrl}
                           variants={variants}

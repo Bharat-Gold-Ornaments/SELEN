@@ -8,7 +8,9 @@ export function ColorSwatchSelector({
   colors,
   availableColors,
   selected,
+  previewColor,
   onSelect,
+  onPreview,
   productName,
   productUrl,
   variants,
@@ -16,8 +18,13 @@ export function ColorSwatchSelector({
 }: {
   colors: string[];
   availableColors: Set<string>;
+  /** The color actually chosen for purchase — drives the "selected" border on available swatches. */
   selected: string | undefined;
+  /** The color currently shown in the main gallery — may be an out-of-stock color the shopper is just browsing. */
+  previewColor: string | undefined;
   onSelect: (color: string) => void;
+  /** Called when an out-of-stock swatch is clicked, so the main gallery can preview it without changing the purchasable selection. */
+  onPreview: (color: string) => void;
   productName: string;
   productUrl: string;
   variants: VariantForGallery[];
@@ -28,6 +35,7 @@ export function ColorSwatchSelector({
       {colors.map((color) => {
         const isAvailable = availableColors.has(color);
         const isSelected = color === selected;
+        const isPreviewed = color === previewColor;
         const swatch = getColorSwatch(color);
         const label = swatch?.label ?? color;
 
@@ -76,9 +84,15 @@ export function ColorSwatchSelector({
               <button
                 type="button"
                 aria-label={`${label} — coming soon`}
+                aria-pressed={isPreviewed}
+                onClick={() => onPreview(color)}
                 className="flex flex-col items-center gap-1.5"
               >
-                <span className="grid h-9 w-9 place-items-center rounded-full border border-transparent">
+                <span
+                  className={`grid h-9 w-9 place-items-center rounded-full border border-dashed transition-colors ${
+                    isPreviewed ? "border-foreground/40" : "border-transparent"
+                  }`}
+                >
                   {dot}
                 </span>
                 <span className="text-[0.65rem] uppercase tracking-[0.2em] text-muted-foreground/40">
