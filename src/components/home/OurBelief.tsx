@@ -6,7 +6,7 @@ export function OurBelief() {
   return (
     <section className="bg-champagne px-6 py-28 sm:px-10 sm:py-40">
       <div className="mx-auto grid max-w-[1400px] items-center gap-16 lg:grid-cols-2 lg:gap-28">
-        <Reveal>
+        <Reveal className="hidden lg:block">
           <img
             src={PLACEHOLDER.founder}
             alt="SELEN founder at the studio bench"
