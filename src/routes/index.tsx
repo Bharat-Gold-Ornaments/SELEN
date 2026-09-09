@@ -19,6 +19,15 @@ const productsQuery = {
   queryFn: () => getProducts({ data: {} }),
 };
 
+// Distinct queryKey from productsQuery above — that one is the full, unfiltered
+// catalog, shared and reused as-is by shop.tsx/collections.$category.tsx/
+// product.$handle.tsx, so it can't be repointed at a filtered query without
+// corrupting what those pages expect from the shared cache entry.
+const featuredProductsQuery = {
+  queryKey: ["products", "featured"],
+  queryFn: () => getProducts({ data: { query: "tag:featured" } }),
+};
+
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
@@ -31,19 +40,23 @@ export const Route = createFileRoute("/")({
     ],
   }),
   loader: async ({ context }) => {
-    await context.queryClient.ensureQueryData(productsQuery);
+    await Promise.all([
+      context.queryClient.ensureQueryData(productsQuery),
+      context.queryClient.ensureQueryData(featuredProductsQuery),
+    ]);
   },
   component: Index,
 });
 
 function Index() {
-  const { data: products } = useSuspenseQuery(productsQuery);
+  useSuspenseQuery(productsQuery);
+  const { data: featuredProducts } = useSuspenseQuery(featuredProductsQuery);
 
   return (
     <main className="bg-background">
       <Hero />
       <ShopByCategory />
-      <FeaturedProduct products={products} />
+      <FeaturedProduct products={featuredProducts} />
       <EditorialCollections />
       <OurBelief />
       <VisitStore />
