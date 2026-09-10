@@ -14,7 +14,7 @@ import { RingSizeSelector } from "@/components/product/RingSizeSelector";
 import { ColorSwatchSelector } from "@/components/product/ColorSwatchSelector";
 import { SuggestionInvite } from "@/components/shop/SuggestionInvite";
 import { Reveal } from "@/components/editorial/Reveal";
-import { formatPrice } from "@/lib/categories";
+import { PriceTag } from "@/components/product/PriceTag";
 import { isRingSizeOption, RING_SIZE_DISPLAY_RANGE } from "@/lib/ringSize";
 import { getColorGallery, isColorOption } from "@/lib/colorOption";
 import {
@@ -108,6 +108,8 @@ function ProductView({ product }: { product: ShopifyProduct }) {
     v.selectedOptions.every((o) => selectedOptions[o.name] === o.value),
   );
   const price = selectedVariant?.price ?? product.priceRange.minVariantPrice;
+  const compareAtPrice =
+    selectedVariant?.compareAtPrice ?? product.compareAtPriceRange?.minVariantPrice;
 
   const flatGallery = product.images.edges.map((e) => ({
     url: `${e.node.url}?width=1600`,
@@ -227,7 +229,7 @@ function ProductView({ product }: { product: ShopifyProduct }) {
               {product.title}
             </h1>
             <p className="mt-5 flex items-center gap-1.5 text-sm tracking-wide text-muted-foreground">
-              {formatPrice(price.amount, price.currencyCode)}
+              <PriceTag price={price} compareAtPrice={compareAtPrice} />
               <GstNote />
             </p>
 

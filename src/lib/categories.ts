@@ -90,3 +90,20 @@ export function formatPrice(amount: string, currencyCode: string) {
   const symbol = currencyCode === "INR" ? "₹" : `${currencyCode} `;
   return `${symbol}${Math.round(parseFloat(amount)).toLocaleString("en-IN")}`;
 }
+
+/**
+ * Whole-number discount percent, or null when there's no real discount to show. The strict
+ * greater-than guard also absorbs Shopify's known quirk where an aggregate `compareAtPriceRange`
+ * can report "0.00" instead of null when nothing in range is actually discounted — 0 is never
+ * greater than the price, so it falls out of this check for free.
+ */
+export function getDiscountPercent(
+  price: { amount: string },
+  compareAtPrice: { amount: string } | null | undefined,
+): number | null {
+  if (!compareAtPrice) return null;
+  const current = parseFloat(price.amount);
+  const original = parseFloat(compareAtPrice.amount);
+  if (!(original > current) || !(current >= 0)) return null;
+  return Math.round(((original - current) / original) * 100);
+}

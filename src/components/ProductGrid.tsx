@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
-import { formatPrice } from "@/lib/categories";
 import { PLACEHOLDER } from "@/lib/placeholders";
 import { MascotEmptyState } from "@/components/mascot/Mascot";
+import { PriceTag } from "@/components/product/PriceTag";
 import type { ShopifyProduct } from "@/lib/shopify.server";
 
 export function ProductGrid({ products }: { products: ShopifyProduct[] }) {
@@ -62,7 +62,7 @@ export function ProductTile({ product }: { product: ShopifyProduct }) {
       </div>
       <p className="mt-6 font-heading text-lg leading-snug tracking-tight">{product.title}</p>
       <p className="mt-1.5 text-[0.8rem] tracking-wide text-muted-foreground">
-        {formatPrice(price.amount, price.currencyCode)}
+        <PriceTag price={price} compareAtPrice={product.compareAtPriceRange?.minVariantPrice} />
       </p>
     </Link>
   );

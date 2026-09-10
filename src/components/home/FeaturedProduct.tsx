@@ -2,8 +2,8 @@ import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { AnimatePresence, motion } from "motion/react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
-import { formatPrice } from "@/lib/categories";
 import { Reveal, SectionLabel } from "@/components/editorial/Reveal";
+import { PriceTag } from "@/components/product/PriceTag";
 import type { ProductEdge } from "@/lib/shopify.server";
 
 export function FeaturedProduct({ products }: { products: ProductEdge[] }) {
@@ -67,7 +67,7 @@ export function FeaturedProduct({ products }: { products: ProductEdge[] }) {
             </Link>
 
             <p className="mt-5 text-base tracking-wide text-muted-foreground">
-              {formatPrice(price.amount, price.currencyCode)}
+              <PriceTag price={price} compareAtPrice={product.compareAtPriceRange?.minVariantPrice} />
             </p>
 
             <p className="mt-8 max-w-sm text-sm leading-relaxed text-muted-foreground">

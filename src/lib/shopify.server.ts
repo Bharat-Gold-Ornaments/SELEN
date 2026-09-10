@@ -19,6 +19,11 @@ export interface ShopifyProductVariant {
     amount: string;
     currencyCode: string;
   };
+  /** The variant's pre-discount price, when a discount is active on it. Null otherwise. */
+  compareAtPrice: {
+    amount: string;
+    currencyCode: string;
+  } | null;
   availableForSale: boolean;
   selectedOptions: Array<{ name: string; value: string }>;
   image: { url: string; altText: string | null } | null;
@@ -38,6 +43,13 @@ export interface ShopifyProduct {
       currencyCode: string;
     };
   };
+  /** Aggregate pre-discount price across variants — only meaningful when its amount exceeds priceRange's (see getDiscountPercent). */
+  compareAtPriceRange: {
+    minVariantPrice: {
+      amount: string;
+      currencyCode: string;
+    };
+  } | null;
   images: {
     edges: Array<{
       node: {
@@ -114,6 +126,12 @@ const GET_PRODUCTS_QUERY = `
               currencyCode
             }
           }
+          compareAtPriceRange {
+            minVariantPrice {
+              amount
+              currencyCode
+            }
+          }
           images(first: 5) {
             edges {
               node {
@@ -128,6 +146,10 @@ const GET_PRODUCTS_QUERY = `
                 id
                 title
                 price {
+                  amount
+                  currencyCode
+                }
+                compareAtPrice {
                   amount
                   currencyCode
                 }
@@ -167,6 +189,12 @@ const GET_PRODUCT_BY_HANDLE_QUERY = `
           currencyCode
         }
       }
+      compareAtPriceRange {
+        minVariantPrice {
+          amount
+          currencyCode
+        }
+      }
       images(first: 10) {
         edges {
           node {
@@ -181,6 +209,10 @@ const GET_PRODUCT_BY_HANDLE_QUERY = `
             id
             title
             price {
+              amount
+              currencyCode
+            }
+            compareAtPrice {
               amount
               currencyCode
             }

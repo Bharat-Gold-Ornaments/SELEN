@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
-import { formatPrice } from "@/lib/categories";
 import { Reveal, SectionLabel } from "@/components/editorial/Reveal";
+import { PriceTag } from "@/components/product/PriceTag";
 import type { ShopifyProduct } from "@/lib/shopify.server";
 
 export function StyledTogether({ products }: { products: ShopifyProduct[] }) {
@@ -35,7 +35,7 @@ export function StyledTogether({ products }: { products: ShopifyProduct[] }) {
                   </div>
                   <p className="mt-5 font-heading text-lg tracking-tight">{p.title}</p>
                   <p className="mt-1.5 text-[0.8rem] text-muted-foreground">
-                    {formatPrice(price.amount, price.currencyCode)}
+                    <PriceTag price={price} compareAtPrice={p.compareAtPriceRange?.minVariantPrice} />
                   </p>
                 </Link>
               </Reveal>
