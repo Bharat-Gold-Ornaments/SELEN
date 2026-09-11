@@ -13,9 +13,13 @@ export const RING_SIZES: RingSizeEntry[] = [
   { size: "6", innerDiameterMm: 14.7, innerCircumferenceMm: 46.1 },
   { size: "8", innerDiameterMm: 15.3, innerCircumferenceMm: 48.0 },
   { size: "10", innerDiameterMm: 15.9, innerCircumferenceMm: 50.0 },
+  { size: "11", innerDiameterMm: 16.2, innerCircumferenceMm: 50.9 },
   { size: "12", innerDiameterMm: 16.5, innerCircumferenceMm: 51.9 },
+  { size: "13", innerDiameterMm: 16.9, innerCircumferenceMm: 53.1 },
   { size: "14", innerDiameterMm: 17.3, innerCircumferenceMm: 54.4 },
+  { size: "15", innerDiameterMm: 17.6, innerCircumferenceMm: 55.3 },
   { size: "16", innerDiameterMm: 17.9, innerCircumferenceMm: 56.3 },
+  { size: "17", innerDiameterMm: 18.2, innerCircumferenceMm: 57.2 },
   { size: "18", innerDiameterMm: 18.5, innerCircumferenceMm: 58.3 },
   { size: "20", innerDiameterMm: 19.2, innerCircumferenceMm: 60.2 },
   { size: "22", innerDiameterMm: 19.8, innerCircumferenceMm: 62.1 },
@@ -27,7 +31,17 @@ export const RING_SIZES: RingSizeEntry[] = [
  * configured as Shopify variants. Sizes with no matching in-stock variant are shown disabled
  * rather than hidden, so customers always see the full standard range.
  */
-export const RING_SIZE_DISPLAY_RANGE = ["8", "10", "12", "14", "16", "18"];
+export const RING_SIZE_DISPLAY_RANGE = [
+  "10",
+  "11",
+  "12",
+  "13",
+  "14",
+  "15",
+  "16",
+  "17",
+  "18",
+];
 
 /** Shopify product option names that identify a ring's size option (case-insensitive match). */
 const RING_SIZE_OPTION_NAMES = ["size", "ring size"];
