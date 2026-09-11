@@ -96,7 +96,7 @@ function TermsOfService() {
           <Link to="/selen-care" className="text-foreground underline underline-offset-4">
             SELEN Care
           </Link>{" "}
-          6-month finish warranty; see{" "}
+          6-month gold finish warranty; see{" "}
           <Link
             to="/selen-care"
             hash="warranty-terms"
