@@ -16,39 +16,46 @@ export function FeaturedProduct({ products }: { products: ProductEdge[] }) {
   const price = product.priceRange.minVariantPrice;
   const go = (dir: number) => setIndex((i) => (i + dir + items.length) % items.length);
 
+  const imageBlock = (wrapperClassName: string, imgClassName: string) => (
+    <div className={`relative overflow-hidden bg-ivory ${wrapperClassName}`}>
+      <AnimatePresence mode="wait">
+        <motion.img
+          key={product.id}
+          src={image ? `${image.url}?width=1800` : undefined}
+          alt={image?.altText ?? product.title}
+          initial={{ opacity: 0, scale: 1.02 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+          className={imgClassName}
+        />
+      </AnimatePresence>
+
+      <button
+        onClick={() => go(-1)}
+        aria-label="Previous product"
+        className="absolute left-4 top-1/2 grid -translate-y-1/2 place-items-center rounded-full border border-foreground/20 bg-background/70 p-3 text-foreground/70 backdrop-blur-sm transition-colors hover:border-foreground/50 hover:text-foreground sm:left-8"
+      >
+        <ArrowLeft className="h-5 w-5" strokeWidth={1.75} />
+      </button>
+      <button
+        onClick={() => go(1)}
+        aria-label="Next product"
+        className="absolute right-4 top-1/2 grid -translate-y-1/2 place-items-center rounded-full border border-foreground/20 bg-background/70 p-3 text-foreground/70 backdrop-blur-sm transition-colors hover:border-foreground/50 hover:text-foreground sm:right-8"
+      >
+        <ArrowRight className="h-5 w-5" strokeWidth={1.75} />
+      </button>
+    </div>
+  );
+
   return (
     <section className="w-full bg-ivory">
       <div className="grid w-full lg:min-h-[86vh] lg:grid-cols-[1.35fr_1fr]">
-        {/* Full-bleed imagery */}
-        <div className="relative overflow-hidden bg-background">
-          <AnimatePresence mode="wait">
-            <motion.img
-              key={product.id}
-              src={image ? `${image.url}?width=1800` : undefined}
-              alt={image?.altText ?? product.title}
-              initial={{ opacity: 0, scale: 1.02 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-              className="aspect-[4/5] w-full object-contain p-10 sm:aspect-[5/4] sm:p-20 lg:absolute lg:inset-0 lg:h-full lg:aspect-auto"
-            />
-          </AnimatePresence>
-
-          <button
-            onClick={() => go(-1)}
-            aria-label="Previous product"
-            className="absolute left-4 top-1/2 grid -translate-y-1/2 place-items-center rounded-full border border-foreground/20 bg-background/70 p-3 text-foreground/70 backdrop-blur-sm transition-colors hover:border-foreground/50 hover:text-foreground sm:left-8"
-          >
-            <ArrowLeft className="h-5 w-5" strokeWidth={1.75} />
-          </button>
-          <button
-            onClick={() => go(1)}
-            aria-label="Next product"
-            className="absolute right-4 top-1/2 grid -translate-y-1/2 place-items-center rounded-full border border-foreground/20 bg-background/70 p-3 text-foreground/70 backdrop-blur-sm transition-colors hover:border-foreground/50 hover:text-foreground sm:right-8"
-          >
-            <ArrowRight className="h-5 w-5" strokeWidth={1.75} />
-          </button>
-        </div>
+        {/* Full-bleed imagery (desktop position) */}
+        {imageBlock(
+          "hidden lg:block",
+          "aspect-[4/5] w-full object-contain p-10 sm:aspect-[5/4] sm:p-20 lg:absolute lg:inset-0 lg:h-full lg:aspect-auto",
+        )}
 
         {/* Editorial detail column */}
         <div className="flex flex-col justify-center px-6 py-20 sm:px-14 sm:py-28 lg:px-20">
@@ -70,12 +77,12 @@ export function FeaturedProduct({ products }: { products: ProductEdge[] }) {
               <PriceTag price={price} compareAtPrice={product.compareAtPriceRange?.minVariantPrice} />
             </p>
 
-            <p className="mt-8 max-w-sm text-sm leading-relaxed text-muted-foreground">
-              925 sterling silver, finished in 20 Karat gold. Made to be worn every day, not saved for
-              later.
-            </p>
+            {/* Full-bleed imagery (mobile position, after price) */}
+            <div className="mt-3 lg:hidden">
+              {imageBlock("", "aspect-[4/5] w-full object-contain p-2 sm:aspect-[5/4] sm:p-4")}
+            </div>
 
-            <div className="mt-10 flex flex-wrap items-center gap-8">
+            <div className="mt-4 flex flex-wrap items-center gap-8 lg:mt-10">
               <Link
                 to="/product/$handle"
                 params={{ handle: product.handle }}

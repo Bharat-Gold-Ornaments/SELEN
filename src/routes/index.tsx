@@ -59,8 +59,8 @@ function Index() {
       <ShopByCategory />
       <FeaturedProduct products={featuredProducts} />
       <EditorialCollections />
-      <OurBelief />
       <VisitStore />
+      <OurBelief />
       <SiteFooter />
       <StoreInvitation />
       <CouponPopup />

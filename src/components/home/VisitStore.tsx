@@ -3,7 +3,7 @@ import { Reveal, SectionLabel } from "@/components/editorial/Reveal";
 
 export function VisitStore() {
   return (
-    <section id="visit" className="relative overflow-hidden bg-background">
+    <section id="visit" className="relative overflow-hidden bg-champagne">
       <span
         aria-hidden
         className="pointer-events-none absolute -right-10 -top-20 select-none font-heading text-[22rem] italic leading-none text-gold/20 sm:-right-6 sm:-top-28 sm:text-[30rem]"
@@ -24,7 +24,7 @@ export function VisitStore() {
               <div className="mt-9 flex flex-wrap gap-4">
                 <Link
                   to="/contact"
-                  className="border border-foreground/30 bg-background px-8 py-3.5 text-[0.745rem] uppercase tracking-[0.3em] transition-colors hover:bg-foreground hover:text-background"
+                  className="border border-foreground/30 bg-champagne px-8 py-3.5 text-[0.745rem] uppercase tracking-[0.3em] transition-colors hover:bg-foreground hover:text-background"
                 >
                   Book an Appointment
                 </Link>
