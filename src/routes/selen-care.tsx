@@ -20,7 +20,7 @@ import {
 
 const TITLE = "SELEN Care — Made to Be Worn, Made to Be Cared For";
 const DESCRIPTION =
-  "SELEN Care is our promise to stand behind every piece: a 6-month finish warranty, simple everyday care guidance, and a team ready to help.";
+  "SELEN Care is our promise to stand behind every piece: a 6-month gold finish warranty, simple everyday care guidance, and a team ready to help.";
 
 export const Route = createFileRoute("/selen-care")({
   head: () => ({
@@ -61,7 +61,7 @@ function SelenCare() {
           <Reveal>
             <SectionLabel>Our Promise</SectionLabel>
             <h2 className="mt-6 font-heading text-3xl font-normal leading-tight tracking-tight sm:text-5xl">
-              6-Month Finish Warranty
+              6-Month Gold Finish Warranty
             </h2>
             <div className="mt-8 max-w-md space-y-5 text-base leading-relaxed text-muted-foreground">
               <p className="text-foreground">{WARRANTY_INTRO}</p>
@@ -144,7 +144,7 @@ function SelenCare() {
           <Reveal>
             <SectionLabel>Full Terms</SectionLabel>
             <h2 className="mt-6 font-heading text-3xl font-normal leading-tight tracking-tight sm:text-4xl">
-              SELEN 6-Month Finish Warranty
+              SELEN 6-Month Gold Finish Warranty
             </h2>
             <p className="mt-3 text-[0.725rem] uppercase tracking-[0.32em] text-muted-foreground">
               Terms &amp; Conditions

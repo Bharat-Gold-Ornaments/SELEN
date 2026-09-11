@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { AnimatePresence, motion } from "motion/react";
-import { X } from "lucide-react";
+import { Sparkles, X } from "lucide-react";
 import { useEffect } from "react";
 import { EDITORIAL_COLLECTIONS } from "@/lib/collections";
 import { VISIBLE_CATEGORIES } from "@/lib/categories";
@@ -55,6 +55,15 @@ export function NavDrawer({ open, onClose }: { open: boolean; onClose: () => voi
                     {c.label}
                   </DrawerLink>
                 ))}
+              </Group>
+
+              <Group label="Create">
+                <DrawerLink to="/design-with-ai" onClose={onClose}>
+                  <span className="inline-flex items-center gap-2.5">
+                    Design with AI
+                    <Sparkles className="h-4 w-4 text-primary" strokeWidth={1.4} />
+                  </span>
+                </DrawerLink>
               </Group>
 
               <Group label="Collections">

@@ -5,8 +5,8 @@ import { Hero } from "@/components/home/Hero";
 import { ShopByCategory } from "@/components/home/ShopByCategory";
 import { EditorialCollections } from "@/components/home/EditorialCollections";
 import { FeaturedProduct } from "@/components/home/FeaturedProduct";
-import { OurBelief } from "@/components/home/OurBelief";
 import { VisitStore } from "@/components/home/VisitStore";
+import { DesignWithAiTeaser } from "@/components/home/DesignWithAiTeaser";
 import { StoreInvitation } from "@/components/home/StoreInvitation";
 import { SiteFooter } from "@/components/home/SiteFooter";
 import { CouponPopup } from "@/components/home/CouponPopup";
@@ -60,7 +60,7 @@ function Index() {
       <FeaturedProduct products={featuredProducts} />
       <EditorialCollections />
       <VisitStore />
-      <OurBelief />
+      <DesignWithAiTeaser />
       <SiteFooter />
       <StoreInvitation />
       <CouponPopup />

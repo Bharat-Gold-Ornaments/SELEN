@@ -313,7 +313,7 @@ function ProductView({ product }: { product: ShopifyProduct }) {
               {isLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : "Add to bag"}
             </Button>
             <p className="mt-4 text-center text-[0.68rem] uppercase tracking-[0.24em] text-muted-foreground/80">
-              6-Month Finish Warranty
+              6-Month Gold Finish Warranty
             </p>
             {!selectedVariant?.availableForSale && (
               <p className="mt-3 text-xs text-muted-foreground">
@@ -362,7 +362,7 @@ function ProductView({ product }: { product: ShopifyProduct }) {
               <Panel value="care" title="SELEN Care">
                 <div>
                   <p className="text-[0.7rem] uppercase tracking-[0.28em] text-foreground">
-                    6-Month Finish Warranty
+                    6-Month Gold Finish Warranty
                   </p>
                   <p className="mt-3 text-foreground">{WARRANTY_INTRO}</p>
                   <p className="mt-3">{WARRANTY_COVERAGE}</p>

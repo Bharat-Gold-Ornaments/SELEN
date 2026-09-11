@@ -15,11 +15,17 @@ export function ChatWidget() {
       <Sheet open={open} onOpenChange={setOpen}>
         <SheetTrigger asChild>
           <Button
-            size="icon"
-            className="h-12 w-12 rounded-full bg-foreground text-background shadow-lg hover:bg-foreground/90"
-            aria-label="Open design assistant"
+            className="h-12 gap-2 rounded-full bg-foreground px-5 text-background shadow-lg hover:bg-foreground/90"
+            aria-label={open ? "Close design assistant" : "Open design assistant"}
           >
-            {open ? <X className="h-5 w-5" /> : <Sparkles className="h-5 w-5" />}
+            {open ? (
+              <X className="h-5 w-5" />
+            ) : (
+              <>
+                <Sparkles className="h-4 w-4" />
+                <span className="text-[0.68rem] uppercase tracking-[0.18em]">Design with AI</span>
+              </>
+            )}
           </Button>
         </SheetTrigger>
         <SheetContent

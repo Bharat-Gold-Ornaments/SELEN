@@ -16,6 +16,7 @@ import collection5 from "@/assets/placeholders/collection-5.jpg";
 import collection6 from "@/assets/placeholders/collection-6.jpg";
 import sterlingTeaser from "@/assets/placeholders/sterling-teaser.jpg";
 import founders from "@/assets/placeholders/founders.jpg";
+import kinmitra from "@/assets/placeholders/kinmitra.png";
 
 export const PLACEHOLDER = {
   hero,
@@ -25,6 +26,7 @@ export const PLACEHOLDER = {
   sterlingTeaser,
   store,
   lifestyle,
+  kinmitra,
   collection1,
   collection2,
   collection3,
