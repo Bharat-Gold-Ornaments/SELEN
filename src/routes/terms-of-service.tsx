@@ -91,7 +91,20 @@ function TermsOfService() {
           <Link to="/refund-policy" className="text-foreground underline underline-offset-4">
             Refund and Cancellation Policy
           </Link>{" "}
-          for full details on returns, exchanges and cancellations.
+          for full details on returns, exchanges and cancellations. Every SELEN piece is also
+          backed by our{" "}
+          <Link to="/selen-care" className="text-foreground underline underline-offset-4">
+            SELEN Care
+          </Link>{" "}
+          6-month finish warranty; see{" "}
+          <Link
+            to="/selen-care"
+            hash="warranty-terms"
+            className="text-foreground underline underline-offset-4"
+          >
+            warranty terms
+          </Link>{" "}
+          for full details.
         </p>
       </LegalSection>
 

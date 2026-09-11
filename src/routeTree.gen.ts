@@ -15,6 +15,7 @@ import { Route as ContactRouteImport } from './routes/contact'
 import { Route as DesignWithAiRouteImport } from './routes/design-with-ai'
 import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
 import { Route as RefundPolicyRouteImport } from './routes/refund-policy'
+import { Route as SelenCareRouteImport } from './routes/selen-care'
 import { Route as ShopRouteImport } from './routes/shop'
 import { Route as TermsOfServiceRouteImport } from './routes/terms-of-service'
 import { Route as VisitRouteImport } from './routes/visit'
@@ -54,6 +55,11 @@ const PrivacyPolicyRoute = PrivacyPolicyRouteImport.update({
 const RefundPolicyRoute = RefundPolicyRouteImport.update({
   id: '/refund-policy',
   path: '/refund-policy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SelenCareRoute = SelenCareRouteImport.update({
+  id: '/selen-care',
+  path: '/selen-care',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ShopRoute = ShopRouteImport.update({
@@ -114,6 +120,7 @@ export interface FileRoutesByFullPath {
   '/design-with-ai': typeof DesignWithAiRouteWithChildren
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/refund-policy': typeof RefundPolicyRoute
+  '/selen-care': typeof SelenCareRoute
   '/shop': typeof ShopRoute
   '/terms-of-service': typeof TermsOfServiceRoute
   '/visit': typeof VisitRoute
@@ -131,6 +138,7 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/refund-policy': typeof RefundPolicyRoute
+  '/selen-care': typeof SelenCareRoute
   '/shop': typeof ShopRoute
   '/terms-of-service': typeof TermsOfServiceRoute
   '/visit': typeof VisitRoute
@@ -150,6 +158,7 @@ export interface FileRoutesById {
   '/design-with-ai': typeof DesignWithAiRouteWithChildren
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/refund-policy': typeof RefundPolicyRoute
+  '/selen-care': typeof SelenCareRoute
   '/shop': typeof ShopRoute
   '/terms-of-service': typeof TermsOfServiceRoute
   '/visit': typeof VisitRoute
@@ -170,6 +179,7 @@ export interface FileRouteTypes {
     | '/design-with-ai'
     | '/privacy-policy'
     | '/refund-policy'
+    | '/selen-care'
     | '/shop'
     | '/terms-of-service'
     | '/visit'
@@ -187,6 +197,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/privacy-policy'
     | '/refund-policy'
+    | '/selen-care'
     | '/shop'
     | '/terms-of-service'
     | '/visit'
@@ -205,6 +216,7 @@ export interface FileRouteTypes {
     | '/design-with-ai'
     | '/privacy-policy'
     | '/refund-policy'
+    | '/selen-care'
     | '/shop'
     | '/terms-of-service'
     | '/visit'
@@ -224,6 +236,7 @@ export interface RootRouteChildren {
   DesignWithAiRoute: typeof DesignWithAiRouteWithChildren
   PrivacyPolicyRoute: typeof PrivacyPolicyRoute
   RefundPolicyRoute: typeof RefundPolicyRoute
+  SelenCareRoute: typeof SelenCareRoute
   ShopRoute: typeof ShopRoute
   TermsOfServiceRoute: typeof TermsOfServiceRoute
   VisitRoute: typeof VisitRoute
@@ -276,6 +289,13 @@ declare module '@tanstack/react-router' {
       path: '/refund-policy'
       fullPath: '/refund-policy'
       preLoaderRoute: typeof RefundPolicyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/selen-care': {
+      id: '/selen-care'
+      path: '/selen-care'
+      fullPath: '/selen-care'
+      preLoaderRoute: typeof SelenCareRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/shop': {
@@ -372,6 +392,7 @@ const rootRouteChildren: RootRouteChildren = {
   DesignWithAiRoute: DesignWithAiRouteWithChildren,
   PrivacyPolicyRoute: PrivacyPolicyRoute,
   RefundPolicyRoute: RefundPolicyRoute,
+  SelenCareRoute: SelenCareRoute,
   ShopRoute: ShopRoute,
   TermsOfServiceRoute: TermsOfServiceRoute,
   VisitRoute: VisitRoute,

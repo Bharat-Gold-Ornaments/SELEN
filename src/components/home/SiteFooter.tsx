@@ -83,6 +83,14 @@ export function SiteFooter() {
             </li>
             <li>
               <Link
+                to="/selen-care"
+                className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+              >
+                SELEN Care
+              </Link>
+            </li>
+            <li>
+              <Link
                 to="/visit"
                 className="text-sm text-muted-foreground transition-colors hover:text-foreground"
               >

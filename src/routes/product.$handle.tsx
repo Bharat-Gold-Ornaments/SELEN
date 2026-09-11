@@ -23,6 +23,12 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import {
+  WARRANTY_COURIER_NOTE,
+  WARRANTY_COVERAGE,
+  WARRANTY_INTRO,
+  WARRANTY_PROCESS,
+} from "@/lib/selenCare";
 
 const productsQuery = {
   queryKey: ["products"],
@@ -306,6 +312,9 @@ function ProductView({ product }: { product: ShopifyProduct }) {
             >
               {isLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : "Add to bag"}
             </Button>
+            <p className="mt-4 text-center text-[0.68rem] uppercase tracking-[0.24em] text-muted-foreground/80">
+              6-Month Finish Warranty
+            </p>
             {!selectedVariant?.availableForSale && (
               <p className="mt-3 text-xs text-muted-foreground">
                 {allOptionsChosen
@@ -350,12 +359,23 @@ function ProductView({ product }: { product: ShopifyProduct }) {
                   for full details.
                 </p>
               </Panel>
-              <Panel value="care" title="Jewellery Care">
-                <p>
-                  Last on, first off. Keep away from perfume and water, wipe with the enclosed cloth
-                  after wear, and store in its pouch. Complimentary refinishing is offered at our
-                  boutique.
-                </p>
+              <Panel value="care" title="SELEN Care">
+                <div>
+                  <p className="text-[0.7rem] uppercase tracking-[0.28em] text-foreground">
+                    6-Month Finish Warranty
+                  </p>
+                  <p className="mt-3 text-foreground">{WARRANTY_INTRO}</p>
+                  <p className="mt-3">{WARRANTY_COVERAGE}</p>
+                  <p className="mt-3">{WARRANTY_PROCESS}</p>
+                  <p className="mt-3">{WARRANTY_COURIER_NOTE}</p>
+                  <Link
+                    to="/selen-care"
+                    hash="warranty-terms"
+                    className="mt-4 inline-block border-b border-foreground/40 pb-0.5 text-[0.7rem] uppercase tracking-[0.24em] text-foreground transition-colors hover:border-foreground"
+                  >
+                    View Full Warranty Terms &rarr;
+                  </Link>
+                </div>
               </Panel>
             </Accordion>
           </div>
