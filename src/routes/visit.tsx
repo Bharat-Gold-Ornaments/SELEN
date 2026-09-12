@@ -87,7 +87,11 @@ function VisitPage() {
               <dt className="text-[0.725rem] uppercase tracking-[0.36em] text-muted-foreground">
                 Enquiries
               </dt>
-              <dd className="mt-3 leading-relaxed text-muted-foreground">support@selen.in</dd>
+              <dd className="mt-3 leading-relaxed text-muted-foreground">
+                +91 94038 80777
+                <br />
+                0832-2222244
+              </dd>
             </div>
           </dl>
         </Reveal>

@@ -30,12 +30,8 @@ function RefundPolicy() {
       <LegalSection heading="1. Order Cancellation">
         <p>
           You may cancel your order free of charge at any time before it has been shipped, by
-          contacting us at{" "}
-          <a href="mailto:support@selen.in" className="text-foreground underline underline-offset-4">
-            support@selen.in
-          </a>{" "}
-          or +91 94038 80777 with your order number. Once an order has been shipped, it can no
-          longer be cancelled and the terms below apply instead.
+          contacting us at +91 94038 80777 with your order number. Once an order has been shipped,
+          it can no longer be cancelled and the terms below apply instead.
         </p>
       </LegalSection>
 
@@ -62,24 +58,16 @@ function RefundPolicy() {
       <LegalSection heading="4. Damaged, Defective, or Incorrect Items">
         <p>
           If you receive a damaged, defective, or incorrect item, please contact us within 48
-          hours of delivery at{" "}
-          <a href="mailto:support@selen.in" className="text-foreground underline underline-offset-4">
-            support@selen.in
-          </a>{" "}
-          with your order number and photos of the item. We will arrange a free replacement or
-          full exchange at no additional cost to you.
+          hours of delivery at +91 94038 80777 with your order number and photos of the item. We
+          will arrange a free replacement or full exchange at no additional cost to you.
         </p>
       </LegalSection>
 
       <LegalSection heading="5. How to Request an Exchange">
         <p>
-          Email{" "}
-          <a href="mailto:support@selen.in" className="text-foreground underline underline-offset-4">
-            support@selen.in
-          </a>{" "}
-          or call +91 94038 80777 / 0832-2222244 within 7 days of delivery with your order number
-          and reason for exchange. Once approved, we will share instructions for returning the
-          item. Please note return shipping costs for change-of-mind exchanges are borne by the
+          Call +91 94038 80777 / 0832-2222244 within 7 days of delivery with your order number and
+          reason for exchange. Once approved, we will share instructions for returning the item.
+          Please note return shipping costs for change-of-mind exchanges are borne by the
           customer, unless the item is damaged, defective, or incorrect.
         </p>
       </LegalSection>
@@ -98,12 +86,6 @@ function RefundPolicy() {
             "Bharat Gold Ornaments Private Limited",
             "House No. 773/2, Sulabhat, Agassaim, St. Lourence, Tiswadi, North Goa – 403204, Goa, India",
             "Phone: +91 94038 80777 / 0832-2222244",
-            <>
-              Email:{" "}
-              <a href="mailto:support@selen.in" className="underline underline-offset-4">
-                support@selen.in
-              </a>
-            </>,
           ]}
         />
       </LegalSection>

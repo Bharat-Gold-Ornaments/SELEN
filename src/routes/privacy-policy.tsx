@@ -260,12 +260,6 @@ function PrivacyPolicy() {
             "Bharat Gold Ornaments Private Limited",
             "House No. 773/2, Sulabhat, Agassaim, St. Lourence, Tiswadi, North Goa – 403204, Goa, India",
             "Phone: +91 94038 80777 / 0832-2222244",
-            <>
-              Email:{" "}
-              <a href="mailto:support@selen.in" className="underline underline-offset-4">
-                support@selen.in
-              </a>
-            </>,
           ]}
         />
       </LegalSection>

@@ -26,7 +26,7 @@ export const Route = createFileRoute("/contact")({
 });
 
 const SOCIALS = [
-  { icon: MessageCircle, label: "WhatsApp", href: "https://wa.me/919403880777" },
+  { icon: MessageCircle, label: "WhatsApp", href: "https://wa.me/919404354377" },
   { icon: Instagram, label: "Instagram", href: "https://instagram.com/selen" },
   { icon: Mail, label: "Email", href: "mailto:support@selen.in" },
 ];
@@ -67,45 +67,17 @@ function ContactPage() {
             <dl className="mt-8 space-y-9 text-sm">
               <div>
                 <dt className="text-[0.725rem] uppercase tracking-[0.36em] text-muted-foreground">
-                  Appointments
+                  Phone
                 </dt>
                 <dd className="mt-3 leading-relaxed text-muted-foreground">
-                  <a
-                    href="mailto:support@selen.in"
-                    className="text-foreground underline-offset-4 hover:underline"
-                  >
-                    support@selen.in
-                  </a>{" "}
-                  — send a preferred day and time and we will hold the room for you.
+                  +91 94038 80777 / 0832-2222244
                 </dd>
               </div>
               <div>
                 <dt className="text-[0.725rem] uppercase tracking-[0.36em] text-muted-foreground">
-                  Orders
+                  WhatsApp Only
                 </dt>
-                <dd className="mt-3 leading-relaxed text-muted-foreground">
-                  <a
-                    href="mailto:support@selen.in"
-                    className="text-foreground underline-offset-4 hover:underline"
-                  >
-                    support@selen.in
-                  </a>{" "}
-                  — deliveries, exchanges and gift notes.
-                </dd>
-              </div>
-              <div>
-                <dt className="text-[0.725rem] uppercase tracking-[0.36em] text-muted-foreground">
-                  Care &amp; Repairs
-                </dt>
-                <dd className="mt-3 leading-relaxed text-muted-foreground">
-                  <a
-                    href="mailto:support@selen.in"
-                    className="text-foreground underline-offset-4 hover:underline"
-                  >
-                    support@selen.in
-                  </a>{" "}
-                  — refinishing, resizing and cleaning for every SELEN piece.
-                </dd>
+                <dd className="mt-3 leading-relaxed text-muted-foreground">+91 94043 54377</dd>
               </div>
             </dl>
           </Reveal>
