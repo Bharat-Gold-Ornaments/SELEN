@@ -13,6 +13,7 @@ import appCss from "../styles.css?url";
 import { Header } from "@/components/Header";
 import { useCartSync } from "@/hooks/useCartSync";
 import { ChatWidget } from "@/components/chat/ChatWidget";
+import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { Toaster } from "@/components/ui/sonner";
 import { MascotEmptyState } from "@/components/mascot/Mascot";
 
@@ -142,6 +143,7 @@ function RootComponent() {
       <Header />
       <Outlet />
       <ChatWidget />
+      <WhatsAppButton />
       <Toaster />
     </QueryClientProvider>
   );

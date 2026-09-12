@@ -62,9 +62,11 @@ export function ChatInterface({
             <Sparkles className="h-4 w-4 text-gold-deep" />
           </div>
           <div>
-            <h2 className="font-heading text-sm font-medium tracking-tight">{title}</h2>
+            <h2 className="font-heading text-sm font-medium tracking-tight">
+              {compact ? "KinMitra" : "Design with AI"}
+            </h2>
             <p className="text-[0.775rem] uppercase tracking-wider text-muted-foreground">
-              Design with AI
+              {title}
             </p>
           </div>
         </div>
