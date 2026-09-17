@@ -3,7 +3,7 @@ import { EDITORIAL_COLLECTIONS } from "@/lib/collections";
 import { MascotSeal } from "@/components/mascot/Mascot";
 import { SelenPromise } from "@/components/home/SelenPromise";
 
-const SHOP = ["earrings", "pendants", "necklaces", "rings"];
+const SHOP = ["earrings", "pendants", "rings"];
 
 export function SiteFooter() {
   return (

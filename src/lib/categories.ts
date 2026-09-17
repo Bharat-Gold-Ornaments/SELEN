@@ -18,7 +18,7 @@ export const CATEGORIES: Category[] = [
     slug: "pendants",
     label: "Pendants",
     line: "Everyday pendants that sit close to the skin.",
-    match: /pendant/i,
+    match: /pendant|necklace|chain|choker/i,
   },
   {
     slug: "necklaces",
@@ -47,9 +47,13 @@ export const CATEGORIES: Category[] = [
 ];
 
 
-/** Categories with live products. Bracelets and anklets are excluded until stocked. */
+/**
+ * Categories with live products, shown in nav and the homepage tiles. Necklaces are folded into
+ * Pendants (see the pendants match above) rather than shown separately. Bracelets and anklets
+ * are excluded until stocked.
+ */
 export const VISIBLE_CATEGORIES = CATEGORIES.filter((c) =>
-  ["earrings", "pendants", "necklaces", "rings"].includes(c.slug),
+  ["earrings", "pendants", "rings"].includes(c.slug),
 );
 
 export function getCategory(slug: string) {

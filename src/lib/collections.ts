@@ -18,7 +18,7 @@ export const EDITORIAL_COLLECTIONS: EditorialCollection[] = [
     title: "Essentials",
     line: "Pieces made to be lived in.",
     note: "Quiet weight, warm shine, nothing precious about wearing it daily.",
-    image: PLACEHOLDER.collection1,
+    image: PLACEHOLDER.essentials,
     categories: [],
   },
   {
