@@ -8,22 +8,26 @@ export interface RingSizeEntry {
   eu?: string;
 }
 
-/** SELEN Ring Size = Indian Ring Size. Physical mm measurements are the source of truth. */
+/**
+ * SELEN Ring Size = Indian Ring Size. Physical mm measurements are the source of truth.
+ * US sizes are an approximate reference conversion for international customers — US-labeled
+ * charts vary slightly between manufacturers, so mm is what we stand behind.
+ */
 export const RING_SIZES: RingSizeEntry[] = [
-  { size: "6", innerDiameterMm: 14.7, innerCircumferenceMm: 46.1 },
-  { size: "8", innerDiameterMm: 15.3, innerCircumferenceMm: 48.0 },
-  { size: "10", innerDiameterMm: 15.9, innerCircumferenceMm: 50.0 },
-  { size: "11", innerDiameterMm: 16.2, innerCircumferenceMm: 50.9 },
-  { size: "12", innerDiameterMm: 16.5, innerCircumferenceMm: 51.9 },
-  { size: "13", innerDiameterMm: 16.9, innerCircumferenceMm: 53.1 },
-  { size: "14", innerDiameterMm: 17.3, innerCircumferenceMm: 54.4 },
-  { size: "15", innerDiameterMm: 17.6, innerCircumferenceMm: 55.3 },
-  { size: "16", innerDiameterMm: 17.9, innerCircumferenceMm: 56.3 },
-  { size: "17", innerDiameterMm: 18.2, innerCircumferenceMm: 57.2 },
-  { size: "18", innerDiameterMm: 18.5, innerCircumferenceMm: 58.3 },
-  { size: "20", innerDiameterMm: 19.2, innerCircumferenceMm: 60.2 },
-  { size: "22", innerDiameterMm: 19.8, innerCircumferenceMm: 62.1 },
-  { size: "24", innerDiameterMm: 20.4, innerCircumferenceMm: 64.0 },
+  { size: "6", innerDiameterMm: 14.7, innerCircumferenceMm: 46.1, us: "3.5" },
+  { size: "8", innerDiameterMm: 15.3, innerCircumferenceMm: 48.0, us: "4.5" },
+  { size: "10", innerDiameterMm: 15.9, innerCircumferenceMm: 50.0, us: "5.5" },
+  { size: "11", innerDiameterMm: 16.2, innerCircumferenceMm: 50.9, us: "5.75" },
+  { size: "12", innerDiameterMm: 16.5, innerCircumferenceMm: 51.9, us: "6" },
+  { size: "13", innerDiameterMm: 16.9, innerCircumferenceMm: 53.1, us: "6.5" },
+  { size: "14", innerDiameterMm: 17.3, innerCircumferenceMm: 54.4, us: "7" },
+  { size: "15", innerDiameterMm: 17.6, innerCircumferenceMm: 55.3, us: "7.25" },
+  { size: "16", innerDiameterMm: 17.9, innerCircumferenceMm: 56.3, us: "7.5" },
+  { size: "17", innerDiameterMm: 18.2, innerCircumferenceMm: 57.2, us: "8" },
+  { size: "18", innerDiameterMm: 18.5, innerCircumferenceMm: 58.3, us: "8.5" },
+  { size: "20", innerDiameterMm: 19.2, innerCircumferenceMm: 60.2, us: "9" },
+  { size: "22", innerDiameterMm: 19.8, innerCircumferenceMm: 62.1, us: "10" },
+  { size: "24", innerDiameterMm: 20.4, innerCircumferenceMm: 64.0, us: "11" },
 ];
 
 /**

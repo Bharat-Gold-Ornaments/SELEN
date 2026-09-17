@@ -44,7 +44,7 @@ export function RingSizeGuide({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-h-[85vh] overflow-y-auto rounded-none sm:max-w-lg">
+      <DialogContent className="max-h-[85vh] overflow-y-auto rounded-none sm:max-w-2xl">
         <DialogHeader>
           <DialogTitle className="font-heading text-xl font-normal tracking-tight">
             Find Your Perfect Ring Size
@@ -107,11 +107,16 @@ function GuideBody() {
         <p className="text-[0.7rem] uppercase tracking-[0.3em] text-muted-foreground">
           SELEN / Indian Ring Sizes
         </p>
+        <p className="mt-2 text-xs leading-relaxed text-muted-foreground/80">
+          SELEN sizes are Indian ring sizes. US sizes are an approximate reference — for the most
+          reliable fit, go by inner diameter or circumference.
+        </p>
         <div className="mt-4 overflow-x-auto">
           <table className="w-full text-left text-sm">
             <thead>
               <tr className="border-b border-border/70 text-[0.65rem] uppercase tracking-[0.24em] text-muted-foreground">
-                <th className="py-2 font-normal">Size</th>
+                <th className="py-2 font-normal">Indian Size</th>
+                <th className="py-2 font-normal text-right">US Size</th>
                 <th className="py-2 font-normal text-right">Inner Diameter</th>
                 <th className="py-2 font-normal text-right">Inner Circumference</th>
               </tr>
@@ -120,6 +125,9 @@ function GuideBody() {
               {RING_SIZES.map((entry) => (
                 <tr key={entry.size} className="border-b border-border/40">
                   <td className="py-2">{entry.size}</td>
+                  <td className="py-2 text-right text-muted-foreground">
+                    {entry.us ?? "—"}
+                  </td>
                   <td className="py-2 text-right text-muted-foreground">
                     {entry.innerDiameterMm} mm
                   </td>

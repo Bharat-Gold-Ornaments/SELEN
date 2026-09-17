@@ -46,14 +46,20 @@ export function RingSizeSelector({
       <p className="mt-3 text-sm text-muted-foreground">
         {selectedEntry ? (
           <>
-            <span className="text-foreground">Size {selectedEntry.size}</span> &mdash;{" "}
-            {formatRingMeasurement(selectedEntry)}
+            <span className="text-foreground">
+              Size {selectedEntry.size}
+              {selectedEntry.us && ` (US ${selectedEntry.us})`}
+            </span>{" "}
+            &mdash; {formatRingMeasurement(selectedEntry)}
           </>
         ) : selected ? (
           <span className="text-foreground">Size {selected}</span>
         ) : (
           "Select a size to see the measurement."
         )}
+      </p>
+      <p className="mt-1 text-xs text-muted-foreground/70">
+        Sizes shown are Indian ring sizes.
       </p>
 
       <button
