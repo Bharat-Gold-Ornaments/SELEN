@@ -324,12 +324,6 @@ function ProductView({ product }: { product: ShopifyProduct }) {
             )}
 
             <Accordion type="single" collapsible className="mt-14 border-t border-border/70">
-              <Panel value="materials" title="Materials">
-                <p>
-                  A solid core of BIS hallmarked 925 sterling silver, finished with a generous layer
-                  of 20 Karat gold. Stones, where present, are hand-set cubic zirconia.
-                </p>
-              </Panel>
               <Panel value="specifications" title="Product Specifications">
                 {specs.length > 0 ? (
                   <dl className="space-y-2">
