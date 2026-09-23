@@ -9,7 +9,6 @@ import { VisitStore } from "@/components/home/VisitStore";
 import { DesignWithAiTeaser } from "@/components/home/DesignWithAiTeaser";
 import { StoreInvitation } from "@/components/home/StoreInvitation";
 import { SiteFooter } from "@/components/home/SiteFooter";
-import { CouponPopup } from "@/components/home/CouponPopup";
 
 const TITLE = "SELEN — Gold Finish Sterling Silver Jewellery";
 const DESCRIPTION =
@@ -63,7 +62,6 @@ function Index() {
       <DesignWithAiTeaser />
       <SiteFooter />
       <StoreInvitation />
-      <CouponPopup />
     </main>
   );
 }
