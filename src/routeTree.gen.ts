@@ -17,6 +17,7 @@ import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
 import { Route as RefundPolicyRouteImport } from './routes/refund-policy'
 import { Route as SelenCareRouteImport } from './routes/selen-care'
 import { Route as ShopRouteImport } from './routes/shop'
+import { Route as SilverExchangeRouteImport } from './routes/silver-exchange'
 import { Route as TermsOfServiceRouteImport } from './routes/terms-of-service'
 import { Route as VisitRouteImport } from './routes/visit'
 import { Route as WhySterlingSilverRouteImport } from './routes/why-sterling-silver'
@@ -65,6 +66,11 @@ const SelenCareRoute = SelenCareRouteImport.update({
 const ShopRoute = ShopRouteImport.update({
   id: '/shop',
   path: '/shop',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SilverExchangeRoute = SilverExchangeRouteImport.update({
+  id: '/silver-exchange',
+  path: '/silver-exchange',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TermsOfServiceRoute = TermsOfServiceRouteImport.update({
@@ -122,6 +128,7 @@ export interface FileRoutesByFullPath {
   '/refund-policy': typeof RefundPolicyRoute
   '/selen-care': typeof SelenCareRoute
   '/shop': typeof ShopRoute
+  '/silver-exchange': typeof SilverExchangeRoute
   '/terms-of-service': typeof TermsOfServiceRoute
   '/visit': typeof VisitRoute
   '/why-sterling-silver': typeof WhySterlingSilverRoute
@@ -140,6 +147,7 @@ export interface FileRoutesByTo {
   '/refund-policy': typeof RefundPolicyRoute
   '/selen-care': typeof SelenCareRoute
   '/shop': typeof ShopRoute
+  '/silver-exchange': typeof SilverExchangeRoute
   '/terms-of-service': typeof TermsOfServiceRoute
   '/visit': typeof VisitRoute
   '/why-sterling-silver': typeof WhySterlingSilverRoute
@@ -160,6 +168,7 @@ export interface FileRoutesById {
   '/refund-policy': typeof RefundPolicyRoute
   '/selen-care': typeof SelenCareRoute
   '/shop': typeof ShopRoute
+  '/silver-exchange': typeof SilverExchangeRoute
   '/terms-of-service': typeof TermsOfServiceRoute
   '/visit': typeof VisitRoute
   '/why-sterling-silver': typeof WhySterlingSilverRoute
@@ -181,6 +190,7 @@ export interface FileRouteTypes {
     | '/refund-policy'
     | '/selen-care'
     | '/shop'
+    | '/silver-exchange'
     | '/terms-of-service'
     | '/visit'
     | '/why-sterling-silver'
@@ -199,6 +209,7 @@ export interface FileRouteTypes {
     | '/refund-policy'
     | '/selen-care'
     | '/shop'
+    | '/silver-exchange'
     | '/terms-of-service'
     | '/visit'
     | '/why-sterling-silver'
@@ -218,6 +229,7 @@ export interface FileRouteTypes {
     | '/refund-policy'
     | '/selen-care'
     | '/shop'
+    | '/silver-exchange'
     | '/terms-of-service'
     | '/visit'
     | '/why-sterling-silver'
@@ -238,6 +250,7 @@ export interface RootRouteChildren {
   RefundPolicyRoute: typeof RefundPolicyRoute
   SelenCareRoute: typeof SelenCareRoute
   ShopRoute: typeof ShopRoute
+  SilverExchangeRoute: typeof SilverExchangeRoute
   TermsOfServiceRoute: typeof TermsOfServiceRoute
   VisitRoute: typeof VisitRoute
   WhySterlingSilverRoute: typeof WhySterlingSilverRoute
@@ -303,6 +316,13 @@ declare module '@tanstack/react-router' {
       path: '/shop'
       fullPath: '/shop'
       preLoaderRoute: typeof ShopRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/silver-exchange': {
+      id: '/silver-exchange'
+      path: '/silver-exchange'
+      fullPath: '/silver-exchange'
+      preLoaderRoute: typeof SilverExchangeRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/terms-of-service': {
@@ -394,6 +414,7 @@ const rootRouteChildren: RootRouteChildren = {
   RefundPolicyRoute: RefundPolicyRoute,
   SelenCareRoute: SelenCareRoute,
   ShopRoute: ShopRoute,
+  SilverExchangeRoute: SilverExchangeRoute,
   TermsOfServiceRoute: TermsOfServiceRoute,
   VisitRoute: VisitRoute,
   WhySterlingSilverRoute: WhySterlingSilverRoute,

@@ -161,7 +161,27 @@ function TermsOfService() {
         </p>
       </LegalSection>
 
-      <LegalSection heading="13. Contact Us">
+      <LegalSection heading="13. Silver Exchange Program">
+        <p>
+          SELEN also offers a{" "}
+          <Link to="/silver-exchange" className="text-foreground underline underline-offset-4">
+            Silver Exchange Program
+          </Link>
+          , allowing eligible silver jewellery and articles to be brought to our store for purity
+          testing and valuation, with the approved value adjusted toward the purchase of SELEN
+          jewellery. The exchange value is not payable in cash. See the{" "}
+          <Link
+            to="/silver-exchange"
+            hash="exchange-terms"
+            className="text-foreground underline underline-offset-4"
+          >
+            full exchange terms
+          </Link>{" "}
+          for details.
+        </p>
+      </LegalSection>
+
+      <LegalSection heading="14. Contact Us">
         <LegalContact
           lines={[
             "Bharat Gold Ornaments Private Limited",

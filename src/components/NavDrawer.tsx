@@ -92,6 +92,9 @@ export function NavDrawer({ open, onClose }: { open: boolean; onClose: () => voi
                 <DrawerLink to="/materials/$slug" params={{ slug: "jewellery-care" }} onClose={onClose}>
                   Care Guide
                 </DrawerLink>
+                <DrawerLink to="/silver-exchange" onClose={onClose}>
+                  Silver Exchange
+                </DrawerLink>
                 <DrawerLink to="/visit" onClose={onClose}>
                   Visit Store
                 </DrawerLink>

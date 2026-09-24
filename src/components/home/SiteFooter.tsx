@@ -91,6 +91,14 @@ export function SiteFooter() {
             </li>
             <li>
               <Link
+                to="/silver-exchange"
+                className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+              >
+                Silver Exchange
+              </Link>
+            </li>
+            <li>
+              <Link
                 to="/visit"
                 className="text-sm text-muted-foreground transition-colors hover:text-foreground"
               >
